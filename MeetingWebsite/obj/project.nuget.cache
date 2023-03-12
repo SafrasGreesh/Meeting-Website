@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UoGZ20iMVuqg/wE6kGk8YiJYfUMMNdzzx9Bp167Kv1YTHVUQtdkAlKytN5I3LPh1g7ncAY1c5vvkY29djC94Zg==",
+  "dgSpecHash": "6o3+ivECFJ4axwkJZKO+e4na0JQ6PWZq8xW8OLBLoQ4AIq4K1fk7PV/36w3LSTeP2jmAS/3LU2J8mvacFXgTaQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\MeetingWebsite\\MeetingWebsite.csproj",
+  "projectFilePath": "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\Meeting-Website\\MeetingWebsite\\MeetingWebsite.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Professional\\.nuget\\packages\\bootstrap\\5.2.3\\bootstrap.5.2.3.nupkg.sha512",
     "C:\\Users\\Professional\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.3\\microsoft.entityframeworkcore.7.0.3.nupkg.sha512",

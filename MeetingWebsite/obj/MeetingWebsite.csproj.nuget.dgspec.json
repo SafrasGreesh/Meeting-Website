@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\MeetingWebsite\\MeetingWebsite.csproj": {}
+    "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\Meeting-Website\\MeetingWebsite\\MeetingWebsite.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\MeetingWebsite\\MeetingWebsite.csproj": {
+    "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\Meeting-Website\\MeetingWebsite\\MeetingWebsite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\MeetingWebsite\\MeetingWebsite.csproj",
+        "projectUniqueName": "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\Meeting-Website\\MeetingWebsite\\MeetingWebsite.csproj",
         "projectName": "MeetingWebsite",
-        "projectPath": "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\MeetingWebsite\\MeetingWebsite.csproj",
+        "projectPath": "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\Meeting-Website\\MeetingWebsite\\MeetingWebsite.csproj",
         "packagesPath": "C:\\Users\\Professional\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\MeetingWebsite\\obj\\",
+        "outputPath": "C:\\Users\\Professional\\source\\repos\\MeetingWebsite\\Meeting-Website\\MeetingWebsite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Professional\\AppData\\Roaming\\NuGet\\NuGet.Config",

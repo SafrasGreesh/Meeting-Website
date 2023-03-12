@@ -9,37 +9,37 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MeetingWebsite
 build_property.RootNamespace = MeetingWebsite
-build_property.ProjectDir = C:\Users\Professional\source\repos\MeetingWebsite\MeetingWebsite\
+build_property.ProjectDir = C:\Users\Professional\source\repos\MeetingWebsite\Meeting-Website\MeetingWebsite\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Professional\source\repos\MeetingWebsite\MeetingWebsite
+build_property.MSBuildProjectDirectory = C:\Users\Professional\source\repos\MeetingWebsite\Meeting-Website\MeetingWebsite
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Professional/source/repos/MeetingWebsite/MeetingWebsite/Pages/Error.cshtml]
+[C:/Users/Professional/source/repos/MeetingWebsite/Meeting-Website/MeetingWebsite/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Professional/source/repos/MeetingWebsite/MeetingWebsite/Pages/Index.cshtml]
+[C:/Users/Professional/source/repos/MeetingWebsite/Meeting-Website/MeetingWebsite/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Professional/source/repos/MeetingWebsite/MeetingWebsite/Pages/Privacy.cshtml]
+[C:/Users/Professional/source/repos/MeetingWebsite/Meeting-Website/MeetingWebsite/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Professional/source/repos/MeetingWebsite/MeetingWebsite/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Professional/source/repos/MeetingWebsite/Meeting-Website/MeetingWebsite/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Professional/source/repos/MeetingWebsite/MeetingWebsite/Pages/_ViewImports.cshtml]
+[C:/Users/Professional/source/repos/MeetingWebsite/Meeting-Website/MeetingWebsite/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Professional/source/repos/MeetingWebsite/MeetingWebsite/Pages/_ViewStart.cshtml]
+[C:/Users/Professional/source/repos/MeetingWebsite/Meeting-Website/MeetingWebsite/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Professional/source/repos/MeetingWebsite/MeetingWebsite/Pages/Shared/_Layout.cshtml]
+[C:/Users/Professional/source/repos/MeetingWebsite/Meeting-Website/MeetingWebsite/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-g0ec3s5ahy
