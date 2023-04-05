@@ -1,0 +1,42 @@
+﻿@page
+@model RegistrationModel
+@{
+    ViewData["Title"] = "Registration";
+}
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-6 col-md-8 col-sm-10">
+			<main class="form-signin w-75 m-auto">
+				<form>
+			<h1 class="h3 mb-3 fw-normal">Регистрация</h1>
+					<div class="form-floating">
+						@*<label for="username" class="form-label">Имя пользователя</label>*@
+						<input type="text" class="form-control" id="floatingInput" placeholder="Username">
+						<label for="floatingInput">Имя пользователя</label>
+					</div>
+					<div class="form-floating">
+						@*<label for="email" class="form-label">E-mail</label>*@
+						<input type="email" class="form-control" id="floatingInput" placeholder="email">
+						<label for="floatingInput">E-mail</label>
+					</div>
+					<div class="form-floating">
+						@*<label for="password" class="form-label">Пароль</label>*@
+						<input type="password" class="form-control" id="floatingPassword" placeholder="password">
+						<label for="floatingInput">Пароль</label>
+					</div>
+					<div class="form-floating">
+						@*<label for="confirm-password" class="form-label">Подтвердите пароль</label>*@
+						<input type="password" class="form-control" id="floatingPassword" placeholder="confirm-password">
+						<label for="floatingInput">Подтвердите пароль</label>
+					</div>
+					<div class="mb-3 form-check">
+						<input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+						<label class="form-check-label" for="terms">Я согласен с <a href="#">условиями использования</a></label>
+					</div>
+					<button type="submit" class="btn btn-primary w-100">Зарегистрироваться</button>
+				</form>
+			</main>
+
+		</div>
+	</div>
+</div>
