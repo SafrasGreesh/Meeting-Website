@@ -1,0 +1,98 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "ChoisePeople";
+}
+<body>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="cards-container">
+                    <div class="card">
+                        <img src="https://via.placeholder.com/500x300.png?text=Person+1" class="card-img-top" alt="Person 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Иван Иванов</h5>
+                            <p class="card-text">28 лет, Москва</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Кнопки лайка и дизлайка -->
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="button" class="btn btn-success" id="like-button">Лайк</button>
+                    <button type="button" class="btn btn-danger" id="dislike-button">Дизлайк</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подключение библиотеки jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script>
+        // Получаем элементы со страницы
+        const cardsContainer = document.querySelector(".cards-container");
+        const likeButton = document.querySelector("#like-button");
+        const dislikeButton = document.querySelector("#dislike-button");
+
+        // Список карточек людей
+        const people = [
+            {
+                name: "Иван Иванов",
+                age: 25,
+                city: "Москва",
+                img: "https://randomuser.me/api/portraits/men/1.jpg",
+            },
+            {
+                name: "Настя Пашкина",
+                age: 23,
+                city: "Ижевск",
+                img: "https://randomuser.me/api/portraits/women/1.jpg",
+            },
+            {
+                name: "Лиза Крюкова",
+                age: 23,
+                city: "Казань",
+                img: "https://randomuser.me/api/portraits/women/5.jpg",
+            },
+        ];
+
+        let currentCardIndex = 0;
+
+        // Функция для отображения активной карточки
+        function showActiveCard() {
+            if (currentCardIndex >= people.length) {
+                cardsContainer.innerHTML = `<p>Анкеты закончились</p>`;
+            } else {
+                cardsContainer.innerHTML = `
+                            <div class="card">
+                                <img src="${people[currentCardIndex].img}" class="card-img-top" alt="${people[currentCardIndex].name}">
+                                <div class="card-body">
+                                    <h5 class="card-title">${people[currentCardIndex].name}, ${people[currentCardIndex].age}</h5>
+                                    <p class="card-text">${people[currentCardIndex].city}</p>
+                                </div>
+                            </div>
+                        `;
+            }
+        }
+
+        // Показываем первую карточку при загрузке страницы
+        showActiveCard();
+
+        // Обработчик нажатия кнопки "Лайк"
+        likeButton.addEventListener("click", () => {
+            currentCardIndex++;
+            showActiveCard();
+        });
+
+
+        // Обработчик нажатия кнопки "Дизлайк"
+        dislikeButton.addEventListener("click", () => {
+            currentCardIndex++;
+            showActiveCard();
+        });
+
+    </script>
+
+    <!-- Скрипт для переключения карточек и отправки данных на сервер -->
+</body>

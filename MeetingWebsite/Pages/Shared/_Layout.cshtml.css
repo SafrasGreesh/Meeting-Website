@@ -117,7 +117,15 @@ main {
 }
 
 .container {
+    /*position: fixed;*/
+    margin-top: 0;
     margin-left: 0; /* Убираем отступ слева */
-    margin-right: 1;
+    padding-left: 0; /* Убираем внутренний отступ слева */
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    margin-left: 0; /* Убираем отступ слева */
     padding-left: 0; /* Убираем внутренний отступ слева */
 }
