@@ -1,0 +1,79 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "UserSettings";
+}
+@*<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="#">Сайт знакомств</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ms-auto">
+				<li class="nav-item">
+					<a class="nav-link" href="#">Личный кабинет</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Мои сообщения</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Мой профиль</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Выход</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>*@
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-lg-6 col-md-8 col-sm-10">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="text-center">Профиль</h3>
+				</div>
+				
+				<div class="card-body">
+					<div class="mb-3">
+						<label for="username" class="form-label">Имя пользователя</label>
+						<input type="text" class="form-control" id="username" name="username" value="Иван Иванов" readonly>
+					</div>
+					<div class="mb-3">
+						<label for="email" class="form-label">E-mail</label>
+						<input type="email" class="form-control" id="email" name="email" value="ivanov@example.com" readonly>
+					</div>
+					<div class="mb-3">
+						<label for="gender" class="form-label">Пол</label>
+						<input type="text" class="form-control" id="gender" name="gender" value="Мужской" readonly>
+					</div>
+					<div class="mb-3">
+						<city for="city" class="form-city">Город</city>
+						<input type="text" class="form-control" id="city" name="city" value="Ижевск" readonly>
+					</div>
+					<div class="mb-3">
+						<label for="birthdate" class="form-label">Дата рождения</label>
+						<input type="text" class="form-control" id="birthdate" name="birthdate" value="01.01.1990" readonly>
+					</div>
+					<button type="button" class="btn btn-primary w-100">Изменить профиль</button>
+				</div>
+			</div>
+			
+		</div>
+		<div class="col-lg-6 col-md-8 col-sm-10">
+			<div class="card">
+				<div class="card-header">
+					<div class="mb-3 text-center">
+						<img src="https://via.placeholder.com/150" class="rounded-circle mb-3" alt="Фотография пользователя">
+						<div class="input-group">
+							<input type="file" class="form-control" id="photo" name="photo" accept="image/*" style="display: none;">
+							<button type="button" class="btn btn-secondary" onclick="document.getElementById('photo').click()">Изменить фото</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
