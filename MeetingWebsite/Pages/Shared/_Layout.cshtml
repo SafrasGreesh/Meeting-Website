@@ -71,7 +71,7 @@
                                 <li>
                                     <a href="#" class="nav-link link-body-emphasis">
                                         <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table" /></svg>
-                                        Orders
+                                        События
                                     </a>
                                 </li>
                                 <li>
@@ -90,14 +90,15 @@
                             <hr>
                             <div class="dropdown">
                                 <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                                    @*<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">*@
                                     <strong>mdo</strong>
                                 </a>
                                 <ul class="dropdown-menu text-small shadow">
-                                    <li><a class="dropdown-item" href="#">Settings</a></li>
-                                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                                    <li><a href="/UserSettings" class="dropdown-item" href="#">Settings</a></li>
+                                    <li><a href="/UserInformation" class="dropdown-item" href="#">Profile</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="#">Sign out</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -118,11 +119,11 @@
     </div>
 
 
-    <footer class="border-top footer text-muted">
+    @*<footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - MeetingWebsite - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer>*@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

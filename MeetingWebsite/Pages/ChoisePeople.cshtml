@@ -3,18 +3,14 @@
 @{
     ViewData["Title"] = "ChoisePeople";
 }
+
+
 <body>
     <div class="container my-5">
         <div class="row">
             <div class="col-md-6 mx-auto">
                 <div class="cards-container">
-                    <div class="card">
-                        <img src="https://via.placeholder.com/500x300.png?text=Person+1" class="card-img-top" alt="Person 1">
-                        <div class="card-body">
-                            <h5 class="card-title">Иван Иванов</h5>
-                            <p class="card-text">28 лет, Москва</p>
-                        </div>
-                    </div>
+                    
                 </div>
                 <!-- Кнопки лайка и дизлайка -->
                 <div class="d-flex justify-content-between mt-3">
@@ -42,18 +38,21 @@
                 age: 25,
                 city: "Москва",
                 img: "https://randomuser.me/api/portraits/men/1.jpg",
+                description: "Я люблю спорт, путешествия и новые знакомства."
             },
             {
                 name: "Настя Пашкина",
                 age: 23,
                 city: "Ижевск",
                 img: "https://randomuser.me/api/portraits/women/1.jpg",
+                description: "Я студентка медицинского университета, люблю читать книги и готовить."
             },
             {
                 name: "Лиза Крюкова",
                 age: 23,
                 city: "Казань",
                 img: "https://randomuser.me/api/portraits/women/5.jpg",
+                description: "Я работаю в IT-компании, увлекаюсь программированием и научной фантастикой."
             },
         ];
 
@@ -65,14 +64,19 @@
                 cardsContainer.innerHTML = `<p>Анкеты закончились</p>`;
             } else {
                 cardsContainer.innerHTML = `
-                            <div class="card">
-                                <img src="${people[currentCardIndex].img}" class="card-img-top" alt="${people[currentCardIndex].name}">
-                                <div class="card-body">
-                                    <h5 class="card-title">${people[currentCardIndex].name}, ${people[currentCardIndex].age}</h5>
-                                    <p class="card-text">${people[currentCardIndex].city}</p>
+                                <div class="card">
+                                    <div class="col-md-4 mb-3 mb-md-0">
+                                        <img src="${people[currentCardIndex].img}" class="card-img-top" alt="${people[currentCardIndex].name}">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title">${people[currentCardIndex].name}, ${people[currentCardIndex].age}</h5>
+                                            <p class="card-text">${people[currentCardIndex].city}</p>
+                                            <p class="card-text d-md-block d-none">${people[currentCardIndex].description}</p>
+                                        </div
+                                    </div>
                                 </div>
-                            </div>
-                        `;
+                            `;
             }
         }
 

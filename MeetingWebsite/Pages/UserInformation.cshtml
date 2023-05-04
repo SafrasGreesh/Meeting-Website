@@ -1,0 +1,52 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "UserInformation";
+}
+
+<body>
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <img src="" class="card-img-top" alt="Фотография пользователя">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Имя пользователя</h5>
+                    <p class="card-text">Возраст: <span id="user-age"></span></p>
+                    <p class="card-text">Город: <span id="user-city"></span></p>
+                    <p class="card-text">Описание: <span id="user-description"></span></p>
+                    <a href="/UserInformation" class="btn btn-primary">Изменить профиль</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const user = {
+            name: "Иван Иванов",
+            age: 30,
+            city: "Москва",
+            photo: "https://via.placeholder.com/150",
+            description: "Привет, я Иван, люблю путешествовать и заниматься спортом"
+        };
+
+        const nameElement = document.querySelector(".card-title");
+        nameElement.innerText = user.name;
+
+        const ageElement = document.querySelector("#user-age");
+        ageElement.innerText = user.age;
+
+        const cityElement = document.querySelector("#user-city");
+        cityElement.innerText = user.city;
+
+        const descriptionElement = document.querySelector("#user-description");
+        descriptionElement.innerText = user.description;
+
+        const photoElement = document.querySelector(".card-img-top");
+        photoElement.src = user.photo;
+        photoElement.style.maxHeight = "300px";
+        photoElement.style.objectFit = "cover";
+    </script>
+</body>
