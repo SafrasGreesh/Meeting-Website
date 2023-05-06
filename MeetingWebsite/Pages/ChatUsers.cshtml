@@ -16,5 +16,49 @@
 </head>
 <body>
     
+   <div class="container">
+    <div class="row">
+      <div class="col-md-4 border-end">
+        <h3>Пользователи</h3>
+        <ul class="list-group">
+          <li class="list-group-item active">User 1</li>
+          <li class="list-group-item">User 2</li>
+          <li class="list-group-item">User 3</li>
+          <li class="list-group-item">User 4</li>
+        </ul>
+      </div>
+      <div class="col-md-8">
+        <h3>Чат</h3>
+        <div class="chat-box p-3 mb-4 border">
+          <div class="message">
+            <p class="sender">User 1:</p>
+            <p class="text">Привет! Как дела?</p>
+          </div>
+          <div class="message">
+            <p class="sender">User 2:</p>
+            <p class="text">I'm good, thanks for asking. How about you?</p>
+          </div>
+          <div class="message">
+            <p class="sender">User 1:</p>
+            <p class="text">I'm doing well too, thanks.</p>
+          </div>
+        </div>
+        <form class="message-form">
+          <div class="form-group">
+            <textarea class="form-control" placeholder="Type your message here"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="script.js"></script>
+
+  
+
 </body>
 </html>
