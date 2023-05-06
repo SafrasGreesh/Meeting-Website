@@ -2,8 +2,73 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Сайт знакомств</h1>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Добро пожаловать на сайт знакомств</title>
+    <!-- Подключение Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MeetingWebsite.styles.css" asp-append-version="true" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/sidebars.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Сайт знакомств</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Login">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Registration">Регистрация</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основное содержимое страницы -->
+    <div class="container my-5">
+        <h1 class="text-center mb-5">Добро пожаловать на сайт знакомств</h1>
+        <div class="row">
+            <div class="col-md-6">
+                <img src="https://picsum.photos/600/400" alt="Фото пары" class="img-fluid">
+            </div>
+            <div class="col-md-6">
+                <h2 class="mb-4">Найдите свою вторую половинку</h2>
+                <p>Наш сайт знакомств поможет вам найти человека, с которым вы сможете разделить свою жизнь. Зарегистрируйтесь на сайте, создайте свой профиль и начните поиск.</p>
+                <a href="/Registration" class="btn btn-primary mt-4">Зарегистрироваться</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Подвал страницы -->
+    <footer class="bg-light text-center py-3">
+        <div class="container">
+            &copy; 2023 Сайт знакомств
+        </div>
+    </footer>
+
+    <!-- Подключение скриптов Bootstrap 5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/sidebars.js"></script>
+</body>
+</html>
+
