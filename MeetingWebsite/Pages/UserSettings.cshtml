@@ -3,77 +3,215 @@
 @{
     ViewData["Title"] = "UserSettings";
 }
-@*<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="#">Сайт знакомств</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-		<div class="collapse navbar-collapse" id="navbarNav">
-			<ul class="navbar-nav ms-auto">
-				<li class="nav-item">
-					<a class="nav-link" href="#">Личный кабинет</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Мои сообщения</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Мой профиль</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="#">Выход</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-</nav>*@
 
-<div class="container mt-5">
-	<div class="row justify-content-center">
-		<div class="col-lg-6 col-md-8 col-sm-10">
-			<div class="card">
-				<div class="card-header">
-					<h3 class="text-center">Профиль</h3>
-				</div>
-				
-				<div class="card-body">
-					<div class="mb-3">
-						<label for="username" class="form-label">Имя пользователя</label>
-						<input type="text" class="form-control" id="username" name="username" value="Иван Иванов" readonly>
+<body>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-lg-6 col-md-8 col-sm-10">
+				<div class="card">
+					<div class="card-header">
+						<h3 class="text-center">Профиль</h3>
+					</div>			
+					<div class="card-body">
+						<div class="mb-3">
+							<label for="username" class="form-label">Имя пользователя</label>
+							<input type="text" class="form-control" id="username" name="username" value="" readonly>
+						</div>
+						<div class="mb-3">
+							<label for="email" class="form-label">E-mail</label>
+							<input type="email" class="form-control" id="email" name="email" value="" readonly>
+						</div>
+						<div class="mb-3">
+							<label for="gender" class="form-label">Пол</label>
+							<input type="text" class="form-control" id="gender" name="gender" value="" readonly>
+						</div>
+						<div class="mb-3">
+							<city for="city" class="form-city">Город</city>
+							<input type="text" class="form-control" id="city" name="city" value="" readonly>
+						</div>
+						<div class="mb-3">
+							<label for="birthdate" class="form-label">Дата рождения</label>
+							<input type="text" class="form-control" id="birthdate" name="birthdate" value="" readonly>
+						</div>
+						<button type="button" class="btn btn-primary w-100">Изменить информацию</button>
+						<button type="button" class="btn btn-success w-100 d-none" id="saveBtn">Сохранить</button>
 					</div>
-					<div class="mb-3">
-						<label for="email" class="form-label">E-mail</label>
-						<input type="email" class="form-control" id="email" name="email" value="ivanov@example.com" readonly>
-					</div>
-					<div class="mb-3">
-						<label for="gender" class="form-label">Пол</label>
-						<input type="text" class="form-control" id="gender" name="gender" value="Мужской" readonly>
-					</div>
-					<div class="mb-3">
-						<city for="city" class="form-city">Город</city>
-						<input type="text" class="form-control" id="city" name="city" value="Ижевск" readonly>
-					</div>
-					<div class="mb-3">
-						<label for="birthdate" class="form-label">Дата рождения</label>
-						<input type="text" class="form-control" id="birthdate" name="birthdate" value="01.01.1990" readonly>
-					</div>
-					<button type="button" class="btn btn-primary w-100">Изменить профиль</button>
 				</div>
 			</div>
-			
-		</div>
-		<div class="col-lg-6 col-md-8 col-sm-10">
-			<div class="card">
-				<div class="card-header">
-					<div class="mb-3 text-center">
-						<img src="https://via.placeholder.com/150" class="rounded-circle mb-3" alt="Фотография пользователя">
-						<div class="input-group">
-							<input type="file" class="form-control" id="photo" name="photo" accept="image/*" style="display: none;">
-							<button type="button" class="btn btn-secondary" onclick="document.getElementById('photo').click()">Изменить фото</button>
+			<div class="col-lg-6 col-md-8 col-sm-10">
+				<div class="card">
+					<div class="card-header">
+						<div class="mb-3 text-center">
+							<img src="https://via.placeholder.com/150" class="rounded-circle mb-3" alt="Фотография пользователя" width="150" height="150">
+							<div class="input-group">
+								<input type="file" class="form-control" id="photo" name="photo" accept="image/*" style="display: none;">
+								<button type="button" class="btn btn-secondary" onclick="document.getElementById('photo').click()">Изменить фото</button>
+							</div>
 						</div>
 					</div>
 				</div>
+				<div class="mb-5">
+					<label for="description" class="form-label">Описание</label>
+					<textarea class="form-control" id="description" name="description" rows="3" readonly></textarea>
+					<div class="card-body">
+						<button type="button" class="btn btn-primary w-100" id="editBtnD">Изменить описание</button>
+						<button type="button" class="btn btn-success w-100 d-none" id="saveBtnD">Сохранить</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+
+	<script>
+		const user = {
+			name: "Иван Иванов",
+			birthdate: "01.01.1990",
+			gender: "Мужской",
+			city: "Москва",
+			email: "ivanov@example.com",
+			description: "Привет, я Иван, люблю путешествовать и заниматься спортом"
+		};
+		//заполняем профиль 
+		document.getElementById("username").value = user.name;
+		document.getElementById("email").value = user.email;
+		document.getElementById("gender").value = user.gender;
+		document.getElementById("city").value = user.city;
+		document.getElementById("birthdate").value = user.birthdate;
+		document.getElementById("description").value = user.description;
+
+	  // Находим кнопку "Изменить профиль"
+	  var editBtn = document.querySelector('button.btn-primary');
+
+	  // Находим все поля ввода
+	  var inputFields = document.querySelectorAll('input.form-control', 'textarea.form-control');
+
+	  // При клике на кнопку "Изменить профиль" изменяем состояние полей ввода
+	  editBtn.addEventListener('click', function() {
+		for (var i = 0; i < inputFields.length; i++) {
+		  inputFields[i].readOnly = false;
+		}
+	  });
+
+		var saveBtn = document.querySelector('button#saveBtn');
+
+		editBtn.addEventListener('click', function () {
+			for (var i = 0; i < inputFields.length; i++) {
+				inputFields[i].readOnly = false;
+			}
+			editBtn.classList.add('d-none');
+			saveBtn.classList.remove('d-none');
+		});
+
+		saveBtn.addEventListener('click', function () {
+			// отправить измененные данные на сервер или сохранить их локально
+			// ...
+
+			for (var i = 0; i < inputFields.length; i++) {
+				inputFields[i].readOnly = true;
+			}
+			saveBtn.classList.add('d-none');
+			editBtn.classList.remove('d-none');
+		});
+
+		saveBtn.addEventListener('click', function () {
+			var hasChanges = false;
+			for (var i = 0; i < inputFields.length; i++) {
+				if (inputFields[i].value !== inputFields[i].defaultValue) {
+					hasChanges = true;
+					break;
+				}
+			}
+			if (hasChanges) {
+				// отправить измененные данные на сервер или сохранить их локально
+				// ...
+
+				for (var i = 0; i < inputFields.length; i++) {
+					inputFields[i].readOnly = true;
+					inputFields[i].defaultValue = inputFields[i].value;
+				}
+				saveBtn.classList.add('d-none');
+				editBtn.classList.remove('d-none');
+			}
+		});
+
+		// Находим поле ввода типа "файл"
+		var photoInput = document.getElementById('photo');
+
+		// Находим тег "img"
+		var profileImg = document.querySelector('img');
+
+		// При изменении значения поля ввода типа "файл"
+		photoInput.addEventListener('change', function () {
+			// Получаем файл из поля ввода
+			var file = photoInput.files[0];
+
+			// Создаем объект FileReader
+			var reader = new FileReader();
+
+			// При загрузке файла в объект FileReader
+			reader.addEventListener("load", function () {
+				// Задаем новое значение атрибута "src" тега "img"
+				profileImg.src = reader.result;
+			}, false);
+
+			// Читаем файл как URL-адрес
+			if (file) {
+				reader.readAsDataURL(file);
+			}
+		});
+
+		//var editBtnD = document.querySelector('button.btn-primary-d');
+
+		// Находим все поля ввода
+		var inputFieldsD = document.querySelectorAll('textarea.form-control');
+
+		// При клике на кнопку "Изменить профиль" изменяем состояние полей ввода
+		editBtnD.addEventListener('click', function () {
+			for (var i = 0; i < inputFieldsD.length; i++) {
+				inputFieldsD[i].readOnly = false;
+			}
+		});
+
+		var saveBtnD = document.querySelector('button#saveBtnD');
+
+		editBtnD.addEventListener('click', function () {
+			for (var i = 0; i < inputFieldsD.length; i++) {
+				inputFieldsD[i].readOnly = false;
+			}
+			editBtnD.classList.add('d-none');
+			saveBtnD.classList.remove('d-none');
+		});
+
+		saveBtnD.addEventListener('click', function () {
+			// отправить измененные данные на сервер или сохранить их локально
+			// ...
+
+			for (var i = 0; i < inputFieldsD.length; i++) {
+				inputFieldsD[i].readOnly = true;
+			}
+			saveBtnD.classList.add('d-none');
+			editBtnD.classList.remove('d-none');
+		});
+
+		saveBtnD.addEventListener('click', function () {
+			var hasChanges = false;
+			for (var i = 0; i < inputFieldsD.length; i++) {
+				if (inputFieldsD[i].value !== inputFieldsD[i].defaultValue) {
+					hasChanges = true;
+					break;
+				}
+			}
+			if (hasChanges) {
+				// отправить измененные данные на сервер или сохранить их локально
+				// ...
+
+				for (var i = 0; i < inputFieldsD.length; i++) {
+					inputFieldsD[i].readOnly = true;
+					inputFieldsD[i].defaultValue = inputFieldsD[i].value;
+				}
+				saveBtnD.classList.add('d-none');
+				editBtnD.classList.remove('d-none');
+			}
+		});
+	</script>
+</body>

@@ -1,0 +1,150 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "ChoisePeople";
+}
+
+
+<style>
+
+    .card {
+        object-fit: cover;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        /*height: 450px;*/
+        height: 80vh;
+        position: relative;
+        width: 40%;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+
+    .card-body {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        /*padding: 10px;*/
+        background-color: rgba(105, 105, 105, 0.8);
+    }
+    .card {
+        transition: transform 0.5s, background-color 0.5s;
+        background-color: #fff;
+    }
+
+    .card-liked {
+        transform: translateX(100%) rotate(20deg);
+        background-color: #c2e8c2;
+    }
+
+    .card-disliked {
+        transform: translateX(-100%) rotate(-20deg);
+        background-color: #f8cfcf;
+    }
+
+</style>
+<body>
+    <div class="container my-5">
+        <div class="row">
+            @*<div class="col-md-6 mx-auto">*@
+                <div class="cards-container">
+                   
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="button" class="btn btn-danger" id="dislike-button">Дизлайк</button>
+                    <button type="button" class="btn btn-success" id="like-button">Лайк</button>
+                </div>
+                <!-- Кнопки лайка и дизлайка -->
+            @*</div>*@
+        </div>
+    </div>
+
+    <!-- Подключение библиотеки jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script>
+        // Получаем элементы со страницы
+        const cardsContainer = document.querySelector(".cards-container");
+        const likeButton = document.querySelector("#like-button");
+        const dislikeButton = document.querySelector("#dislike-button");
+
+        // Список карточек людей
+        const people = [
+            {
+                name: "Иван Иванов",
+                age: 25,
+                city: "Москва",
+                img: "https://randomuser.me/api/portraits/men/1.jpg",
+                description: "Я люблю спорт, путешествия и новые знакомства."
+            },
+            {
+                name: "Настя Пашкина",
+                age: 23,
+                city: "Ижевск",
+                img: "https://randomuser.me/api/portraits/women/1.jpg",
+                description: "Я студентка медицинского университета, люблю читать книги и готовить."
+            },
+            {
+                name: "Лиза Крюкова",
+                age: 23,
+                city: "Казань",
+                img: "https://randomuser.me/api/portraits/women/5.jpg",
+                description: "Я работаю в IT-компании, увлекаюсь программированием и научной фантастикой."
+            },
+        ];
+
+        let currentCardIndex = 0;
+
+        // Функция для отображения активной карточки
+        function showActiveCard() {
+            
+            if (currentCardIndex >= people.length) {
+                cardsContainer.innerHTML = `<p>Анкеты закончились</p>`;
+            } else {
+                cardsContainer.innerHTML = `
+
+                                                <div class="card" style="background-image: url('${people[currentCardIndex].img}');">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">${people[currentCardIndex].name}, ${people[currentCardIndex].age}</h5>
+                                                        <p class="card-text">${people[currentCardIndex].city}</p>
+                                                        <p>${people[currentCardIndex].description}</p>
+                                                    </div>
+                                                </div>
+
+                            `;
+            }
+        }
+
+        // Показываем первую карточку при загрузке страницы
+        showActiveCard();
+
+        // Обработчик нажатия кнопки "Лайк"
+        // Обработчик нажатия кнопки "Лайк"
+        likeButton.addEventListener("click", () => {
+          const card = cardsContainer.querySelector(".card");
+          card.classList.add("card-liked");
+          currentCardIndex++;
+          setTimeout(() => {
+            card.classList.remove("card-liked");
+            showActiveCard();
+          }, 500);
+        });
+
+        // Обработчик нажатия кнопки "Дизлайк"
+        dislikeButton.addEventListener("click", () => {
+          const card = cardsContainer.querySelector(".card");
+          card.classList.add("card-disliked");
+          currentCardIndex++;
+          setTimeout(() => {
+            card.classList.remove("card-disliked");
+            showActiveCard();
+          }, 500);
+        });
+
+    </script>
+</body>

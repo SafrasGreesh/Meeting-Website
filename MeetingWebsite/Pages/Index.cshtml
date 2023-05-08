@@ -2,9 +2,132 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    Layout = null;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Добро пожаловать на сайт знакомств</title>
+
+
+
+  
+
+    <!-- Подключение Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MeetingWebsite.styles.css" asp-append-version="true" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/sidebars.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url(https://i.ibb.co/k0K5Ybn/background.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to bottom right, #dc143c, #dc103c);
+            border-color: #8B4513;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+    @*<style>
+        body {
+            background: url(https://stihi.ru/pics/2020/07/13/6050.jpg);
+        }
+    </style>*@
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="container text-white">
+            <a class="navbar-brand text-white" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#dc143c" class="bi bi-arrow-through-heart-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M2.854 15.854A.5.5 0 0 1 2 15.5V14H.5a.5.5 0 0 1-.354-.854l1.5-1.5A.5.5 0 0 1 2 11.5h1.793l3.103-3.104a.5.5 0 1 1 .708.708L4.5 12.207V14a.5.5 0 0 1-.146.354l-1.5 1.5ZM16 3.5a.5.5 0 0 1-.854.354L14 2.707l-1.006 1.006c.236.248.44.531.6.845.562 1.096.585 2.517-.213 4.092-.793 1.563-2.395 3.288-5.105 5.08L8 13.912l-.276-.182A23.825 23.825 0 0 1 5.8 12.323L8.31 9.81a1.5 1.5 0 0 0-2.122-2.122L3.657 10.22a8.827 8.827 0 0 1-1.039-1.57c-.798-1.576-.775-2.997-.213-4.093C3.426 2.565 6.18 1.809 8 3.233c1.25-.98 2.944-.928 4.212-.152L13.292 2 12.147.854A.5.5 0 0 1 12.5 0h3a.5.5 0 0 1 .5.5v3Z" />
+                </svg>
+                Сайт знакомств</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Login">Вход</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="/Registration">Регистрация</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основное содержимое страницы -->
+    <div class="container my-5 text-white">
+        <h1 class="text-center mb-5">
+            Добро пожаловать!
+        </h1>
+
+        <h2 class="text-center mb-5">
+            Найди новых знакомых, общайся и встречайся с людьми поблизости
+        </h2>
+
+
+        <div class="row">
+
+            <div class="col-12 col-md-6">
+                <h3 class="mb-4">Найдите свою вторую половинку</h3>
+                <p>Dinder предлагает уникальный сервис, который поможет вам найти именно того человека, который подходит вам по интересам, характеру и жизненным ценностям. У нас вы можете создать свой профиль, указать свои предпочтения и начать общаться с теми, кто вам интересен. Наша команда всегда готова помочь и поддержать вас на любом этапе знакомства. Не откладывайте свою счастливую жизнь на потом, присоединяйтесь к нам прямо сейчас!</p>
+            </div>
+            <div class="col-12 col-md-6">
+                <h3 class="mb-4">Находите сообщества по интересам</h3>
+                <p>Dinder предлагает уникальную возможность находить не только события по интересам, но и компанию для их посещения. Найдите единомышленников, которые разделяют ваши увлечения и хотят провести время так же, как и вы. Вы можете создать свои собственные группы или присоединиться к уже существующим, чтобы общаться, делиться впечатлениями и находить новых друзей.Не упустите возможность найти что-то новое и увлекательное!</p>
+
+            </div>
+           
+
+           @* <div class="col-md-6">
+                <h2 class="mb-4">Найдите свою вторую половинку</h2>
+                <p>Наш сайт знакомств поможет вам найти человека, с которым вы сможете разделить свою жизнь. Зарегистрируйтесь на сайте, создайте свой профиль и начните поиск.</p>
+          
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="mb-4">Находите сообщества по интересам</h2>
+                <p>Наш сайт знакомств поможет вам найти человека, с которым вы сможете разделить свою жизнь. Зарегистрируйтесь на сайте, создайте свой профиль и начните поиск.</p>
+                <a href="/Registration" class="btn btn-primary mt-4">Зарегистрироваться</a>
+            </div>*@
+        </div>
+        <a href="/Registration" class="btn btn-primary mt-4">Зарегистрироваться</a>
+
+
+
+    </div>
+
+    <!-- Подвал страницы -->
+    <footer class="bg-dark text-center py-3 fixed-bottom">
+        <div class="container text-white">
+            &copy; 2023 Сайт знакомств
+        </div>
+    </footer>
+
+    <!-- Подключение скриптов Bootstrap 5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/sidebars.js"></script>
+</body>
+</html>
+
