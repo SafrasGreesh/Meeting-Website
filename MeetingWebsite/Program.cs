@@ -17,6 +17,17 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+
+
+void Test()
+{
+    ApplicationContext db = new ApplicationContext();
+    db.Users.Add(new Users { Name = "IvanovIvan", Id = 1 });
+
+}
+
+Test();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

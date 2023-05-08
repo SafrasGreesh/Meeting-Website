@@ -16,7 +16,7 @@ namespace MeetingWebsite.Services
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MeetingWebsite;Username=postgres;Password=nfyxbr");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MeetingWebsite;Username=postgres;Password=987321");
         }
     }
 }
