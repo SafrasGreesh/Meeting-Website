@@ -5,19 +5,61 @@
 }
 
 
+<style>
 
+    .card {
+        object-fit: cover;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        /*height: 450px;*/
+        height: 80vh;
+        position: relative;
+        width: 40%;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .card-body {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    .card {
+        transition: transform 0.5s, background-color 0.5s;
+        background-color: #fff;
+    }
+
+    .card-liked {
+        transform: translateX(100%) rotate(20deg);
+        background-color: #c2e8c2;
+    }
+
+    .card-disliked {
+        transform: translateX(-100%) rotate(-20deg);
+        background-color: #f8cfcf;
+    }
+
+</style>
 <body>
     <div class="container my-5">
         <div class="row">
             @*<div class="col-md-6 mx-auto">*@
                 <div class="cards-container">
+                   
                     
                 </div>
-                <!-- Кнопки лайка и дизлайка -->
                 <div class="d-flex justify-content-between mt-3">
-                    <button type="button" class="btn btn-success" id="like-button">Лайк</button>
                     <button type="button" class="btn btn-danger" id="dislike-button">Дизлайк</button>
+                    <button type="button" class="btn btn-success" id="like-button">Лайк</button>
                 </div>
+                <!-- Кнопки лайка и дизлайка -->
+                
             @*</div>*@
         </div>
     </div>
@@ -66,20 +108,15 @@
                 cardsContainer.innerHTML = `<p>Анкеты закончились</p>`;
             } else {
                 cardsContainer.innerHTML = `
-                                        <div class="card">
-                                            <div class="row no-gutters">
-                                                <div class="col-md-4">
-                                                    <img src="${people[currentCardIndex].img}" class="card-img" alt="${people[currentCardIndex].name}">
-                                                </div>
-                                                <div class="col-md-8">
+
+                                                <div class="card" style="background-image: url('${people[currentCardIndex].img}');">
                                                     <div class="card-body">
                                                         <h5 class="card-title">${people[currentCardIndex].name}, ${people[currentCardIndex].age}</h5>
                                                         <p class="card-text">${people[currentCardIndex].city}</p>
-                                                        <p class="card-text">${people[currentCardIndex].description}</p>
+                                                        <p>${people[currentCardIndex].description}</p>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+
                             `;
             }
         }
@@ -88,15 +125,26 @@
         showActiveCard();
 
         // Обработчик нажатия кнопки "Лайк"
+        // Обработчик нажатия кнопки "Лайк"
         likeButton.addEventListener("click", () => {
-            currentCardIndex++;
+          const card = cardsContainer.querySelector(".card");
+          card.classList.add("card-liked");
+          currentCardIndex++;
+          setTimeout(() => {
+            card.classList.remove("card-liked");
             showActiveCard();
+          }, 500);
         });
 
         // Обработчик нажатия кнопки "Дизлайк"
         dislikeButton.addEventListener("click", () => {
-            currentCardIndex++;
+          const card = cardsContainer.querySelector(".card");
+          card.classList.add("card-disliked");
+          currentCardIndex++;
+          setTimeout(() => {
+            card.classList.remove("card-disliked");
             showActiveCard();
+          }, 500);
         });
 
     </script>
