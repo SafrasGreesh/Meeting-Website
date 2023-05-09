@@ -28,6 +28,7 @@ void Test()
 }
 
 Test();
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
