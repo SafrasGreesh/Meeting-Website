@@ -6,6 +6,7 @@
 
 <body>
     <div class="container my-4">
+        <h3>Ваш профиль:</h3>
         <div class="row">
             <div class="col-md-4 mb-3 mb-md-0">
                 <img src="" class="card-img-top" alt="Фотография пользователя">
@@ -21,6 +22,34 @@
             </div>
         </div>
     </div>
+    <h3>Параметры поиска:</h3>
+    <form>
+        <div class="form-group">
+            <label for="age-min">Возраст:</label>
+            <div class="d-flex">
+                <input type="range" class="form-control-range mr-3" id="age-min" min="18" max="99" value="18">
+                <input type="range" class="form-control-range" id="age-max" min="19" max="100" value="100">
+            </div>
+            <div class="d-flex justify-content-between">
+                <small>От: <span id="age-min-value">18</span></small>
+                <small>До: <span id="age-max-value">100</span></small>
+            </div>
+        </div>
+        <div class="form-group d-flex align-items-center">
+            <p class="card-text mb-0 mr-3">Город: <span id="user-city-2"></span></p>
+        </div>
+        <div class="form-group">
+            <label for="gender">Пол:</label>
+            <select class="form-control" id="gender">
+                
+                <option value="other">Любой</option>
+                <option value="male">Мужской</option>
+                <option value="female">Женский</option>
+                
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
 
    
     <script>
@@ -48,5 +77,59 @@
         photoElement.src = user.photo;
         photoElement.style.maxHeight = "300px";
         photoElement.style.objectFit = "cover";
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                alert("Ваш браузер не поддерживает Geolocation API");
+            }
+        }
+
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+
+            // Вызов API для определения города по координатам
+            fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=77f5249cba8eae9acece89f6091c7fe2&lang=ru`)
+                .then(response => response.json())
+                .then(data => {
+                    const city = data.name;
+                    const cityElement = document.querySelector("#user-city-2");
+                    cityElement.innerText = city;
+                })
+                .catch(error => {
+                    console.error("Ошибка при получении данных:", error);
+                    alert("Не удалось получить местоположение. Попробуйте позже");
+                });
+        }
+        getLocation();
+        const ageMinElement = document.querySelector("#age-min");
+        const ageMaxElement = document.querySelector("#age-max");
+        const ageMinValueElement = document.querySelector("#age-min-value");
+        const ageMaxValueElement = document.querySelector("#age-max-value");
+
+        ageMinElement.addEventListener("input", function () {
+            ageMinValueElement.innerText = ageMinElement.value;
+            ageMaxElement.min = ageMinElement.value;
+            if (Number(ageMaxElement.value) < Number(ageMinElement.value)) {
+                ageMaxElement.value = ageMinElement.value;
+                ageMaxValueElement.innerText = ageMinElement.value;
+            }
+        });
+
+        ageMaxElement.addEventListener("input", function () {
+            ageMaxValueElement.innerText = ageMaxElement.value;
+            ageMinElement.max = ageMaxElement.value;
+            if (Number(ageMinElement.value) > Number(ageMaxElement.value)) {
+                ageMinElement.value = ageMaxElement.value;
+                ageMinValueElement.innerText = ageMaxElement.value;
+            }
+        });
+
+        // Установка начальных значений
+        ageMinValueElement.innerText = ageMinElement.value;
+        ageMaxValueElement.innerText = ageMaxElement.value;
     </script>
 </body>
