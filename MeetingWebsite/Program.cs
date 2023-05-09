@@ -1,5 +1,25 @@
 using BlazorServerSignalRApp.Server.Hubs;
 
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Threading.Tasks;
+//using Microsoft.AspNetCore.Hosting;
+//using Microsoft.Extensions.Configuration;
+//using Microsoft.Extensions.Hosting;
+//using Microsoft.Extensions.Logging;
+//using MeetingWebsite;
+
+//static void Sddsdsds(string[] args)
+//{
+//    CreateHostBuilder(args).Build().Run();
+//}
+
+//static IHostBuilder CreateHostBuilder(string[] args) =>
+//    Host.CreateDefaultBuilder(args)
+//        .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,14 +39,14 @@ if (!app.Environment.IsDevelopment())
 
 
 
-void Test()
-{
-    ApplicationContext db = new ApplicationContext();
-    db.Users.Add(new Users { Name = "IvanovIvan", Id = 1 });
+//void Test()
+//{
+//    ApplicationContext db = new ApplicationContext();
+//    db.Users.Add(new Users { Name = "IvanovIvan", Id = 1 });
 
-}
+//}
 
-Test();
+//Test();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -39,3 +59,4 @@ app.MapRazorPages();
 app.MapHub<ChatHub>("/chatHub");
 
 app.Run();
+

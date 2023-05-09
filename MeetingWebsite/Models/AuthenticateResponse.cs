@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MeetingWebsite.Entity;
 
-namespace MeetingWebsite.Entity
+namespace MeetingWebsite.Models
 {
-    public class Users:BaseEntity
+    public class AuthenticateResponse
     {
         public int Password { get; set; }
 
@@ -14,5 +14,15 @@ namespace MeetingWebsite.Entity
         public string Photo { get; set; }
         public string Description { get; set; }
         public string Gender { get; set; }
+        public string Token { get; set; }
+
+        public AuthenticateResponse(Users user, string token)
+        {
+            Password = user.Password;
+            Id = user.Id;
+            Name = user.Name;
+            Mail = user.Mail;
+            Token = token;
+        }
     }
 }
