@@ -2,7 +2,18 @@
 @model LoginModel
 @{
     ViewData["Title"] = "Login";
+    Layout = "";
 }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Login</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MeetingWebsite.styles.css" asp-append-version="true" />
+    <!-- Custom styles for this template -->
+    <link href="~/css/sidebars.css" rel="stylesheet">
+</head>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-6 col-md-8 col-sm-10">
@@ -24,9 +35,13 @@
                             <input type="checkbox" value="remember-me"> Запомнить меня
                         </label>
                     </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+                    <a class="w-100 btn btn-lg btn-primary" href="/Home">Войти</a>
                 </form>
             </main>
         </div>
     </div>
 </div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/sidebars.js"></script>

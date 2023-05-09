@@ -1,0 +1,124 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "EventsList";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Подключаем стили Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css">
+    <title>События</title>
+</head>
+<body>
+
+    <div class="container my-5">
+        <h1>События</h1>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Список событий</h3>
+                <ul class="list-group my-3">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Событие 1
+                        <a href="\event" class="btn btn-sm btn-primary">Посмотреть</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Событие 2
+                        <a href="\event" class="btn btn-sm btn-primary">Посмотреть</a>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Событие 3
+                        <a href="\event" class="btn btn-sm btn-primary">Посмотреть</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <h3>Добавить событие</h3>
+                <form>
+                    <div class="mb-3">
+                        <label for="eventName" class="form-label">Название события</label>
+                        <input type="text" class="form-control" id="eventName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventDateTime" class="form-label">Дата и время события</label>
+                        <input type="datetime-local" class="form-control" id="eventDateTime">
+                    </div>
+                    <div class="mb-3">
+                        <label for="eventDescription" class="form-label">Описание события</label>
+                        <textarea class="form-control" id="eventDescription" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить событие</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    @*Подключение скриптов тут приводит к отключению dropdown на Layout!*@
+   @* <!-- Подключаем скрипты Bootstrap 5 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js"></script>*@
+
+
+    <script>
+        // Получаем ссылки на элементы страницы
+        const form = document.querySelector('form');
+        const eventNameInput = document.querySelector('#eventName');
+        const eventDateTimeInput = document.querySelector('#eventDateTime');
+        const eventDescriptionInput = document.querySelector('#eventDescription');
+        const eventsList = document.querySelector('.list-group');
+
+        // Функция для добавления нового события в список
+        const addEventToList = (eventName, eventDateTime, eventDescription) => {
+            // Создаем новый элемент списка событий
+            const newEvent = document.createElement('li');
+            newEvent.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+
+            // Создаем элементы для отображения информации о событии
+            const eventTitle = document.createElement('span');
+            eventTitle.textContent = eventName;
+            const eventDateTimeInfo = document.createElement('small');
+            eventDateTimeInfo.textContent = eventDateTime;
+            const joinButton = document.createElement('button');
+            joinButton.classList.add('btn', 'btn-sm', 'btn-primary');
+            joinButton.textContent = 'Посмотреть';
+
+            joinButton.addEventListener('click', () => {
+                window.location.href = '/Event';
+            });
+
+            // Добавляем элементы в новый элемент списка событий
+            newEvent.appendChild(eventTitle);
+            newEvent.appendChild(eventDateTimeInfo);
+            newEvent.appendChild(joinButton);
+
+            // Добавляем новое событие в список
+            eventsList.appendChild(newEvent);
+        }
+
+        // Обработчик события отправки формы
+        form.addEventListener('submit', (event) => {
+            // Отменяем стандартное поведение формы
+            event.preventDefault();
+            if (!eventNameInput.value || !eventDateTimeInput.value) {
+                alert('Пожалуйста, заполните поля "Название события" и "Дата и время события"');
+                return;
+            }
+            // Получаем значения полей формы
+            const eventName = eventNameInput.value;
+            const eventDateTime = eventDateTimeInput.value;
+            const eventDescription = eventDescriptionInput.value;
+
+            // Вызываем функцию для добавления нового события в список
+            addEventToList(eventName, eventDateTime, eventDescription);
+
+            // Очищаем поля формы
+            eventNameInput.value = '';
+            eventDateTimeInput.value = '';
+            eventDescriptionInput.value = '';
+        });
+    </script>
+</body>
+</html>
