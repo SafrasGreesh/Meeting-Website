@@ -2,16 +2,33 @@
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 
-//Disable the send button until connection is established.
 document.getElementById("sendButton").disabled = true;
 
 connection.on("ReceiveMessage", function (user, message) {
     var li = document.createElement("li");
+    var btnDelete = document.createElement("button");
+    var btnEdit = document.createElement("button");
+    var text = document.createElement("span");
     document.getElementById("messagesList").appendChild(li);
-    // We can assign user-supplied strings to an element's textContent because it
-    // is not interpreted as markup. If you're assigning in any other way, you 
-    // should be aware of possible script injection concerns.
-    li.textContent = `${user} says ${message}`;
+
+    // Установка текста сообщения
+    text.textContent = `${user} : ${message}`;
+    li.appendChild(text);
+
+    // Создание кнопки удаления
+    btnDelete.textContent = "Delete";
+    btnDelete.onclick = function () {
+        li.remove();
+    }
+    li.appendChild(btnDelete);
+
+    // Создание кнопки редактирования
+    btnEdit.textContent = "Edit";
+    btnEdit.onclick = function () {
+        var newText = prompt("Enter new message");
+        text.textContent = `${user} : ${newText}`;
+    }
+    li.appendChild(btnEdit);
 });
 
 connection.start().then(function () {
