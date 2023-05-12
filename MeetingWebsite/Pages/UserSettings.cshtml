@@ -3,7 +3,18 @@
 @{
     ViewData["Title"] = "UserSettings";
 }
+<style>
+	img.dragover {
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.10);
+	}
 
+	.drop-area p {
+		margin-bottom: 0;
+		font-size: 18px;
+		color: #555;
+	}
+</style>
 <body>
 	<div class="container mt-5">
 		<div class="row justify-content-center">
@@ -46,6 +57,9 @@
 							<div class="input-group">
 								<input type="file" class="form-control" id="photo" name="photo" accept="image/*" style="display: none;">
 								<button type="button" class="btn btn-secondary" onclick="document.getElementById('photo').click()">Изменить фото</button>
+								<div class="drop-area">
+									<p>Или перетащите нужное изображение</p>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -145,6 +159,7 @@
 			// Получаем файл из поля ввода
 			var file = photoInput.files[0];
 
+			loadFile(file);
 			// Создаем объект FileReader
 			var reader = new FileReader();
 
@@ -159,6 +174,38 @@
 				reader.readAsDataURL(file);
 			}
 		});
+
+		// При перетаскивании файла на изображение
+		profileImg.addEventListener('dragover', function(e) {
+			e.preventDefault();
+			this.classList.add('dragover');
+		});
+
+		// При сбросе файла на изображение
+		profileImg.addEventListener('drop', function(e) {
+			e.preventDefault();
+			this.classList.remove('dragover');
+			var file = e.dataTransfer.files[0];
+			loadFile(file);
+		});
+
+		// При уходе файла с изображения
+		profileImg.addEventListener('dragleave', function(e) {
+			e.preventDefault();
+			this.classList.remove('dragover');
+		});
+
+		// Функция для загрузки файла
+		function loadFile(file) {
+			var reader = new FileReader();
+			reader.addEventListener("load", function () {
+				profileImg.src = reader.result;
+			}, false);
+			if (file) {
+				reader.readAsDataURL(file);
+			}
+		}
+
 
 		//var editBtnD = document.querySelector('button.btn-primary-d');
 
