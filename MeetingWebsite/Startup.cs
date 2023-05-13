@@ -8,55 +8,78 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-
+using BlazorServerSignalRApp.Server.Hubs;
 
 namespace MeetingWebsite
 {
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+	public class Startup
+	{
+		public Startup(IConfiguration configuration)
+		{
+			Configuration = configuration;
+		}
 
-        public IConfiguration Configuration { get; }
+		public IConfiguration Configuration { get; }
 
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<ApplicationContext>(opt =>
-                opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddDbContext<ApplicationContext>(opt =>
+				opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
+			services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 
-            services.AddAutoMapper(typeof(UserProfile));
-            services.AddCors();
-            services.AddControllers();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sailora WEB API API", Version = "v1" });
-            });
+			services.AddAutoMapper(typeof(UserProfile));
+			services.AddCors();
+			services.AddControllers();
+			services.AddSwaggerGen(c =>
+			{
+				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sailora WEB API API", Version = "v1" });
+			});
 
-            services.AddScoped<IUserService, UserService>();
-        }
+			services.AddScoped<IUserService, UserService>();
 
-        // configure the HTTP request pipeline
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseRouting();
-            //app.UseSwagger();
-            //app.UseSwaggerUI(x =>
-            //{
-            //    x.SwaggerEndpoint("/swagger/v1/swagger.json", "Sailora WEB API v1");
+			// Добавьте следующие строки
 
-            //});
+			services.AddRazorPages();
+			services.AddSignalR();
+		}
 
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader());
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+				app.UseSwagger();
+				app.UseSwaggerUI(x =>
+				{
+					x.SwaggerEndpoint("/swagger/v1/swagger.json", "Sailora WEB API v1");
+				});
+			}
+			else
+			{
+				app.UseExceptionHandler("/Error");
+				app.UseHsts();
+			}
 
-            app.UseMiddleware<JwtMiddleware>();
-            app.UseEndpoints(x => x.MapControllers());
-        }
-    }
+			app.UseHttpsRedirection();
+			app.UseStaticFiles();
+
+			app.UseRouting();
+
+			app.UseCors(x => x
+				.AllowAnyOrigin()
+				.AllowAnyMethod()
+				.AllowAnyHeader());
+
+			app.UseAuthentication(); // Добавьте эту строку, если вы используете аутентификацию
+			app.UseAuthorization();
+
+			app.UseEndpoints(endpoints =>
+			{
+				endpoints.MapRazorPages();
+				endpoints.MapControllers();
+				endpoints.MapHub<ChatHub>("/chatHub");
+			});
+		}
+	}
 }
