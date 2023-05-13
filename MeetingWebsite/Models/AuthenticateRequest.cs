@@ -8,6 +8,6 @@ namespace MeetingWebsite.Models
         public string Mail { get; set; }
 
         [Required]
-        public int Password { get; set; }
+        public string Password { get; set; }
     }
 }

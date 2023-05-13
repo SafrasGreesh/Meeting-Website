@@ -1,8 +1,8 @@
 ﻿using MeetingWebsite.Entity;
-using MeetingWebsite.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Configuration;
+using MeetingWebsite.Services;
 
 namespace MeetingWebsite.Controllers
 {

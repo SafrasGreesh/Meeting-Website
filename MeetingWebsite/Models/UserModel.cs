@@ -11,11 +11,11 @@ namespace MeetingWebsite.Models
         //public string Name { get; set; }
         //public string Email { get; set; }
         //public string Password { get; set; }
+        
 
+        public string Password { get; set; }
 
-        public int Password { get; set; }
-
-        public int? Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public string Mail { get; set; }

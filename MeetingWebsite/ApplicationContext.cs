@@ -14,9 +14,16 @@ namespace MeetingWebsite.Services
         {
             Database.EnsureCreated();
         }
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
+        {
+        }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MeetingWebsite;Username=postgres;Password=987321");
+        }
+        public async Task<int> SaveChangesAsync()
+        {
+            return await base.SaveChangesAsync();
         }
     }
 }

@@ -4,9 +4,9 @@ namespace MeetingWebsite.Models
 {
     public class AuthenticateResponse
     {
-        public int Password { get; set; }
+        public string Password { get; set; }
 
-        public int? Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public string Mail { get; set; }
@@ -23,6 +23,12 @@ namespace MeetingWebsite.Models
             Name = user.Name;
             Mail = user.Mail;
             Token = token;
+            Gender = user.Gender;
+            Description = user.Description;
+            Photo = user.Photo;
+            BirthDate = user.BirthDate;
+            City = user.City;
+
         }
     }
 }
