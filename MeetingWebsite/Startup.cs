@@ -79,6 +79,7 @@ namespace MeetingWebsite
 				endpoints.MapRazorPages();
 				endpoints.MapControllers();
 				endpoints.MapHub<ChatHub>("/chatHub");
+				endpoints.MapFallbackToPage("/home");
 			});
 		}
 	}

@@ -74,13 +74,13 @@
                     // Обработка успешного ответа сервера после регистрации
                     console.log(response);
                     alert('Авторизация прошла успешно');
-                    //window.location.href = "home";
+                    window.location.href = "home";
                     // Дополнительные действия, например, перенаправление на другую страницу
                 },
                 error: function (xhr, status, error) {
                     // Обработка ошибки при регистрации
                     console.log(xhr.responseText);
-                    alert(xhr.responseText);
+                    alert('Ошибка при авторизации');
                 }
             });
         });
