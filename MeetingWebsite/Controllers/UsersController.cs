@@ -1,4 +1,6 @@
-﻿using MeetingWebsite.Models;
+﻿/*Проверяет корректность поступивших пост запросов от клиента на сервер, например если запрос пустой, то вернет ошибки*/
+
+using MeetingWebsite.Models;
 using MeetingWebsite.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
@@ -40,7 +42,7 @@ namespace MeetingWebsite.Controllers
                 return BadRequest(new { message = "Didn't register!" });
             }
 
-            return Ok(response);
+            return Ok(response); 
         }
 
         [Authorize]

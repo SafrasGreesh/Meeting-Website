@@ -23,11 +23,11 @@ namespace MeetingWebsite.Services
             _mapper = mapper;
         }
 
-        public AuthenticateResponse Authenticate(AuthenticateRequest model)
+        public AuthenticateResponse Authenticate(AuthenticateRequest model) //проверяет наличие юзера в бд и соответствие логина и пароля
         {
             var user = _userRepository
-                .GetAll()
-                .FirstOrDefault(x => x.Mail == model.Mail && x.Password == model.Password);
+                .GetAll() //список возащает пользователй или ссылку
+                .FirstOrDefault(x => x.Mail == model.Mail && x.Password == model.Password); //поиск по списку
 
             if (user == null)
             {
@@ -35,16 +35,16 @@ namespace MeetingWebsite.Services
                 return null;
             }
 
-            var token = _configuration.GenerateJwtToken(user);
+            var token = _configuration.GenerateJwtToken(user); //генерация токена
 
-            return new AuthenticateResponse(user, token);
+            return new AuthenticateResponse(user, token); //предоставление прав доступа? 
         }
 
         public async Task<AuthenticateResponse> Register(UserModel userModel)
         {
-            var user = _mapper.Map<Users>(userModel);
+            var user = _mapper.Map<Users>(userModel); //создает объект юзера
 
-            var addedUser = await _userRepository.Add(user);
+            var addedUser = await _userRepository.Add(user); //добавление юзера  в бд
 
             var response = Authenticate(new AuthenticateRequest
             {
@@ -52,17 +52,17 @@ namespace MeetingWebsite.Services
                 Password = user.Password
             });
 
-            return response;
+            return response; //если норм возвращает норм
         }
 
         public IEnumerable<Users> GetAll()
         {
-            return _userRepository.GetAll();
+            return _userRepository.GetAll(); //возвращает репозиторий юзеров
         }
 
         public Users GetById(int id)
         {
-            return _userRepository.GetById(id);
+            return _userRepository.GetById(id); //вовзаращет репозиторий
         }
     }
 }
