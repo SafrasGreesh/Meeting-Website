@@ -8,6 +8,6 @@ namespace MeetingWebsite.Services
     {
         List<T> GetAll();
         T GetById(long id);
-        Task<long> Add(T entity);
+        Task<int?> Add(T entity);
     }
 }

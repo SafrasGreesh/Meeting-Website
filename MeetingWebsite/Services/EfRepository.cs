@@ -32,7 +32,7 @@ namespace MeetingWebsite.Services
             return result;
         }
 
-        public async Task<long> Add(T entity)
+        public async Task<int?> Add(T entity)
         {
             var result = await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();

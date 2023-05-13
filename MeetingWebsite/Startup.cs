@@ -43,12 +43,12 @@ namespace MeetingWebsite
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();
-            app.UseSwagger();
-            app.UseSwaggerUI(x =>
-            {
-                x.SwaggerEndpoint("/swagger/v1/swagger.json", "Sailora WEB API v1");
+            //app.UseSwagger();
+            //app.UseSwaggerUI(x =>
+            //{
+            //    x.SwaggerEndpoint("/swagger/v1/swagger.json", "Sailora WEB API v1");
 
-            });
+            //});
 
             app.UseCors(x => x
                 .AllowAnyOrigin()

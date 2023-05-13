@@ -20,7 +20,7 @@ namespace MeetingWebsite
                 .ForMember(dst => dst.Photo, opt => opt.MapFrom(src => src.Photo))
                 .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dst => dst.Gender, opt => opt.MapFrom(src => src.Gender))
-                .ForMember(dst => dst.Id, opt => opt.Ignore())
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
                 ;
             
        
@@ -43,7 +43,7 @@ namespace MeetingWebsite
                 .ForMember(dst => dst.Photo, opt => opt.MapFrom(src => src.Photo))
                 .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dst => dst.Gender, opt => opt.MapFrom(src => src.Gender))
-                .ForMember(dst => dst.Id, opt => opt.Ignore())
+                .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dst => dst.Token, opt => opt.Ignore())
                 ;
         }

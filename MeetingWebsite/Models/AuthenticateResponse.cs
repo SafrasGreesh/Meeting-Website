@@ -6,7 +6,7 @@ namespace MeetingWebsite.Models
     {
         public string Password { get; set; }
 
-        public long Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public string Mail { get; set; }
