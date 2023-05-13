@@ -35,13 +35,55 @@
                             <input type="checkbox" value="remember-me"> Запомнить меня
                         </label>
                     </div>
-                    <a class="w-100 btn btn-lg btn-primary" href="/Home">Войти</a>
+                    <button type="submit" class="w-100 btn btn-lg btn-primary">Войти</button>
                 </form>
             </main>
         </div>
     </div>
 </div>
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/js/sidebars.js"></script>
+
+<script>
+    $(function () {
+        // Назначаем обработчик события отправки формы
+        $("form").submit(function (event) {
+            event.preventDefault(); // Предотвращаем перезагрузку страницы при отправке формы
+
+            // Получаем данные из формы
+            var email = $("#floatingInput").val();
+            var password = $("#floatingPassword").val();
+            //var rememberMe = $("input[value='remember-me']").prop("checked");
+
+            // Генерируем случайный ID
+           // var id = Math.floor(Math.random() * 1000000000) + 1;
+            
+            var data = {
+                password: password,
+                mail: email,
+            };
+            // Отправляем POST-запрос на сервер
+            $.post({
+                url: '/users/authenticate', // Здесь указывается URL-путь для обработки регистрации на сервере
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    // Обработка успешного ответа сервера после регистрации
+                    console.log(response);
+                    alert('Авторизация прошла успешно');
+                    //window.location.href = "home";
+                    // Дополнительные действия, например, перенаправление на другую страницу
+                },
+                error: function (xhr, status, error) {
+                    // Обработка ошибки при регистрации
+                    console.log(xhr.responseText);
+                    alert(xhr.responseText);
+                }
+            });
+        });
+    });
+
+</script>
