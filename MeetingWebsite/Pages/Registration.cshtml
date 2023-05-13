@@ -56,3 +56,50 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/js/sidebars.js"></script>
+<script>
+	$(function () {
+		$('#registrationForm').submit(function (e) {
+			e.preventDefault();
+			var name = $('#username').val();
+			var mail = $('#email').val();
+			var password = $('#password').val();
+			var confirmPassword = $('#confirmPassword').val();
+			var terms = $('#terms').prop('checked');
+
+			if (password !== confirmPassword) {
+				alert('Пароли не совпадают');
+				return;
+			}
+
+			if (!terms) {
+				alert('Необходимо согласиться с условиями использования');
+				return;
+			}
+
+			// Создать объект с данными для отправки на сервер
+			var data = {
+				name: name,
+				mail: mail,
+				password: password
+			};
+
+			// Отправить POST-запрос на сервер
+			$.ajax({
+				url: '/register', // Здесь указывается URL-путь для обработки регистрации на сервере
+				type: 'POST',
+				data: data,
+				success: function (response) {
+					// Обработка успешного ответа сервера после регистрации
+					console.log(response);
+					alert('Регистрация прошла успешно');
+					// Дополнительные действия, например, перенаправление на другую страницу
+				},
+				error: function (xhr, status, error) {
+					// Обработка ошибки при регистрации
+					console.log(xhr.responseText);
+					alert('Ошибка регистрации');
+				}
+			});
+		});
+	});
+</script>
