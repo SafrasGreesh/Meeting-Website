@@ -18,37 +18,31 @@
 	<div class="row justify-content-center">
 		<div class="col-lg-6 col-md-8 col-sm-10">
 			<main class="form-signin w-75 m-auto">
-				<form>
-			<h1 class="h3 mb-3 fw-normal">Регистрация</h1>
+				<form id="registrationForm">
+					<h1 class="h3 mb-3 fw-normal">Регистрация</h1>
 					<div class="form-floating">
-						@*<label for="username" class="form-label">Имя пользователя</label>*@
-						<input type="text" class="form-control" id="floatingInput" placeholder="Username">
-						<label for="floatingInput">Имя пользователя</label>
+						<input type="text" class="form-control" id="username" placeholder="Username">
+						<label for="username">Имя пользователя</label>
 					</div>
 					<div class="form-floating">
-						@*<label for="email" class="form-label">E-mail</label>*@
-						<input type="email" class="form-control" id="floatingInput" placeholder="email">
-						<label for="floatingInput">E-mail</label>
+						<input type="email" class="form-control" id="email" placeholder="email">
+						<label for="email">E-mail</label>
 					</div>
 					<div class="form-floating">
-						@*<label for="password" class="form-label">Пароль</label>*@
-						<input type="password" class="form-control" id="floatingPassword" placeholder="password">
-						<label for="floatingInput">Пароль</label>
+						<input type="password" class="form-control" id="password" placeholder="password">
+						<label for="password">Пароль</label>
 					</div>
 					<div class="form-floating">
-						@*<label for="confirm-password" class="form-label">Подтвердите пароль</label>*@
-						<input type="password" class="form-control" id="floatingPassword" placeholder="confirm-password">
-						<label for="floatingInput">Подтвердите пароль</label>
+						<input type="password" class="form-control" id="confirmPassword" placeholder="confirm-password">
+						<label for="confirmPassword">Подтвердите пароль</label>
 					</div>
 					<div class="mb-3 form-check">
 						<input type="checkbox" class="form-check-input" id="terms" name="terms" required>
 						<label class="form-check-label" for="terms">Я согласен с <a href="#">условиями использования</a></label>
 					</div>
-					<a href="/Login" class="btn btn-primary w-100">Зарегистрироваться</a>
-
+                    <button type="submit" class="btn btn-primary w-100">Зарегистрироваться</button>
 				</form>
 			</main>
-
 		</div>
 	</div>
 </div>
@@ -56,3 +50,60 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="~/js/sidebars.js"></script>
+<script>
+    $(function () {
+        $('#registrationForm').submit(function (e) {
+            e.preventDefault();
+
+            var name = $('#username').val();
+            var mail = $('#email').val();
+            var password = $('#password').val();
+            var confirmPassword = $('#confirmPassword').val();
+            var terms = $('#terms').prop('checked');
+
+            if (password !== confirmPassword) {
+                alert('Пароли не совпадают');
+                return;
+            }
+
+            if (!terms) {
+                alert('Необходимо согласиться с условиями использования');
+                return;
+            }
+            var id = Math.floor(Math.random() * 1000000000) + 1;
+            // Создать объект с данными для отправки на сервер
+            var data = {
+                password: password,
+                id: id,
+                name: name,
+                birthDate: "2023-05-13T21:43:21.558Z",
+                mail: mail,
+                city: "",
+                photo: "",
+                description: "",
+                gender: ""
+            };
+
+            // Отправить POST-запрос на сервер
+            $.post({
+                url: '/users/register', // Здесь указывается URL-путь для обработки регистрации на сервере
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (response) {
+                    // Обработка успешного ответа сервера после регистрации
+                    console.log(response);
+                    alert('Регистрация прошла успешно');
+                    window.location.href = "home";
+                    // Дополнительные действия, например, перенаправление на другую страницу
+                },
+                error: function (xhr, status, error) {
+                    // Обработка ошибки при регистрации
+                    console.log(xhr.responseText);
+                    alert('Ошибка регистрации');
+                }
+            });
+        });
+    });
+
+
+</script>
