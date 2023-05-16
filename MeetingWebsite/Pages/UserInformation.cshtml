@@ -13,10 +13,11 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title">Имя пользователя</h5>
-                    <p class="card-text">Возраст: <span id="user-age"></span></p>
-                    <p class="card-text">Город: <span id="user-city"></span></p>
-                    <p class="card-text">Описание: <span id="user-description"></span></p>
+                    <h5 class="card-text" id="username" name="username" value="" readonly></h5>
+                  
+                    <p class="card-text">Возраст: <span id="user-age" value=""></span></p>
+                    <p class="card-text">Город: <span id="user-city" value=""></span></p>
+                    <p class="card-text">Описание: <span id="user-description" value=""></span></p>
                     <a href="/UserSettings" class="btn btn-primary">Изменить профиль</a>
                 </div>
             </div>
@@ -59,19 +60,36 @@
             city: "Москва",
             photo: "https://via.placeholder.com/150",
             description: "Привет, я Иван, люблю путешествовать и заниматься спортом"
+
+
+
         };
 
-        const nameElement = document.querySelector(".card-title");
-        nameElement.innerText = user.name;
+        fetch('/users/id')
+            .then(response => response.json())
+            .then(user => {
+                userData = user; // Сохраняем данные пользователя в переменную
+                 //Заполнить поля на странице данными пользователя
+                document.getElementById("username").textContent = user.name;
+                document.getElementById("user-city").textContent = user.city;
+                document.getElementById("user-description").textContent = user.description;
+            })
+            .catch(error => console.error(error));
+
+
+
+
+        //const nameElement = document.querySelector(".card-title");
+        //nameElement.innerText = userData.name;
 
         const ageElement = document.querySelector("#user-age");
         ageElement.innerText = user.age;
 
-        const cityElement = document.querySelector("#user-city");
-        cityElement.innerText = user.city;
+        //const cityElement = document.querySelector("#user-city");
+        //cityElement.innerText = userData.city;
 
-        const descriptionElement = document.querySelector("#user-description");
-        descriptionElement.innerText = user.description;
+        //const descriptionElement = document.querySelector("#user-description");
+        //descriptionElement.innerText = userData.description;
 
         const photoElement = document.querySelector(".card-img-top");
         photoElement.src = user.photo;
