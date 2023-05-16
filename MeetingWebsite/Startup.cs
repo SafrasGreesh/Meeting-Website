@@ -37,16 +37,17 @@ namespace MeetingWebsite
 			});
 
 			services.AddScoped<IUserService, UserService>();
+            services.AddSession(); //!
+            // Добавьте следующие строки
 
-			// Добавьте следующие строки
-
-			services.AddRazorPages();
+            services.AddRazorPages();
 			services.AddSignalR();
 		}
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
-			if (env.IsDevelopment())
+            
+            if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
 				app.UseSwagger();
@@ -60,8 +61,8 @@ namespace MeetingWebsite
 				app.UseExceptionHandler("/Error");
 				app.UseHsts();
 			}
-
-			app.UseHttpsRedirection();
+            app.UseSession(); //!
+            app.UseHttpsRedirection();
 			app.UseStaticFiles();
 
 			app.UseRouting();
