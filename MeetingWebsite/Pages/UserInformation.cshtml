@@ -52,6 +52,7 @@
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
 
+    <script src="~/js/page.js"></script>
    
     <script>
         const user = {
@@ -60,9 +61,6 @@
             city: "Москва",
             photo: "https://via.placeholder.com/150",
             description: "Привет, я Иван, люблю путешествовать и заниматься спортом"
-
-
-
         };
 
         fetch('/users/id')
@@ -72,24 +70,11 @@
                  //Заполнить поля на странице данными пользователя
                 document.getElementById("username").textContent = user.name;
                 document.getElementById("user-city").textContent = user.city;
+                document.getElementById("user-age").textContent = calculateAge(user.birthDate);
                 document.getElementById("user-description").textContent = user.description;
             })
             .catch(error => console.error(error));
 
-
-
-
-        //const nameElement = document.querySelector(".card-title");
-        //nameElement.innerText = userData.name;
-
-        const ageElement = document.querySelector("#user-age");
-        ageElement.innerText = user.age;
-
-        //const cityElement = document.querySelector("#user-city");
-        //cityElement.innerText = userData.city;
-
-        //const descriptionElement = document.querySelector("#user-description");
-        //descriptionElement.innerText = userData.description;
 
         const photoElement = document.querySelector(".card-img-top");
         photoElement.src = user.photo;

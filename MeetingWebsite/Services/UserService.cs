@@ -7,6 +7,8 @@ using AutoMapper;
 using Microsoft.Extensions.Configuration;
 using MeetingWebsite.Helpers;
 using MeetingWebsite.Models;
+using System.IO.Pipelines;
+using Microsoft.AspNetCore.Http;
 
 namespace MeetingWebsite.Services
 {
@@ -64,5 +66,52 @@ namespace MeetingWebsite.Services
         {
             return _userRepository.GetById(id); //вовзаращет репозиторий
         }
+
+        public async Task<AuthenticateResponse> UpdateInformation(UserModel userModel, int? id)
+        {
+
+            var user = _userRepository.GetById(id); // Найти пользователя по идентификатору
+
+            if (user == null)
+            {
+                // Обработка случая, когда пользователь с заданным идентификатором не найден
+                // Можно выбросить исключение или вернуть сообщение об ошибке
+                // Например:
+                throw new DllNotFoundException("User not found");
+            }
+
+            // Обновить свойства пользователя с помощью значений из модели
+            if (userModel.Name != "")
+            {
+				user.Name = userModel.Name;
+			}
+			if (userModel.Mail != "")
+			{
+				user.Mail = userModel.Mail;
+			}
+			if (userModel.City != "")
+			{
+				user.City = userModel.City;
+			}
+			if (userModel.Gender != "")
+			{
+				user.Gender = userModel.Gender;
+			}
+			if (userModel.Description != "")
+			{
+				user.Description = userModel.Description;
+			}
+
+			await _userRepository.UserUpdate(id ?? 0, user); // Сохранить изменения в базе данных
+
+            var response = Authenticate(new AuthenticateRequest
+            {
+                Mail = user.Mail,
+                Password = user.Password
+            });
+
+            return response;
+        }
+
     }
 }

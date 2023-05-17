@@ -41,8 +41,9 @@
 							<input type="text" class="form-control" id="city" name="city" value="" readonly>
 						</div>
 						<div class="mb-3">
-							<label for="birthdate" class="form-label">Дата рождения</label>
-							<input type="text" class="form-control" id="birthdate" name="birthdate" value="" readonly>
+							@*<label for="birthdate" class="form-label">Дата рождения</label>
+							<input type="text" class="form-control" id="birthdate" name="birthdate" value="" readonly>*@
+							<p class="card-text">Дата рождения: <span id="birthdate" value=""></span></p>
 						</div>
 						<button type="button" class="btn btn-primary w-100">Изменить информацию</button>
 						<button type="button" class="btn btn-success w-100 d-none" id="saveBtn">Сохранить</button>
@@ -85,7 +86,7 @@
 				document.getElementById("email").value = user.mail;
 				document.getElementById("gender").value = user.gender;
 				document.getElementById("city").value = user.city;
-				document.getElementById("birthdate").value = user.birthDate;
+				document.getElementById("birthdate").textContent = user.birthDate;
 				document.getElementById("description").value = user.description;
 			})
 			.catch(error => console.error(error));
@@ -102,6 +103,7 @@
 		for (var i = 0; i < inputFields.length; i++) {
 		  inputFields[i].readOnly = false;
 		}
+			document.getElementById("birthdate").readOnly = true;
 	  });
 
 		var saveBtn = document.querySelector('button#saveBtn');
@@ -117,6 +119,45 @@
 		saveBtn.addEventListener('click', function () {
 			// отправить измененные данные на сервер или сохранить их локально
 			// ...
+
+			var name = document.getElementById("username").value;
+			var mail = document.getElementById("email").value;
+			var gender = document.getElementById("gender").value;
+			var city = document.getElementById("city").value;
+			//var birthDate = document.getElementById("birthdate").value;
+			//var description = document.getElementById("description").value;
+
+			// Создать объект с данными пользователя
+			var userData = {
+				password: "",
+				photo: "",
+				name: name,
+				mail: mail,
+				gender: gender,
+				city: city,
+				birthDate: "2023-05-13T21:43:21.558Z",
+				description: ""
+			};
+
+			// Отправить данные на сервер в POST-запросе
+			$.post({
+				url: '/users/update', // Здесь указывается URL-путь для обработки регистрации на сервере
+				contentType: 'application/json',
+				data: JSON.stringify(userData),
+				success: function (response) {
+					// Обработка успешного ответа сервера после регистрации
+					console.log(response);
+					alert('Обновление данных прошло успешно');
+					//window.location.href = "home";
+					// Дополнительные действия, например, перенаправление на другую страницу
+				},
+				error: function (xhr, status, error) {
+					// Обработка ошибки при регистрации
+					console.log(xhr.responseText);
+					alert('Ошибка обновления');
+				}
+			});
+
 
 			for (var i = 0; i < inputFields.length; i++) {
 				inputFields[i].readOnly = true;
@@ -230,6 +271,38 @@
 		saveBtnD.addEventListener('click', function () {
 			// отправить измененные данные на сервер или сохранить их локально
 			// ...
+			var description = document.getElementById("description").value;
+
+			// Создать объект с данными пользователя
+			var userData = {
+				password: "",
+				photo: "",
+				name: "",
+				mail: "",
+				gender: "",
+				city: "",
+				birthDate: "2023-05-13T21:43:21.558Z",
+				description: description
+			};
+
+			// Отправить данные на сервер в POST-запросе
+			$.post({
+				url: '/users/update', // Здесь указывается URL-путь для обработки регистрации на сервере
+				contentType: 'application/json',
+				data: JSON.stringify(userData),
+				success: function (response) {
+					// Обработка успешного ответа сервера после регистрации
+					console.log(response);
+					alert('Обновление данных прошло успешно');
+					//window.location.href = "home";
+					// Дополнительные действия, например, перенаправление на другую страницу
+				},
+				error: function (xhr, status, error) {
+					// Обработка ошибки при регистрации
+					console.log(xhr.responseText);
+					alert('Ошибка обновления');
+				}
+			});
 
 			for (var i = 0; i < inputFieldsD.length; i++) {
 				inputFieldsD[i].readOnly = true;

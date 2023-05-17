@@ -54,6 +54,20 @@ namespace MeetingWebsite.Controllers
         }
 
 
+        [HttpPost("update")]
+        public async Task<IActionResult> UpdateInf(UserModel userModel)
+        {
+            int? Id_us = HttpContext.Session.GetInt32("Id");
+
+			var response = await _userService.UpdateInformation(userModel, Id_us);
+
+            if (response == null)
+            {
+                return BadRequest(new { message = "Didn't edit!" });
+            }
+
+            return Ok(response);
+        }
 
         [HttpGet("id")]
         public IActionResult GetId()
@@ -79,9 +93,14 @@ namespace MeetingWebsite.Controllers
             return Ok(user);
         }
 
+		[HttpGet("TakeId")]
+		public IActionResult TakeId()
+		{
+			int? id = HttpContext.Session.GetInt32("Id");
+			return Ok(id);
+		}
 
-
-        [Authorize]
+		[Authorize]
         [HttpGet]
         public IActionResult GetAll()
         {

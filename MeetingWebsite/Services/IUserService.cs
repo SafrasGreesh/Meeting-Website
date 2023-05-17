@@ -14,5 +14,7 @@ namespace MeetingWebsite.Services
         Task<AuthenticateResponse> Register(UserModel userModel);
         IEnumerable<Users> GetAll();
         Users GetById(int id);
-    }
+        Task<AuthenticateResponse> UpdateInformation(UserModel userModel, int? id);
+
+	}
 }
