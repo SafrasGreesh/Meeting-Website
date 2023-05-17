@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using BlazorServerSignalRApp.Server.Hubs;
+using System.Reflection.Metadata;
+using MeetingWebsite.Entity;
 
 namespace MeetingWebsite
 {
@@ -64,7 +66,6 @@ namespace MeetingWebsite
             app.UseSession(); //!
             app.UseHttpsRedirection();
 			app.UseStaticFiles();
-
 			app.UseRouting();
 
 			app.UseCors(x => x
@@ -82,6 +83,8 @@ namespace MeetingWebsite
 				endpoints.MapHub<ChatHub>("/chatHub");
 				endpoints.MapFallbackToPage("/home");
 			});
-		}
+        }
+
+		
 	}
 }
