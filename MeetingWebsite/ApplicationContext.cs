@@ -21,6 +21,7 @@ namespace MeetingWebsite.Services
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MeetingWebsite;Username=admin;Password=12345");
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         }
         
         public async Task<int> SaveChangesAsync()
