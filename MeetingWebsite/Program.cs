@@ -31,7 +31,7 @@ namespace MeetingWebsite.Services
 
                 context.Database.EnsureCreated();
 
-                
+                context.Users.RemoveRange(context.Users);
                 context.Users.Add(new Users {
                         Password = "1",
                         Name = "Абоба",
