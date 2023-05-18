@@ -100,11 +100,19 @@ namespace MeetingWebsite.Controllers
 			return Ok(id);
 		}
 
-		[Authorize]
+		//[Authorize]
         [HttpGet]
         public IActionResult GetAll()
         {
             var users = _userService.GetAll();
+            return Ok(users);
+        }
+
+        [HttpGet("swipe")]
+        public IActionResult Swipe()
+        {
+            int id = HttpContext.Session.GetInt32("Id")??0;
+            var users = _userService.Swipe(id);
             return Ok(users);
         }
 

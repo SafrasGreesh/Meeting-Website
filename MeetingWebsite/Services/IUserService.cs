@@ -15,6 +15,8 @@ namespace MeetingWebsite.Services
         IEnumerable<Users> GetAll();
         Users GetById(int id);
         Task<AuthenticateResponse> UpdateInformation(UserModel userModel, int? id);
+        IEnumerable<Users> Swipe(int id_y);
 
-	}
+
+    }
 }

@@ -62,6 +62,13 @@ namespace MeetingWebsite.Services
             return _userRepository.GetAll(); //возвращает репозиторий юзеров
         }
 
+        public IEnumerable<Users> Swipe(int id_y)
+        {
+            var UsersSwipe = _userRepository.GetAll().Where(u => u.Id != id_y); ;
+
+            return UsersSwipe; //возвращает репозиторий юзеров
+        }
+
         public Users GetById(int id)
         {
             return _userRepository.GetById(id); //вовзаращет репозиторий

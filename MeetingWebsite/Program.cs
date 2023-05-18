@@ -38,12 +38,35 @@ namespace MeetingWebsite.Services
                         BirthDate = new DateTime(2000, 12, 1),
                         City = "јбобчинск",
                         Description = "Ћюблю ниху€ не делать",
-                        Gender = "ћ",
+                        Gender = "M",
                         Id = 1,
                         Mail = "aboba@mail.ru",
                         Photo = ""
                     });
-
+                context.Users.Add(new Users
+                {
+                    Password = "2",
+                    Name = "Ћада",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "јбобчинск",
+                    Description = "Ћюблю ниху€ не делать",
+                    Gender = "W",
+                    Id = 2,
+                    Mail = "lada@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "3",
+                    Name = "јнна",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "јбобчинск",
+                    Description = "Ћюблю ниху€ не делать",
+                    Gender = "W",
+                    Id = 3,
+                    Mail = "anna@mail.ru",
+                    Photo = ""
+                });
                 context.SaveChanges();
             }
             host.Run();
