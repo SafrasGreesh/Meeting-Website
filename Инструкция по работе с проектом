@@ -8,6 +8,6 @@
 
 Если вы изменили сущности:
 1. Drop-Database.
-2. Remove-Migrations
-3. Add-Migrations
+2. Remove-Migration
+3. Add-Migration
 4. Update-Database или запуск проекта
