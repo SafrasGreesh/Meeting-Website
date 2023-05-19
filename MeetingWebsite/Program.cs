@@ -36,11 +36,11 @@ namespace MeetingWebsite.Services
                 context.Users.RemoveRange(context.Users);
                 context.Users.Add(new Users {
                         Password = "1",
-                        Name = "Àáîáà",
+                        Name = "Абоба",
                         BirthDate = new DateTime(2000, 12, 1),
-                        City = "Àáîá÷èíñê",
-                        Description = "Ëþáëþ íèõóÿ íå äåëàòü",
-                        Gender = "Ì",
+                        City = "Абобчинск",
+                        Description = "Люблю нихуя не делать",
+                        Gender = "М",
                         Id = 1,
                         Mail = "aboba@mail.ru",
                         Photo = ""
@@ -68,23 +68,23 @@ namespace MeetingWebsite.Services
                 if (request.Path == "/upload" && request.Method == "POST")
                 {
                     IFormFileCollection files = request.Form.Files;
-                    // ïóòü ê ïàïêå, ãäå áóäóò õðàíèòüñÿ ôàéëû
+                    // путь к папке, где будут храниться файлы
                     var uploadPath = $"{Directory.GetCurrentDirectory()}/uploads";
-                    // ñîçäàåì ïàïêó äëÿ õðàíåíèÿ ôàéëîâ
+                    // создаем папку для хранения файлов
                     Directory.CreateDirectory(uploadPath);
 
                     foreach (var file in files)
                     {
-                        // ïóòü ê ïàïêå uploads
+                        // путь к папке uploads
                         string fullPath = $"{uploadPath}/{file.FileName}";
 
-                        // ñîõðàíÿåì ôàéë â ïàïêó uploads
+                        // сохраняем файл в папку uploads
                         using (var fileStream = new FileStream(fullPath, FileMode.Create))
                         {
                             await file.CopyToAsync(fileStream);
                         }
                     }
-                    await response.WriteAsync("Ôàéëû óñïåøíî çàãðóæåíû");
+                    await response.WriteAsync("Файлы успешно загружены");
                 }
                 else
                 {
