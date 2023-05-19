@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MeetingWebsite.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20230517144920_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20230519214546_Second")]
+    partial class Second
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,7 @@ namespace MeetingWebsite.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Message")
                         .IsRequired()
@@ -43,7 +43,12 @@ namespace MeetingWebsite.Migrations
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UsersId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
 
                     b.ToTable("Chat");
                 });
@@ -57,7 +62,7 @@ namespace MeetingWebsite.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("DislikesUserId")
                         .HasColumnType("integer");
@@ -65,7 +70,12 @@ namespace MeetingWebsite.Migrations
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UsersId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
 
                     b.ToTable("Dislikes");
                 });
@@ -79,7 +89,7 @@ namespace MeetingWebsite.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
                     b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -92,7 +102,12 @@ namespace MeetingWebsite.Migrations
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UsersId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
 
                     b.ToTable("Events");
                 });
@@ -106,7 +121,7 @@ namespace MeetingWebsite.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int?>("LikeUserId")
                         .HasColumnType("integer");
@@ -114,7 +129,12 @@ namespace MeetingWebsite.Migrations
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
 
+                    b.Property<int>("UsersId")
+                        .HasColumnType("integer");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UsersId");
 
                     b.ToTable("Likes");
                 });
@@ -128,7 +148,7 @@ namespace MeetingWebsite.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
                     b.Property<DateTime>("BirthDate")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -161,6 +181,61 @@ namespace MeetingWebsite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.Entity.Chat", b =>
+                {
+                    b.HasOne("MeetingWebsite.Entity.Users", "Users")
+                        .WithMany("Chats")
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.Entity.Dislikes", b =>
+                {
+                    b.HasOne("MeetingWebsite.Entity.Users", "Users")
+                        .WithMany("Dislikes")
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.Entity.Events", b =>
+                {
+                    b.HasOne("MeetingWebsite.Entity.Users", "Users")
+                        .WithMany("Events")
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.Entity.Likes", b =>
+                {
+                    b.HasOne("MeetingWebsite.Entity.Users", "Users")
+                        .WithMany("Likes")
+                        .HasForeignKey("UsersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Users");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.Entity.Users", b =>
+                {
+                    b.Navigation("Chats");
+
+                    b.Navigation("Dislikes");
+
+                    b.Navigation("Events");
+
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }

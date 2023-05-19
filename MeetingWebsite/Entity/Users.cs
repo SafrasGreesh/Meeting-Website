@@ -2,7 +2,7 @@
 
 namespace MeetingWebsite.Entity
 {
-    public class Users:BaseEntity
+    public class Users : BaseEntity
     {
         public string Password { get; set; }
 
@@ -14,5 +14,13 @@ namespace MeetingWebsite.Entity
         public string Photo { get; set; }
         public string Description { get; set; }
         public string Gender { get; set; }
+
+        public ICollection<Chat> Chats {get;} = new List<Chat>();
+
+        public ICollection<Dislikes> Dislikes {get;} = new List<Dislikes>();
+
+        public ICollection<Likes> Likes {get;} = new List<Likes>();
+
+        public ICollection<Events> Events {get;} = new List<Events>();
     }
 }
