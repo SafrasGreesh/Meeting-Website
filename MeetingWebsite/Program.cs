@@ -12,6 +12,7 @@ using MeetingWebsite;
 using MeetingWebsite.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MeetingWebsite.Services
 {
@@ -20,6 +21,7 @@ namespace MeetingWebsite.Services
 		public static void Main(string[] args)
 		{
 			var host = CreateHostBuilder(args).Build();
+
 
             using (var scope = host.Services.CreateScope())
             {
@@ -46,10 +48,56 @@ namespace MeetingWebsite.Services
 
                 context.SaveChanges();
             }
+
+            UploadFile();
             host.Run();
+
+        }
+        public static async void UploadFile()
+        {
+            var builder = WebApplication.CreateBuilder();
+            var app = builder.Build();
+
+            app.Run(async (context) =>
+            {
+                var response = context.Response;
+                var request = context.Request;
+
+                response.ContentType = "text/html; charset=utf-8";
+
+                if (request.Path == "/upload" && request.Method == "POST")
+                {
+                    IFormFileCollection files = request.Form.Files;
+                    // путь к папке, где будут храниться файлы
+                    var uploadPath = $"{Directory.GetCurrentDirectory()}/uploads";
+                    // создаем папку для хранения файлов
+                    Directory.CreateDirectory(uploadPath);
+
+                    foreach (var file in files)
+                    {
+                        // путь к папке uploads
+                        string fullPath = $"{uploadPath}/{file.FileName}";
+
+                        // сохраняем файл в папку uploads
+                        using (var fileStream = new FileStream(fullPath, FileMode.Create))
+                        {
+                            await file.CopyToAsync(fileStream);
+                        }
+                    }
+                    await response.WriteAsync("Файлы успешно загружены");
+                }
+                else
+                {
+                    await response.SendFileAsync("C:\\Users\\Professional\\source\\repos\\Meeting-Website\\MeetingWebsite\\Pages\\Home.cshtml");
+                }
+            });
+
+            app.Run();
         }
 
-		public static IHostBuilder CreateHostBuilder(string[] args) =>
+
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
 			Host.CreateDefaultBuilder(args)
 				.ConfigureWebHostDefaults(webBuilder =>
 				{
