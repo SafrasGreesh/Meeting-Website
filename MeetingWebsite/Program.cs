@@ -36,11 +36,11 @@ namespace MeetingWebsite.Services
                 context.Users.RemoveRange(context.Users);
                 context.Users.Add(new Users {
                         Password = "1",
-                        Name = "Абоба",
+                        Name = "ГЂГЎГ®ГЎГ ",
                         BirthDate = new DateTime(2000, 12, 1),
-                        City = "Абобчинск",
-                        Description = "Люблю нихуя не делать",
-                        Gender = "М",
+                        City = "ГЂГЎГ®ГЎГ·ГЁГ­Г±ГЄ",
+                        Description = "Г‹ГѕГЎГ«Гѕ Г­ГЁГµГіГї Г­ГҐ Г¤ГҐГ«Г ГІГј",
+                        Gender = "ГЊ",
                         Id = 1,
                         Mail = "aboba@mail.ru",
                         Photo = ""
@@ -68,27 +68,27 @@ namespace MeetingWebsite.Services
                 if (request.Path == "/upload" && request.Method == "POST")
                 {
                     IFormFileCollection files = request.Form.Files;
-                    // путь к папке, где будут храниться файлы
+                    // ГЇГіГІГј ГЄ ГЇГ ГЇГЄГҐ, ГЈГ¤ГҐ ГЎГіГ¤ГіГІ ГµГ°Г Г­ГЁГІГјГ±Гї ГґГ Г©Г«Г»
                     var uploadPath = $"{Directory.GetCurrentDirectory()}/uploads";
-                    // создаем папку для хранения файлов
+                    // Г±Г®Г§Г¤Г ГҐГ¬ ГЇГ ГЇГЄГі Г¤Г«Гї ГµГ°Г Г­ГҐГ­ГЁГї ГґГ Г©Г«Г®Гў
                     Directory.CreateDirectory(uploadPath);
 
                     foreach (var file in files)
                     {
-                        // путь к папке uploads
+                        // ГЇГіГІГј ГЄ ГЇГ ГЇГЄГҐ uploads
                         string fullPath = $"{uploadPath}/{file.FileName}";
 
-                        // сохраняем файл в папку uploads
+                        // Г±Г®ГµГ°Г Г­ГїГҐГ¬ ГґГ Г©Г« Гў ГЇГ ГЇГЄГі uploads
                         using (var fileStream = new FileStream(fullPath, FileMode.Create))
                         {
                             await file.CopyToAsync(fileStream);
                         }
                     }
-                    await response.WriteAsync("Файлы успешно загружены");
+                    await response.WriteAsync("Г”Г Г©Г«Г» ГіГ±ГЇГҐГёГ­Г® Г§Г ГЈГ°ГіГ¦ГҐГ­Г»");
                 }
                 else
                 {
-                    await response.SendFileAsync("C:\\Users\\Professional\\source\\repos\\Meeting-Website\\MeetingWebsite\\Pages\\Home.cshtml");
+                    //await response.SendFileAsync("C:\\Users\\Professional\\source\\repos\\Meeting-Website\\MeetingWebsite\\Pages\\Home.cshtml");
                 }
             });
 
