@@ -7,5 +7,7 @@
         public int? UserId { get; set; }
         public int? DislikesUserId { get; set; }
         public DateTime CreatedAt { get; set; }
+
+        public Users Users { get; set; } = null!;
     }
 }
