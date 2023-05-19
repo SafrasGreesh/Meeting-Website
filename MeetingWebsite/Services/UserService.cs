@@ -15,15 +15,19 @@ namespace MeetingWebsite.Services
     public class UserService : IUserService
     {
         private readonly IEfRepository<Users> _userRepository;
+        private readonly IEfRepository<Options> _optionsRepository;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
 
-        public UserService(IEfRepository<Users> userRepository, IConfiguration configuration, IMapper mapper)
+        public UserService(IEfRepository<Users> userRepository, IConfiguration configuration, IMapper mapper, IEfRepository<Options> optionsRepository)
         {
+            _optionsRepository = optionsRepository;
             _userRepository = userRepository;
             _configuration = configuration;
             _mapper = mapper;
         }
+
+
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model) //проверяет наличие юзера в бд и соответствие логина и пароля
         {
@@ -120,5 +124,50 @@ namespace MeetingWebsite.Services
             return response;
         }
 
+
+        public async Task<bool> UpdateOptions(Options optModel, int? id)
+        {
+
+            var options = _optionsRepository.GetById(id); // Найти пользователя по идентификатору
+
+            if (options == null)
+            {
+
+                optModel.Id = id;
+                optModel.AgeMin = optModel.AgeMin;
+                optModel.AgeMax = optModel.AgeMax;
+                optModel.Gender = optModel.Gender;
+                optModel.City = optModel.City;
+                var addedUser = await _optionsRepository.Add(optModel);
+
+                return true;
+                //throw new DllNotFoundException("User not found");
+            }
+
+            options.AgeMin = optModel.AgeMin;
+            options.AgeMax = optModel.AgeMax;
+            options.Gender = optModel.Gender;
+            options.City = optModel.City;
+
+            await _optionsRepository.OptionsUpdate(id ?? 0, options); // Сохранить изменения в базе данных
+
+            return true;
+        }
+        public Options GetOptionsById(int id)
+        {
+            var options = _optionsRepository.GetById(id);
+
+            if(options == null)
+            {
+                var optModel = new Options();
+                optModel.Id = id;
+                optModel.AgeMin = 18;
+                optModel.AgeMax = 100;
+                optModel.Gender = "A";
+                optModel.City = "";
+                options = optModel;
+            }
+            return options; //вовзаращет репозиторий
+        }
     }
 }

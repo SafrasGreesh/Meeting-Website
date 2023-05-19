@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MeetingWebsite.Helpers;
 using Microsoft.AspNetCore.Http;
+using MeetingWebsite.Entity;
 
 
 namespace MeetingWebsite.Controllers
@@ -22,6 +23,8 @@ namespace MeetingWebsite.Controllers
         {
             _userService = userService;
         }
+
+
 
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticateRequest model)
@@ -128,6 +131,47 @@ namespace MeetingWebsite.Controllers
             return Ok(user);
         }
 
+
+
+        [HttpPost("updateOptions")]
+        public async Task<IActionResult> UpdateOptions(Options optionsModel)
+        {
+            int? Id_us = HttpContext.Session.GetInt32("Id");
+
+            var response = await _userService.UpdateOptions(optionsModel, Id_us);
+
+            if (response == false)
+            {
+                return BadRequest(new { message = "Didn't edit!" });
+            }
+
+            return Ok(response);
+        }
+
+
+        [HttpGet("idOptions")]
+        public IActionResult GetOptionsId()
+        {
+            int? id = HttpContext.Session.GetInt32("Id");
+
+            if (id != null)
+            {
+                Console.WriteLine("Значение id из сессии: " + id);
+                //return Ok(new { Id = id });
+            }
+            else
+            {
+                Console.WriteLine("Error");
+                //return BadRequest("Id not found in session.");
+            }
+
+            var options = _userService.GetOptionsById(id ?? 0);
+
+            if (options == null)
+                return NotFound();
+
+            return Ok(options);
+        }
 
     }
 }
