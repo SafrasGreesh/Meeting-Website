@@ -43,13 +43,14 @@
             <label for="gender">Пол:</label>
             <select class="form-control" id="gender">
                 
-                <option value="other">Любой</option>
-                <option value="male">Мужской</option>
-                <option value="female">Женский</option>
+                <option value="A">Любой</option>
+                <option value="M">Мужской</option>
+                <option value="W">Женский</option>
                 
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Сохранить</button>
+        <button type="button" class="btn btn-primary" id="saveBtn">Сохранить</button>
+        @*<button type="submit" class="btn btn-primary">Сохранить</button>*@
     </form>
 
     <script src="~/js/page.js"></script>
@@ -107,11 +108,33 @@
                     alert("Не удалось получить местоположение. Попробуйте позже");
                 });
         }
-        getLocation();
+        //getLocation();
         const ageMinElement = document.querySelector("#age-min");
         const ageMaxElement = document.querySelector("#age-max");
         const ageMinValueElement = document.querySelector("#age-min-value");
         const ageMaxValueElement = document.querySelector("#age-max-value");
+        
+
+        fetch('/users/idOptions')
+            .then(response => response.json())
+            .then(options => {
+                // Заполнить поля на странице данными пользователя
+                ageMinElement.value = options.ageMin;
+                ageMinValueElement.innerText =  options.ageMin;
+                ageMaxElement.value = options.ageMax;
+                ageMaxValueElement.innerText = options.ageMax;
+                document.getElementById("gender").value = options.gender;
+                if (options.city != "") {
+                    document.querySelector("#user-city-2").innerText = options.city;
+                }
+                else{
+                    getLocation();
+                }
+
+            })
+            .catch(error => console.error(error));
+
+
 
         ageMinElement.addEventListener("input", function () {
             ageMinValueElement.innerText = ageMinElement.value;
@@ -134,5 +157,50 @@
         // Установка начальных значений
         ageMinValueElement.innerText = ageMinElement.value;
         ageMaxValueElement.innerText = ageMaxElement.value;
+
+
+        var saveBtn = document.querySelector('button#saveBtn');
+
+        saveBtn.addEventListener('click', function () {
+            // отправить измененные данные на сервер или сохранить их локально
+            // ...
+            //var id = 0;
+            
+            var ageMin = ageMinElement.value;
+            var ageMax = ageMaxElement.value;
+            var gender = document.getElementById('gender').value;
+            var city = document.getElementById('user-city-2').textContent;
+            //var birthDate = document.getElementById("birthdate").value;
+            //var description = document.getElementById("description").value;
+
+            // Создать объект с данными пользователя
+            var userData = {
+                Id: 0,
+                ageMin: ageMin,
+                ageMax: ageMax,
+                gender: gender,
+                city: city
+            };
+
+            // Отправить данные на сервер в POST-запросе
+            $.post({
+                url: '/users/updateOptions', // Здесь указывается URL-путь для обработки регистрации на сервере
+                contentType: 'application/json',
+                data: JSON.stringify(userData),
+                success: function (response) {
+                    // Обработка успешного ответа сервера после регистрации
+                    console.log(response);
+                    alert('Обновление данных прошло успешно');
+                    //window.location.href = "home";
+                    // Дополнительные действия, например, перенаправление на другую страницу
+                },
+                error: function (xhr, status, error) {
+                    // Обработка ошибки при регистрации
+                    console.log(xhr.responseText);
+                    alert('Ошибка обновления');
+                }
+            });
+
+        });
     </script>
 </body>
