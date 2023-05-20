@@ -1,6 +1,6 @@
 ﻿namespace MeetingWebsite.Entity
 {
-    public class Events
+    public class Events : BaseEntity
     {
 
         public int? Id { get; set; }

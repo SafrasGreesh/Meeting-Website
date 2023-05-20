@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace MeetingWebsite.Services
 {
-    public class UserRepository<T> : IEfRepository<T> where T : BaseEntity
+    public class EfRepository<T> : IEfRepository<T> where T : BaseEntity
     {
         private readonly ApplicationContext _context;
 
-        public UserRepository(ApplicationContext context)
+        public EfRepository(ApplicationContext context)
         {
             _context = context;
         }
@@ -19,7 +19,25 @@ namespace MeetingWebsite.Services
             return _context.Set<T>().ToList();
         }
 
-        public T GetById(long id)
+        public List<T> GetAllEvents()
+        {
+            return _context.Set<T>().ToList();
+        }
+
+        public T GetById(int? id)
+        {
+            var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
+
+            if (result == null)
+            {
+                //todo: need to add logger
+                return null;
+            }
+
+            return result;
+        }
+
+        public T GetEventById(int? id)
         {
             var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
 
@@ -38,5 +56,7 @@ namespace MeetingWebsite.Services
             await _context.SaveChangesAsync();
             return result.Entity.Id;
         }
+
+     
     }
 }

@@ -7,7 +7,10 @@ namespace MeetingWebsite.Services
     public interface IEfRepository<T> where T : BaseEntity
     {
         List<T> GetAll();
-        T GetById(long id);
+        List<T> GetAllEvents();
+        T GetById(int? id);
+        T GetEventById(int? id);
         Task<int?> Add(T entity);
+        
     }
 }
