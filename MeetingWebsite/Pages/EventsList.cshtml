@@ -113,48 +113,38 @@
     
 
     <script>
-        fetch('/Users/GetAllEvents') // Замените '/your-api-endpoint' на URL вашего API-эндпоинта, который возвращает список событий
-            .then(response => response.json()) // Преобразование ответа в формате JSON в объект JavaScript
+        fetch('/Users/GetAllEvents')
+            .then(response => response.json())
             .then(events => {
-                // Здесь events будет содержать список событий
-
-                // Получение ссылки на элемент списка событий в HTML-разметке
                 const eventsList = document.getElementById('eventslist');
-
-                // Очистка списка событий перед заполнением
                 eventsList.innerHTML = '';
 
-                // Перебор каждого события в списке
                 events.forEach(event => {
-                    // Создание элемента списка
                     const listItem = document.createElement('li');
+                    listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
 
-                    // Создание элемента названия события
+                    const eventDate = document.createElement('small');
+                    const eventDateTime = new Date(event.date);
+                    eventDate.textContent = eventDateTime.toLocaleString();
+
                     const eventName = document.createElement('span');
                     eventName.textContent = event.name;
 
-                    // Создание кнопки для отображения подробной информации о событии
-                    const detailsButton = document.createElement('button');
-                    detailsButton.textContent = 'Подробнее';
+                    const detailsButton = document.createElement('a');
+                    detailsButton.href = `/Event?id=${event.id}`;
+                    detailsButton.classList.add('btn', 'btn-sm', 'btn-primary');
+                    detailsButton.textContent = 'Посмотреть';
 
-                    // Добавление обработчика события для кнопки отображения подробной информации
-                    detailsButton.addEventListener('click', () => {
-                        // Ваш код для отображения подробной информации о событии
-                        const eventId = event.id; // Идентификатор события (может быть получен из какого-то другого источника)
-                        window.location.href = `/Event?id=${eventId}`;
-
-                        console.log(event.id); // Пример: вывод информации о событии в консоль
-                    });
-
-                    // Добавление элементов в элемент списка
+                    listItem.appendChild(eventDate);
                     listItem.appendChild(eventName);
                     listItem.appendChild(detailsButton);
 
-                    // Добавление элемента списка в список событий
                     eventsList.appendChild(listItem);
                 });
             })
             .catch(error => console.error(error));
+
+
     </script>
 
 
