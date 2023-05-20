@@ -48,7 +48,7 @@ namespace MeetingWebsite.Services
                     Password = "2",
                     Name = "Ћада",
                     BirthDate = new DateTime(2000, 12, 1),
-                    City = "јбобчинск",
+                    City = "»жевск",
                     Description = "Ћюблю ниху€ не делать",
                     Gender = "W",
                     Id = 2,
@@ -60,11 +60,71 @@ namespace MeetingWebsite.Services
                     Password = "3",
                     Name = "јнна",
                     BirthDate = new DateTime(2000, 12, 1),
-                    City = "јбобчинск",
+                    City = "’охр€ки",
                     Description = "Ћюблю ниху€ не делать",
-                    Gender = "W",
+                    Gender = "M",
                     Id = 3,
                     Mail = "anna@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "4",
+                    Name = "¬ан€",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "’охр€ки",
+                    Description = "Ћюблю ниху€ не делать",
+                    Gender = "M",
+                    Id = 4,
+                    Mail = "vanya@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "4",
+                    Name = "јл€",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "’охр€ки",
+                    Description = "Ћюблю ниху€ не делать",
+                    Gender = "W",
+                    Id = 5,
+                    Mail = "aly@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "4",
+                    Name = "—аша",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "’охр€ки",
+                    Description = "Ћюблю ниху€ не делать",
+                    Gender = "W",
+                    Id = 6,
+                    Mail = "sasha@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "4",
+                    Name = "Coн€",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "’охр€ки",
+                    Description = "Ћюблю ниху€ не делать",
+                    Gender = "W",
+                    Id = 7,
+                    Mail = "sonya@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "4",
+                    Name = "–егина",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "’охр€ки",
+                    Description = "Ћюблю ниху€ не делать",
+                    Gender = "W",
+                    Id = 8,
+                    Mail = "regina@mail.ru",
                     Photo = ""
                 });
                 context.SaveChanges();

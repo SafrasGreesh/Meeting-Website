@@ -108,11 +108,33 @@
                     alert("Не удалось получить местоположение. Попробуйте позже");
                 });
         }
-        getLocation();
+        //getLocation();
         const ageMinElement = document.querySelector("#age-min");
         const ageMaxElement = document.querySelector("#age-max");
         const ageMinValueElement = document.querySelector("#age-min-value");
         const ageMaxValueElement = document.querySelector("#age-max-value");
+        
+
+        fetch('/users/idOptions')
+            .then(response => response.json())
+            .then(options => {
+                // Заполнить поля на странице данными пользователя
+                ageMinElement.value = options.ageMin;
+                ageMinValueElement.innerText =  options.ageMin;
+                ageMaxElement.value = options.ageMax;
+                ageMaxValueElement.innerText = options.ageMax;
+                document.getElementById("gender").value = options.gender;
+                if (options.city != "") {
+                    document.querySelector("#user-city-2").innerText = options.city;
+                }
+                else{
+                    getLocation();
+                }
+
+            })
+            .catch(error => console.error(error));
+
+
 
         ageMinElement.addEventListener("input", function () {
             ageMinValueElement.innerText = ageMinElement.value;

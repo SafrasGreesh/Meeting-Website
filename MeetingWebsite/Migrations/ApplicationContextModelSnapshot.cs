@@ -45,28 +45,6 @@ namespace MeetingWebsite.Migrations
                     b.ToTable("Chat");
                 });
 
-            modelBuilder.Entity("MeetingWebsite.Entity.Dislikes", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<int?>("DislikesUserId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Dislikes");
-                });
-
             modelBuilder.Entity("MeetingWebsite.Entity.Events", b =>
                 {
                     b.Property<int?>("Id")
@@ -105,6 +83,9 @@ namespace MeetingWebsite.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<bool>("Like")
+                        .HasColumnType("boolean");
+
                     b.Property<int?>("LikeUserId")
                         .HasColumnType("integer");
 
@@ -114,6 +95,28 @@ namespace MeetingWebsite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Likes");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.Entity.Matches", b =>
+                {
+                    b.Property<int?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int?>("UserId1")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UserId2")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Matches");
                 });
 
             modelBuilder.Entity("MeetingWebsite.Entity.Options", b =>

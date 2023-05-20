@@ -24,8 +24,6 @@ namespace MeetingWebsite.Controllers
             _userService = userService;
         }
 
-
-
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticateRequest model)
         {
@@ -55,7 +53,6 @@ namespace MeetingWebsite.Controllers
 
             return Ok(response); 
         }
-
 
         [HttpPost("update")]
         public async Task<IActionResult> UpdateInf(UserModel userModel)
@@ -111,14 +108,6 @@ namespace MeetingWebsite.Controllers
             return Ok(users);
         }
 
-        [HttpGet("swipe")]
-        public IActionResult Swipe()
-        {
-            int id = HttpContext.Session.GetInt32("Id")??0;
-            var users = _userService.Swipe(id);
-            return Ok(users);
-        }
-
         //[Authorize]
         [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
@@ -131,7 +120,13 @@ namespace MeetingWebsite.Controllers
             return Ok(user);
         }
 
-
+        [HttpGet("swipe")]
+        public IActionResult Swipe()
+        {
+            int id = HttpContext.Session.GetInt32("Id") ?? 0;
+            var users = _userService.Swipe(id);
+            return Ok(users);
+        }
 
         [HttpPost("updateOptions")]
         public async Task<IActionResult> UpdateOptions(Options optionsModel)
@@ -147,7 +142,6 @@ namespace MeetingWebsite.Controllers
 
             return Ok(response);
         }
-
 
         [HttpGet("idOptions")]
         public IActionResult GetOptionsId()
@@ -171,6 +165,33 @@ namespace MeetingWebsite.Controllers
                 return NotFound();
 
             return Ok(options);
+        }
+
+        [HttpPost("likes")]
+        public async Task<IActionResult> Like(int id, Boolean like)
+        {
+            int? Id_us = HttpContext.Session.GetInt32("Id");
+            var response = await _userService.Like(Id_us, id, like);
+
+            if (response == false)
+            {
+                return BadRequest(new { message = "Didn't edit!" });
+            }
+
+            return Ok(response);
+        }
+
+        [HttpGet("matches")]
+        public IActionResult GetMathes()
+        {
+            int? id = HttpContext.Session.GetInt32("Id");
+
+            var matches = _userService.Matches(id ?? 0);
+
+            if (matches == null)
+                return NotFound();
+
+            return Ok(matches);
         }
 
     }

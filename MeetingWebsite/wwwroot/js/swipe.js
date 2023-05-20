@@ -19,6 +19,7 @@ async function getUsers() {
         const data = await response.json();
 
         const people = data.map((user) => ({
+            id: user.id,
             name: user.name,
             age: calculateAge(user.birthDate),
             city: user.city,
@@ -59,9 +60,45 @@ async function getUsers() {
         // Показываем первую карточку при загрузке страницы
         showActiveCard();
 
+        function sendLikeRequest(id, like) {
+            const url = '/Users/likes'; // Укажите правильный URL-путь для обработки запроса на сервере
+
+            const data = {
+                id: id,
+                like: like
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Network response was not ok');
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                    // Обработка успешного ответа сервера
+                })
+                .catch(error => {
+                    console.error('Произошла ошибка при отправке запроса:', error);
+                    // Обработка ошибки при отправке запроса
+                });
+        }
+
+
         // Обработчик нажатия кнопки "Лайк"
         // Обработчик нажатия кнопки "Лайк"
         likeButton.addEventListener("click", () => {
+            const id = 5; // Здесь указывается нужный ID
+            const like = true; // Здесь указывается значение лайка
+            sendLikeRequest(id, like);
             const card = cardsContainer.querySelector(".card");
             card.classList.add("card-liked");
             currentCardIndex++;
@@ -69,17 +106,23 @@ async function getUsers() {
                 card.classList.remove("card-liked");
                 showActiveCard();
             }, 500);
+
+            
+
         });
 
         // Обработчик нажатия кнопки "Дизлайк"
         dislikeButton.addEventListener("click", () => {
+            const id = 5; // Здесь указывается нужный ID
+            const like = false; // Здесь указывается значение лайка
+            sendLikeRequest(id, like);
             const card = cardsContainer.querySelector(".card");
             card.classList.add("card-disliked");
             currentCardIndex++;
             setTimeout(() => {
                 card.classList.remove("card-disliked");
                 showActiveCard();
-            }, 500);
+            }, 500);         
         });
 
 
