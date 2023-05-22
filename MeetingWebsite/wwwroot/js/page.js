@@ -13,3 +13,20 @@ function calculateAge(birthDate) {
 }
 
 
+function getNumberFromServer() {
+    return new Promise((resolve, reject) => {
+        fetch('/users/TakeId')
+            .then(response => response.json())
+            .then(data => {
+                const number = data; // Предполагается, что сервер возвращает только число
+                console.log(number);
+                // Дальнейшая обработка числа
+                // Например, можно сохранить число в отдельную переменную или выполнить другие действия с ним
+                resolve(number); // Разрешить промис с числом
+            })
+            .catch(error => {
+                console.error(error);
+                reject(error); // Отклонить промис с ошибкой
+            });
+    });
+}

@@ -5,13 +5,11 @@ namespace MeetingWebsite.Services
 {
     public class ApplicationContext : DbContext
     {
-        
         public DbSet<Users> Users { get; set; }
         public DbSet<Chat> Chat { get; set; }
-        public DbSet<Matches> Matches { get; set; }
+        public DbSet<Dislikes> Dislikes { get; set; }
         public DbSet<Likes> Likes { get; set; }
         public DbSet<Events> Events { get; set; }
-        public DbSet<Options> Options { get; set; }
         public ApplicationContext()
         {
             Database.EnsureCreated();

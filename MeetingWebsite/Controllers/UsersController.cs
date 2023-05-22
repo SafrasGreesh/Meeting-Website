@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using MeetingWebsite.Helpers;
 using Microsoft.AspNetCore.Http;
-using MeetingWebsite.Entity;
 
 
 namespace MeetingWebsite.Controllers
@@ -53,6 +52,7 @@ namespace MeetingWebsite.Controllers
 
             return Ok(response); 
         }
+
 
         [HttpPost("update")]
         public async Task<IActionResult> UpdateInf(UserModel userModel)
@@ -100,7 +100,7 @@ namespace MeetingWebsite.Controllers
 			return Ok(id);
 		}
 
-		//[Authorize]
+		[Authorize]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -120,79 +120,6 @@ namespace MeetingWebsite.Controllers
             return Ok(user);
         }
 
-        [HttpGet("swipe")]
-        public IActionResult Swipe()
-        {
-            int id = HttpContext.Session.GetInt32("Id") ?? 0;
-            var users = _userService.Swipe(id);
-            return Ok(users);
-        }
-
-        [HttpPost("updateOptions")]
-        public async Task<IActionResult> UpdateOptions(Options optionsModel)
-        {
-            int? Id_us = HttpContext.Session.GetInt32("Id");
-
-            var response = await _userService.UpdateOptions(optionsModel, Id_us);
-
-            if (response == false)
-            {
-                return BadRequest(new { message = "Didn't edit!" });
-            }
-
-            return Ok(response);
-        }
-
-        [HttpGet("idOptions")]
-        public IActionResult GetOptionsId()
-        {
-            int? id = HttpContext.Session.GetInt32("Id");
-
-            if (id != null)
-            {
-                Console.WriteLine("Значение id из сессии: " + id);
-                //return Ok(new { Id = id });
-            }
-            else
-            {
-                Console.WriteLine("Error");
-                //return BadRequest("Id not found in session.");
-            }
-
-            var options = _userService.GetOptionsById(id ?? 0);
-
-            if (options == null)
-                return NotFound();
-
-            return Ok(options);
-        }
-
-        [HttpPost("likes")]
-        public async Task<IActionResult> Like(int id, Boolean like)
-        {
-            int? Id_us = HttpContext.Session.GetInt32("Id");
-            var response = await _userService.Like(Id_us, id, like);
-
-            if (response == false)
-            {
-                return BadRequest(new { message = "Didn't edit!" });
-            }
-
-            return Ok(response);
-        }
-
-        [HttpGet("matches")]
-        public IActionResult GetMathes()
-        {
-            int? id = HttpContext.Session.GetInt32("Id");
-
-            var matches = _userService.Matches(id ?? 0);
-
-            if (matches == null)
-                return NotFound();
-
-            return Ok(matches);
-        }
 
     }
 }

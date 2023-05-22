@@ -18,70 +18,88 @@
             display: none;
         }
     </style>
+
 </head>
 <body>
     <div class="overflow-scroll" style="max-height: 600px;">
         <div class="container my-5">
             <h1 class="text-center mb-5">Взаимные лайки</h1>
-            <div class="row" id="userCards"></div>
-        </div>
-    </div>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-
-        function calculateAge(birthDate) {
-            const now = new Date();
-            const diff = now - birthDate;
-            const ageDate = new Date(diff);
-            return Math.abs(ageDate.getUTCFullYear() - 1970);
-        }
-        // Функция для выполнения GET-запроса
-        async function getData(url) {
-            const response = await fetch(url);
-            const data = await response.json();
-            return data;
-        }
-
-        // Функция для создания карточки пользователя
-        function createUserCard(user) {
-            const userCard = document.createElement('div');
-            userCard.classList.add('col-md-4');
-            const birthDate = new Date(user.birthDate);
-            const age = calculateAge(birthDate);
-            const profilePicture = user.photo !== "" ? user.photo : 'https://via.placeholder.com/200x200.png?text=Profile+Picture';
-
-            userCard.innerHTML = `
-                <div class="card mb-3">
-                            <img src="${profilePicture}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">${user.name}, ${age}</h5>
-                        <button type="button" class="btn btn-primary">Открыть чат</button>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://via.placeholder.com/300x300.png?text=Profile+Picture" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">John Doe</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc euismod bibendum bibendum, metus elit fringilla urna, quis dictum nisl arcu eget enim.</p>
+                            <button type="button" class="btn btn-primary">Открыть чат</button>
+                        </div>
                     </div>
                 </div>
-            `;
-            return userCard;
-        }
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://via.placeholder.com/300x300.png?text=Profile+Picture" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Jane Doe</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc euismod bibendum bibendum, metus elit fringilla urna, quis dictum nisl arcu eget enim.</p>
+                            <button type="button" class="btn btn-primary">Открыть чат</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://via.placeholder.com/300x300.png?text=Profile+Picture" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">John Doe</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc euismod bibendum bibendum, metus elit fringilla urna, quis dictum nisl arcu eget enim.</p>
+                            <button type="button" class="btn btn-primary">Открыть чат</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://via.placeholder.com/300x300.png?text=Profile+Picture" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Jane Doe</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc euismod bibendum bibendum, metus elit fringilla urna, quis dictum nisl arcu eget enim.</p>
+                            <button type="button" class="btn btn-primary">Открыть чат</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://via.placeholder.com/300x300.png?text=Profile+Picture" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">John Doe</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc euismod bibendum bibendum, metus elit fringilla urna, quis dictum nisl arcu eget enim.</p>
+                            <button type="button" class="btn btn-primary">Открыть чат</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://via.placeholder.com/300x300.png?text=Profile+Picture" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Jane Doe</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc euismod bibendum bibendum, metus elit fringilla urna, quis dictum nisl arcu eget enim.</p>
+                            <button type="button" class="btn btn-primary">Открыть чат</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <img src="https://via.placeholder.com/300x300.png?text=Profile+Picture" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">Bob Smith</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc euismod bibendum bibendum, metus elit fringilla urna, quis dictum nisl arcu eget enim.</p>
+                            <button type="button" class="btn btn-primary">Открыть чат</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div
+    </div>
 
-        // Функция для отображения пользователей на странице
-        async function displayUsers() {
-            const matchesUrl = '/users/matches';
-            const matches = await getData(matchesUrl);
-
-            const userCardsContainer = document.getElementById('userCards');
-
-            for (const userId of matches) {
-                const userUrl = `/users/${userId}`;
-                const user = await getData(userUrl);
-
-                const userCard = createUserCard(user);
-                userCardsContainer.appendChild(userCard);
-            }
-        }
-
-        // Вызов функции для отображения пользователей при загрузке страницы
-        window.addEventListener('DOMContentLoaded', displayUsers);
-    </script>
+   @* <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>*@
 </body>
 </html>

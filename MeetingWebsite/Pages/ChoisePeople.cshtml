@@ -76,150 +76,89 @@
     <!-- Подключение библиотеки jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    @*<script src="~/js/swipe.js"></script>*@
 
     <script>
+        // Получаем элементы со страницы
+        const cardsContainer = document.querySelector(".cards-container");
+        const likeButton = document.querySelector("#like-button");
+        const dislikeButton = document.querySelector("#dislike-button");
 
-        function calculateAge(birthDate) {
-            var today = new Date();
-            var birthDate = new Date(birthDate);
+        // Список карточек людей
+        const people = [
+            {
+                name: "Иван Иванов",
+                age: 25,
+                city: "Москва",
+                img: "https://randomuser.me/api/portraits/men/1.jpg",
+                description: "Я люблю спорт, путешествия и новые знакомства."
+            },
+            {
+                name: "Настя Пашкина",
+                age: 23,
+                city: "Ижевск",
+                img: "https://randomuser.me/api/portraits/women/1.jpg",
+                description: "Я студентка медицинского университета, люблю читать книги и готовить."
+            },
+            {
+                name: "Лиза Крюкова",
+                age: 23,
+                city: "Казань",
+                img: "https://randomuser.me/api/portraits/women/5.jpg",
+                description: "Я работаю в IT-компании, увлекаюсь программированием и научной фантастикой."
+            },
+        ];
 
-            var age = today.getFullYear() - birthDate.getFullYear();
-            var monthDiff = today.getMonth() - birthDate.getMonth();
+        let currentCardIndex = 0;
 
-            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-                age--;
-            }
+        // Функция для отображения активной карточки
+        function showActiveCard() {
+            
+            if (currentCardIndex >= people.length) {
+                cardsContainer.innerHTML = `<div class="card" style="background-color: #696969;">
+                                                    <div class="card-body">
+                                                        <h2 class="card-title" style="color: white;">Анкеты закончились</h2>
+                                                    </div>
+                                                </div>`;
+            } else {
+                cardsContainer.innerHTML = `
 
-            return age;
-        }
+                                                <div class="card" style="background-image: url('${people[currentCardIndex].img}');">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title" style="color: white;">${people[currentCardIndex].name}, ${people[currentCardIndex].age}</h5>
+                                                        <p class="card-text" style="color: white;">${people[currentCardIndex].city}</p>
+                                                        <p style="color: white;">${people[currentCardIndex].description}</p>
+                                                    </div>
+                                                </div>
 
-
-        async function getUsers() {
-            try {
-                const response = await fetch('/users/swipe');
-                const data = await response.json();
-
-                const people = data.map((user) => ({
-                    id: user.id,
-                    name: user.name,
-                    age: calculateAge(user.birthDate),
-                    city: user.city,
-                    img: user.photo,
-                    description: user.description,
-                }));
-
-                const cardsContainer = document.querySelector(".cards-container");
-                const likeButton = document.querySelector("#like-button");
-                const dislikeButton = document.querySelector("#dislike-button");
-
-                let currentCardIndex = 0;
-                showActiveCard();
-                // Функция для отображения активной карточки
-                function showActiveCard() {
-
-                    if (currentCardIndex >= people.length) {
-                        cardsContainer.innerHTML = `<div class="card" style="background-color: #696969;">
-                                                                    <div class="card-body">
-                                                                        <h2 class="card-title" style="color: white;">Анкеты закончились</h2>
-                                                                    </div>
-                                                                </div>`;
-                    } else {
-                        cardsContainer.innerHTML = `
-
-                                                                <div class="card" style="background-image: url('${people[currentCardIndex].img}');">
-                                                                    <div class="card-body">
-                                                                        <h5 class="card-title" style="color: white;">${people[currentCardIndex].name}, ${people[currentCardIndex].age}</h5>
-                                                                        <p class="card-text" style="color: white;">${people[currentCardIndex].city}</p>
-                                                                        <p style="color: white;">${people[currentCardIndex].description}</p>
-                                                                    </div>
-                                                                </div>
-
-                                            `;
-                    }
-                }
-
-                // Показываем первую карточку при загрузке страницы
-                showActiveCard();
-
-                // Обработчик нажатия кнопки "Лайк"
-                // Обработчик нажатия кнопки "Лайк"
-                likeButton.addEventListener("click", () => {
-
-                    const url = '/Users/likes';
-                    
-
-                    const id = people[currentCardIndex].id; // Замените на нужное целочисленное значение
-                    const like = true; // Замените на нужное логическое значение
-
-                    const fullUrl = `${url}?id=${id}&like=${like}`;
-
-                    fetch(fullUrl, {
-                        method: 'POST'
-                    })
-                        .then(response => response.json())
-                        .then(result => {
-                            // Обработка ответа от сервера
-                            console.log(result);
-                        })
-                        .catch(error => {
-                            // Обработка ошибок
-                            console.error('Ошибка:', error);
-                        });
-                    const card = cardsContainer.querySelector(".card");
-                    card.classList.add("card-liked");
-                    currentCardIndex++;
-                    setTimeout(() => {
-                        card.classList.remove("card-liked");
-                        showActiveCard();
-                    }, 500);
-
-
-
-                });
-
-                // Обработчик нажатия кнопки "Дизлайк"
-                dislikeButton.addEventListener("click", () => {
-
-                    const url = '/Users/likes';
-                    //const url = 'https://example.com/likes'; // Замените на свой URL-адрес
-
-                    const id = people[currentCardIndex].id; // Замените на нужное целочисленное значение
-                    const like = false; // Замените на нужное логическое значение
-
-                    const fullUrl = `${url}?id=${id}&like=${like}`;
-
-                    fetch(fullUrl, {
-                        method: 'POST'
-                    })
-                        .then(response => response.json())
-                        .then(result => {
-                            // Обработка ответа от сервера
-                            console.log(result);
-                        })
-                        .catch(error => {
-                            // Обработка ошибок
-                            console.error('Ошибка:', error);
-                        });
-                    const card = cardsContainer.querySelector(".card");
-                    card.classList.add("card-disliked");
-                    currentCardIndex++;
-                    setTimeout(() => {
-                        card.classList.remove("card-disliked");
-                        showActiveCard();
-                    }, 500);
-                });
-
-
-                console.log(people);
-            } catch (error) {
-                console.log('Произошла ошибка:', error);
+                            `;
             }
         }
 
+        // Показываем первую карточку при загрузке страницы
+        showActiveCard();
 
+        // Обработчик нажатия кнопки "Лайк"
+        // Обработчик нажатия кнопки "Лайк"
+        likeButton.addEventListener("click", () => {
+          const card = cardsContainer.querySelector(".card");
+          card.classList.add("card-liked");
+          currentCardIndex++;
+          setTimeout(() => {
+            card.classList.remove("card-liked");
+            showActiveCard();
+          }, 500);
+        });
 
-        getUsers();
+        // Обработчик нажатия кнопки "Дизлайк"
+        dislikeButton.addEventListener("click", () => {
+          const card = cardsContainer.querySelector(".card");
+          card.classList.add("card-disliked");
+          currentCardIndex++;
+          setTimeout(() => {
+            card.classList.remove("card-disliked");
+            showActiveCard();
+          }, 500);
+        });
 
     </script>
 </body>

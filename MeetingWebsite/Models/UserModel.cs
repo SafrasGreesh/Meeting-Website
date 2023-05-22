@@ -1,21 +1,5 @@
 ﻿using System.Text.Json.Serialization;
 
-
-namespace MeetingWebsite.Models
-{
-    public class UsersDto
-    {
-        public int? Id { get; set; }
-        public string Name { get; set; }
-        public DateTime BirthDate { get; set; }
-        public string City { get; set; }
-        public string Photo { get; set; }
-        public string Description { get; set; }
-        public string Gender { get; set; }
-    }
-}
-
-
 namespace MeetingWebsite.Models
 {
     public class UserModel
