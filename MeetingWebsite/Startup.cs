@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using BlazorServerSignalRApp.Server.Hubs;
 using System.Reflection.Metadata;
+using EventsWebsite.Hubs;
 using MeetingWebsite.Entity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MeetingWebsite
 {
@@ -44,7 +46,7 @@ namespace MeetingWebsite
 
             services.AddRazorPages();
 			services.AddSignalR();
-		}
+        }
 
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{

@@ -118,19 +118,19 @@ namespace MeetingWebsite.Services
         public IEnumerable<Users> Swipe(int id_y)
         {
             var options = GetOptionsById(id_y);
-            if(options.Gender == "A")
-            {
-                var UsersSwipe = _userRepository.GetAll()
-                    .Where(u => UnlickedUser(id_y, u.Id ?? 0))
-                    .Where(u => u.Id != id_y && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));
-                return UsersSwipe;
-            }
-            else
-            {
-                var UsersSwipe = _userRepository.GetAll()
-                    .Where(u => UnlickedUser(id_y, u.Id ?? 0))
-                    .Where(u => u.Id != id_y && options.Gender == u.Gender && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));  
-                return UsersSwipe;
+            if (options.Gender == "A")
+        {
+            var UsersSwipe = _userRepository.GetAll()
+                .Where(u => UnlickedUser(Convert.ToInt32(id_y), u.Id != null ? Convert.ToInt32(u.Id) : 0))
+                .Where(u => !Equals(u.Id, id_y) && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));
+            return UsersSwipe;
+        }
+        else
+        {
+            var UsersSwipe = _userRepository.GetAll()
+                .Where(u => UnlickedUser(Convert.ToInt32(id_y), u.Id != null ? Convert.ToInt32(u.Id) : 0))
+                .Where(u => !Equals(u.Id, id_y) && options.Gender == u.Gender && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));
+            return UsersSwipe;
             }
      
         }

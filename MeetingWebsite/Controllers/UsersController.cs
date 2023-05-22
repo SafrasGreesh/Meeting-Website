@@ -1,12 +1,7 @@
-﻿/*Проверяет корректность поступивших пост запросов от клиента на сервер, например если запрос пустой, то вернет ошибки*/
-
+﻿
 using MeetingWebsite.Models;
 using MeetingWebsite.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using MeetingWebsite.Helpers;
-using Microsoft.AspNetCore.Http;
 using MeetingWebsite.Entity;
 
 

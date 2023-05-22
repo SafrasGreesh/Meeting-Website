@@ -4,7 +4,7 @@ using MeetingWebsite.Entity;
 
 namespace MeetingWebsite.Services
 {
-    public interface IEfRepository<T> where T : BaseEntity
+    public interface IEfRepository<T>
     {
         List<T> GetAll();
         T GetById(int? id);

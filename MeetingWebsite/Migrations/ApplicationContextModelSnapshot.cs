@@ -22,29 +22,6 @@ namespace MeetingWebsite.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MeetingWebsite.Entity.Chat", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Message")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Chat");
-                });
-
             modelBuilder.Entity("MeetingWebsite.Entity.Events", b =>
                 {
                     b.Property<int?>("Id")
@@ -119,6 +96,36 @@ namespace MeetingWebsite.Migrations
                     b.ToTable("Matches");
                 });
 
+            modelBuilder.Entity("MeetingWebsite.Entity.Messages", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("FromUserId")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("ToRoomId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FromUserId");
+
+                    b.HasIndex("ToRoomId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("MeetingWebsite.Entity.Options", b =>
                 {
                     b.Property<int?>("Id")
@@ -146,6 +153,28 @@ namespace MeetingWebsite.Migrations
                     b.ToTable("Options");
                 });
 
+            modelBuilder.Entity("MeetingWebsite.Entity.Room", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AdminId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdminId");
+
+                    b.ToTable("Rooms");
+                });
+
             modelBuilder.Entity("MeetingWebsite.Entity.Users", b =>
                 {
                     b.Property<int?>("Id")
@@ -153,6 +182,9 @@ namespace MeetingWebsite.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+
+                    b.Property<string>("Avatar")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("timestamp without time zone");
@@ -185,9 +217,48 @@ namespace MeetingWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.Entity.Messages", b =>
+                {
+                    b.HasOne("MeetingWebsite.Entity.Users", "FromUser")
+                        .WithMany()
+                        .HasForeignKey("FromUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MeetingWebsite.Entity.Room", "ToRoom")
+                        .WithMany("Messages")
+                        .HasForeignKey("ToRoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("FromUser");
+
+                    b.Navigation("ToRoom");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.Entity.Room", b =>
+                {
+                    b.HasOne("MeetingWebsite.Entity.Users", "Admin")
+                        .WithMany()
+                        .HasForeignKey("AdminId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Admin");
+                });
+
+            modelBuilder.Entity("MeetingWebsite.Entity.Room", b =>
+                {
+                    b.Navigation("Messages");
                 });
 #pragma warning restore 612, 618
         }

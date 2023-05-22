@@ -24,14 +24,6 @@
     </style>
 </head>
 <body>
-
-
-
-
-  @*  <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>*@
-    <!-- Custom JS -->
-    <script src="script.js"></script>
     <h1>Чат событий</h1>
     <div class="container">
         <div class="row p-1">
@@ -57,21 +49,18 @@
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-1">Message</div>
+            <div class="col-1">Messages</div>
             <div class="col-5"><input type="text" class="form-control" id="messageInput" placeholder="Enter your message" /></div>
             <div class="col-6 text-end">
-                <input type="button" class="btn btn-primary" id="sendButton" value="Send Message" />
+                <input type="button" class="btn btn-primary" id="sendButton" value="Send Messages" />
             </div>
         </div>
     </div>
-    @* <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>*@
+    <!-- Подключение Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="script.js"></script>
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/chat.js"></script>
-
-
-
 </body>
 </html>

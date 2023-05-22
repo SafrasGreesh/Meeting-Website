@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace MeetingWebsite.Pages
 {
-    public class IndexModel : PageModel
+    public partial class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
 
