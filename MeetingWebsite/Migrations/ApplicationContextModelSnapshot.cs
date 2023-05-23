@@ -122,11 +122,8 @@ namespace MeetingWebsite.Migrations
 
             modelBuilder.Entity("MeetingWebsite.Entity.Message", b =>
                 {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
@@ -141,9 +138,6 @@ namespace MeetingWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("SenderId1")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Text")
                         .IsRequired()
                         .HasColumnType("text");
@@ -152,17 +146,14 @@ namespace MeetingWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("ThreadId1")
-                        .HasColumnType("integer");
-
                     b.Property<bool>("isDeleted")
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SenderId1");
+                    b.HasIndex("SenderId");
 
-                    b.HasIndex("ThreadId1");
+                    b.HasIndex("ThreadId");
 
                     b.ToTable("Message");
                 });
@@ -208,11 +199,8 @@ namespace MeetingWebsite.Migrations
 
             modelBuilder.Entity("MeetingWebsite.Entity.Thread", b =>
                 {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp without time zone");
@@ -231,26 +219,20 @@ namespace MeetingWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("OwnerId1")
-                        .HasColumnType("integer");
-
                     b.Property<bool>("isDeleted")
                         .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId1");
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Thread");
                 });
 
             modelBuilder.Entity("MeetingWebsite.Entity.Users", b =>
                 {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
                     b.Property<string>("AvatarFileName")
                         .HasColumnType("text");
@@ -312,14 +294,14 @@ namespace MeetingWebsite.Migrations
                 {
                     b.HasOne("MeetingWebsite.Entity.Users", "Sender")
                         .WithMany("Messages")
-                        .HasForeignKey("SenderId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MeetingWebsite.Entity.Thread", "Thread")
                         .WithMany("Messages")
-                        .HasForeignKey("ThreadId1")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("ThreadId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Sender");
@@ -331,7 +313,7 @@ namespace MeetingWebsite.Migrations
                 {
                     b.HasOne("MeetingWebsite.Entity.Users", "Owner")
                         .WithMany("Threads")
-                        .HasForeignKey("OwnerId1")
+                        .HasForeignKey("OwnerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

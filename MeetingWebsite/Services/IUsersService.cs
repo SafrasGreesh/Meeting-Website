@@ -8,12 +8,12 @@ using MeetingWebsite.Models;
 
 namespace MeetingWebsite.Services
 {
-    public interface IUserService
+    public interface IUsersService
     {
         AuthenticateResponse Authenticate(AuthenticateRequest model);
         Task<AuthenticateResponse> Register(UserModel userModel);
         IEnumerable<Users> GetAll();
-        Users GetById(int id);
+        Users GetById(string id);
         Task<AuthenticateResponse> UpdateInformation(UserModel userModel, int? id);
         IEnumerable<Users> Swipe(int id_y);
         Task<bool> UpdateOptions(Options optModel, int? id);

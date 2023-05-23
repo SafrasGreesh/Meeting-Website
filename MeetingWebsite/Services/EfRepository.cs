@@ -21,7 +21,7 @@ namespace MeetingWebsite.Services
             return _context.Set<T>().ToList();
         }
 
-        public T GetById(int? id)
+        public T GetById(string? id)
         {
             var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
 
@@ -34,7 +34,7 @@ namespace MeetingWebsite.Services
             return result;
         }
 
-        public async Task<int?> Add(T entity)
+        public async Task<string> Add(T entity)
         {
             var result = await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();

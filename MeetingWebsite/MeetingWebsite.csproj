@@ -11,6 +11,47 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\components\App.js" />
+    <None Include="wwwroot\components\Dashboard.js" />
+    <None Include="wwwroot\components\edit-profile\edit-profile.js" />
+    <None Include="wwwroot\components\edit-profile\index.js" />
+    <None Include="wwwroot\components\hoc\index.js" />
+    <None Include="wwwroot\components\hoc\with-auth.js" />
+    <None Include="wwwroot\components\hoc\with-token.js" />
+    <None Include="wwwroot\components\Login.js" />
+    <None Include="wwwroot\components\message-history-search\index.js" />
+    <None Include="wwwroot\components\message-history-search\message-history-search.js" />
+    <None Include="wwwroot\components\message-list\index.js" />
+    <None Include="wwwroot\components\message-list\message-list.js" />
+    <None Include="wwwroot\components\message\index.js" />
+    <None Include="wwwroot\components\message\message.js" />
+    <None Include="wwwroot\components\my-profile\index.js" />
+    <None Include="wwwroot\components\my-profile\my-profile.js" />
+    <None Include="wwwroot\components\oponent-profile\index.js" />
+    <None Include="wwwroot\components\oponent-profile\oponent-profile.js" />
+    <None Include="wwwroot\components\Register.js" />
+    <None Include="wwwroot\components\search\index.js" />
+    <None Include="wwwroot\components\search\search.js" />
+    <None Include="wwwroot\components\send-message-form\index.js" />
+    <None Include="wwwroot\components\send-message-form\send-message-from.js" />
+    <None Include="wwwroot\components\thread-list\index.js" />
+    <None Include="wwwroot\components\thread-list\thread-list.js" />
+    <None Include="wwwroot\components\user-search\index.js" />
+    <None Include="wwwroot\components\user-search\user-search.js" />
+    <None Include="wwwroot\components\user-threads-item\index.js" />
+    <None Include="wwwroot\components\user-threads-item\user-threads-item.js" />
+    <None Include="wwwroot\components\user-threads\index.js" />
+    <None Include="wwwroot\components\user-threads\user-threads.js" />
+    <None Include="wwwroot\helpers\date-time-format.js" />
+    <None Include="wwwroot\helpers\index.js" />
+    <None Include="wwwroot\services\api-service.js" />
+    <None Include="wwwroot\services\auth-header.js" />
+    <None Include="wwwroot\services\avatar-image-service.js" />
+    <None Include="wwwroot\services\default-image-service.js" />
+    <None Include="wwwroot\services\index.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="bootstrap" Version="5.2.3" />
     <PackageReference Include="CryptoHelper" Version="3.0.2" />

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace MeetingWebsite.Services
 {
-    public class UserService : IUserService
+    public class UsersService : IUsersService
     {
         private readonly IEfRepository<Users> _userRepository;
         private readonly IEfRepository<Options> _optionsRepository;
@@ -54,7 +54,7 @@ namespace MeetingWebsite.Services
 
             return age;
         }
-        public UserService(IEfRepository<Users> userRepository, IConfiguration configuration, IMapper mapper, IEfRepository<Options> optionsRepository, IEfRepository<Likes> likesRepository, IEfRepository<Matches> matchesRepository)
+        public UsersService(IEfRepository<Users> userRepository, IConfiguration configuration, IMapper mapper, IEfRepository<Options> optionsRepository, IEfRepository<Likes> likesRepository, IEfRepository<Matches> matchesRepository)
         {
             _optionsRepository = optionsRepository;
             _userRepository = userRepository;
@@ -97,7 +97,7 @@ namespace MeetingWebsite.Services
         {
             return _userRepository.GetAll(); //возвращает репозиторий юзеров
         }
-        public Users GetById(int id)
+        public Users GetById(string id)
         {
             return _userRepository.GetById(id); //вовзаращет репозиторий
         }
@@ -121,15 +121,15 @@ namespace MeetingWebsite.Services
             if(options.Gender == "A")
             {
                 var UsersSwipe = _userRepository.GetAll()
-                    .Where(u => UnlickedUser(id_y, u.Id ?? 0))
-                    .Where(u => u.Id != id_y && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));
+                    .Where(u => UnlickedUser(id_y, u.Id != null ? Convert.ToInt32(u.Id) : 0))
+                    .Where(u => !Equals(u.Id, id_y) && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));
                 return UsersSwipe;
             }
             else
             {
                 var UsersSwipe = _userRepository.GetAll()
-                    .Where(u => UnlickedUser(id_y, u.Id ?? 0))
-                    .Where(u => u.Id != id_y && options.Gender == u.Gender && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));  
+                    .Where(u => UnlickedUser(id_y, u.Id != null ? Convert.ToInt32(u.Id) : 0))
+                    .Where(u => !Equals(u.Id, id_y) && options.Gender == u.Gender && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));  
                 return UsersSwipe;
             }
      
@@ -137,7 +137,7 @@ namespace MeetingWebsite.Services
         public async Task<AuthenticateResponse> UpdateInformation(UserModel userModel, int? id)
         {
 
-            var user = _userRepository.GetById(id); // Найти пользователя по идентификатору
+            var user = _userRepository.GetById(id.ToString()); // Найти пользователя по идентификатору
 
             if (user == null)
             {
@@ -182,7 +182,7 @@ namespace MeetingWebsite.Services
         public async Task<bool> UpdateOptions(Options optModel, int? id)
         {
 
-            var options = _optionsRepository.GetById(id); // Найти пользователя по идентификатору
+            var options = _optionsRepository.GetById(id.ToString()); // Найти пользователя по идентификатору
 
             if (options == null)
             {
@@ -209,7 +209,7 @@ namespace MeetingWebsite.Services
         }
         public Options GetOptionsById(int id)
         {
-            var options = _optionsRepository.GetById(id);
+            var options = _optionsRepository.GetById(id.ToString());
 
             if(options == null)
             {
@@ -254,7 +254,7 @@ namespace MeetingWebsite.Services
 
 
 
-            var options = _likesRepository.GetById(id1); // Найти пользователя по идентификатору
+            var options = _likesRepository.GetById(id1.ToString()); // Найти пользователя по идентификатору
 
             return true;
         }

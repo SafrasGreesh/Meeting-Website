@@ -7,7 +7,7 @@ namespace MeetingWebsite.ViewModels
 {
     public class MessageViewModel
     {
-        public int? Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         public string SenderId { get; set; }

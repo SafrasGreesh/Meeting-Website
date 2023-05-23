@@ -39,7 +39,7 @@ namespace MeetingWebsite.Services
                         City = "јбобчинск",
                         Description = "Ћюблю ниху€ не делать",
                         Gender = "M",
-                        Id = 1,
+                        Id = "1",
                         Mail = "aboba@mail.ru",
                         Photo = "",
                         AvatarFileName = ""
@@ -52,7 +52,7 @@ namespace MeetingWebsite.Services
                     City = "»жевск",
                     Description = "Ћюблю ниху€ не делать",
                     Gender = "W",
-                    Id = 2,
+                    Id = "2",
                     Mail = "lada@mail.ru",
                     Photo = "",
                     AvatarFileName = ""
@@ -65,7 +65,7 @@ namespace MeetingWebsite.Services
                     City = "’охр€ки",
                     Description = "Ћюблю ниху€ не делать",
                     Gender = "M",
-                    Id = 3,
+                    Id = "3",
                     Mail = "anna@mail.ru",
                     Photo = "",
                     AvatarFileName = ""
@@ -78,7 +78,7 @@ namespace MeetingWebsite.Services
                     City = "’охр€ки",
                     Description = "Ћюблю ниху€ не делать",
                     Gender = "M",
-                    Id = 4,
+                    Id = "4",
                     Mail = "vanya@mail.ru",
                     Photo = "",
                     AvatarFileName = ""
@@ -91,7 +91,7 @@ namespace MeetingWebsite.Services
                     City = "’охр€ки",
                     Description = "Ћюблю ниху€ не делать",
                     Gender = "W",
-                    Id = 5,
+                    Id = "5",
                     Mail = "aly@mail.ru",
                     Photo = "",
                     AvatarFileName = ""
@@ -104,7 +104,7 @@ namespace MeetingWebsite.Services
                     City = "’охр€ки",
                     Description = "Ћюблю ниху€ не делать",
                     Gender = "W",
-                    Id = 6,
+                    Id = "6",
                     Mail = "sasha@mail.ru",
                     Photo = "",
                     AvatarFileName = ""
@@ -117,7 +117,7 @@ namespace MeetingWebsite.Services
                     City = "’охр€ки",
                     Description = "Ћюблю ниху€ не делать",
                     Gender = "W",
-                    Id = 7,
+                    Id = "7",
                     Mail = "sonya@mail.ru",
                     Photo = "",
                     AvatarFileName = ""
@@ -130,7 +130,7 @@ namespace MeetingWebsite.Services
                     City = "’охр€ки",
                     Description = "Ћюблю ниху€ не делать",
                     Gender = "W",
-                    Id = 8,
+                    Id = "8",
                     Mail = "regina@mail.ru",
                     Photo = "",
                     AvatarFileName = ""

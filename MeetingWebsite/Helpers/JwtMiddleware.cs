@@ -28,17 +28,17 @@ namespace MeetingWebsite.Helpers
             _configuration = configuration;
         }
 
-        public async Task Invoke(HttpContext context, IUserService userService)
+        public async Task Invoke(HttpContext context, IUsersService usersService)
         {
             var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
             if (token != null)
-                AttachUserToContext(context, userService, token);
+                AttachUserToContext(context, usersService, token);
 
             await _next(context);
         }
 
-        public void AttachUserToContext(HttpContext context, IUserService userService, string token)
+        public void AttachUserToContext(HttpContext context, IUsersService usersService, string token)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace MeetingWebsite.Helpers
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var userId = int.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
-                context.Items["User"] = userService.GetById(userId);
+                context.Items["User"] = usersService.GetById(userId.ToString());
             }
             catch
             {

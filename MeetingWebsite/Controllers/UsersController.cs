@@ -13,23 +13,23 @@ namespace MeetingWebsite.Controllers
     public class UsersController : ControllerBase
     {
 
-        private readonly IUserService _userService;
+        private readonly IUsersService _usersService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUsersService usersService)
         {
-            _userService = userService;
+            _usersService = usersService;
         }
 
         [HttpPost("authenticate")]
         public IActionResult Authenticate(AuthenticateRequest model)
         {
-            var response = _userService.Authenticate(model);
+            var response = _usersService.Authenticate(model);
 
             if (response == null)
                 return BadRequest(new { message = "Username or password is incorrect" });
 
 
-            HttpContext.Session.SetInt32("Id", response.Id ?? 0); //!
+            HttpContext.Session.SetInt32("Id", Convert.ToInt32(response.Id)); //!
                                                                   // Получение значения переменной из сессии
            
 
@@ -40,7 +40,7 @@ namespace MeetingWebsite.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserModel userModel)
         {
-            var response = await _userService.Register(userModel);
+            var response = await _usersService.Register(userModel);
 
             if (response == null)
             {
@@ -55,7 +55,7 @@ namespace MeetingWebsite.Controllers
         {
             int? Id_us = HttpContext.Session.GetInt32("Id");
 
-			var response = await _userService.UpdateInformation(userModel, Id_us);
+			var response = await _usersService.UpdateInformation(userModel, Id_us);
 
             if (response == null)
             {
@@ -81,7 +81,7 @@ namespace MeetingWebsite.Controllers
                 //return BadRequest("Id not found in session.");
             }
 
-            var user = _userService.GetById(id ?? 0);
+            var user = _usersService.GetById((id ?? 0).ToString());
 
             if (user == null)
                 return NotFound();
@@ -100,7 +100,7 @@ namespace MeetingWebsite.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var users = _userService.GetAll();
+            var users = _usersService.GetAll();
             return Ok(users);
         }
 
@@ -108,7 +108,7 @@ namespace MeetingWebsite.Controllers
         [HttpGet("{id}")]
         public IActionResult GetUserById(int id)
         {
-            var user = _userService.GetById(id);
+            var user = _usersService.GetById(id.ToString());
 
             if (user == null)
                 return NotFound();
@@ -120,7 +120,7 @@ namespace MeetingWebsite.Controllers
         public IActionResult Swipe()
         {
             int id = HttpContext.Session.GetInt32("Id") ?? 0;
-            var users = _userService.Swipe(id);
+            var users = _usersService.Swipe(id);
             return Ok(users);
         }
 
@@ -129,7 +129,7 @@ namespace MeetingWebsite.Controllers
         {
             int? Id_us = HttpContext.Session.GetInt32("Id");
 
-            var response = await _userService.UpdateOptions(optionsModel, Id_us);
+            var response = await _usersService.UpdateOptions(optionsModel, Id_us);
 
             if (response == false)
             {
@@ -155,7 +155,7 @@ namespace MeetingWebsite.Controllers
                 //return BadRequest("Id not found in session.");
             }
 
-            var options = _userService.GetOptionsById(id ?? 0);
+            var options = _usersService.GetOptionsById(id ?? 0);
 
             if (options == null)
                 return NotFound();
@@ -167,7 +167,7 @@ namespace MeetingWebsite.Controllers
         public async Task<IActionResult> Like(int id, Boolean like)
         {
             int? Id_us = HttpContext.Session.GetInt32("Id");
-            var response = await _userService.Like(Id_us, id, like);
+            var response = await _usersService.Like(Id_us, id, like);
 
             if (response == false)
             {
@@ -182,7 +182,7 @@ namespace MeetingWebsite.Controllers
         {
             int? id = HttpContext.Session.GetInt32("Id");
 
-            var matches = _userService.Matches(id ?? 0);
+            var matches = _usersService.Matches(id ?? 0);
 
             if (matches == null)
                 return NotFound();
