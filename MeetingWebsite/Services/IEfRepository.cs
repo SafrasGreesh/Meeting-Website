@@ -9,7 +9,7 @@ namespace MeetingWebsite.Services
         List<T> GetAll();
         T GetById(string? id);
         Task<string> Add(T entity);
-        Task UserUpdate(int id, T entity);
+        Task UserUpdate(string id, T entity);
         Task OptionsUpdate(int id, T entity);
     }
 }

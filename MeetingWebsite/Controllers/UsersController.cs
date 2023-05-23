@@ -53,7 +53,7 @@ namespace MeetingWebsite.Controllers
         [HttpPost("update")]
         public async Task<IActionResult> UpdateInf(UserModel userModel)
         {
-            int? Id_us = HttpContext.Session.GetInt32("Id");
+            string? Id_us = HttpContext.Session.GetInt32("Id").ToString();
 
 			var response = await _usersService.UpdateInformation(userModel, Id_us);
 
@@ -129,7 +129,7 @@ namespace MeetingWebsite.Controllers
         {
             int? Id_us = HttpContext.Session.GetInt32("Id");
 
-            var response = await _usersService.UpdateOptions(optionsModel, Id_us);
+            var response = await _usersService.UpdateOptions(optionsModel, Id_us.ToString());
 
             if (response == false)
             {

@@ -70,7 +70,8 @@
                 alert('Необходимо согласиться с условиями использования');
                 return;
             }
-            var id = Math.floor(Math.random() * 1000000000) + 1;
+            var id = (Math.floor(Math.random() * 1000000000) + 1).toString();
+
             // Создать объект с данными для отправки на сервер
             var data = {
                 password: password,
