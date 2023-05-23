@@ -3,6 +3,7 @@ using System;
 using MeetingWebsite.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MeetingWebsite.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230522220355_qqwe")]
+    partial class qqwe
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,26 +63,14 @@ namespace MeetingWebsite.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<bool>("Like")
                         .HasColumnType("boolean");
 
                     b.Property<int?>("LikeUserId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
@@ -97,74 +88,45 @@ namespace MeetingWebsite.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<int?>("UserId1")
                         .HasColumnType("integer");
 
                     b.Property<int?>("UserId2")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean");
-
                     b.HasKey("Id");
 
                     b.ToTable("Matches");
                 });
 
-            modelBuilder.Entity("MeetingWebsite.Entity.Message", b =>
+            modelBuilder.Entity("MeetingWebsite.Entity.Messages", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("SenderId")
+                    b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("SenderId1")
+                    b.Property<int>("FromUserId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("ThreadId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("ThreadId1")
+                    b.Property<int>("ToRoomId")
                         .HasColumnType("integer");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SenderId1");
+                    b.HasIndex("FromUserId");
 
-                    b.HasIndex("ThreadId1");
+                    b.HasIndex("ToRoomId");
 
-                    b.ToTable("Message");
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("MeetingWebsite.Entity.Options", b =>
@@ -185,63 +147,35 @@ namespace MeetingWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<string>("Gender")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean");
 
                     b.HasKey("Id");
 
                     b.ToTable("Options");
                 });
 
-            modelBuilder.Entity("MeetingWebsite.Entity.Thread", b =>
+            modelBuilder.Entity("MeetingWebsite.Entity.Room", b =>
                 {
-                    b.Property<int?>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("OponentId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("OwnerId1")
+                    b.Property<int>("AdminId")
                         .HasColumnType("integer");
 
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId1");
+                    b.HasIndex("AdminId");
 
-                    b.ToTable("Thread");
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("MeetingWebsite.Entity.Users", b =>
@@ -252,7 +186,7 @@ namespace MeetingWebsite.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("Id"));
 
-                    b.Property<string>("AvatarFileName")
+                    b.Property<string>("Avatar")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("BirthDate")
@@ -261,12 +195,6 @@ namespace MeetingWebsite.Migrations
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -278,11 +206,7 @@ namespace MeetingWebsite.Migrations
 
                     b.Property<string>("Mail")
                         .IsRequired()
-                        .HasMaxLength(60)
-                        .HasColumnType("character varying(60)");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -296,58 +220,48 @@ namespace MeetingWebsite.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Username")
-                        .HasMaxLength(60)
-                        .HasColumnType("character varying(60)");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("boolean");
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MeetingWebsite.Entity.Message", b =>
+            modelBuilder.Entity("MeetingWebsite.Entity.Messages", b =>
                 {
-                    b.HasOne("MeetingWebsite.Entity.Users", "Sender")
-                        .WithMany("Messages")
-                        .HasForeignKey("SenderId1")
+                    b.HasOne("MeetingWebsite.Entity.Users", "FromUser")
+                        .WithMany()
+                        .HasForeignKey("FromUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MeetingWebsite.Entity.Thread", "Thread")
+                    b.HasOne("MeetingWebsite.Entity.Room", "ToRoom")
                         .WithMany("Messages")
-                        .HasForeignKey("ThreadId1")
+                        .HasForeignKey("ToRoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Sender");
+                    b.Navigation("FromUser");
 
-                    b.Navigation("Thread");
+                    b.Navigation("ToRoom");
                 });
 
-            modelBuilder.Entity("MeetingWebsite.Entity.Thread", b =>
+            modelBuilder.Entity("MeetingWebsite.Entity.Room", b =>
                 {
-                    b.HasOne("MeetingWebsite.Entity.Users", "Owner")
-                        .WithMany("Threads")
-                        .HasForeignKey("OwnerId1")
+                    b.HasOne("MeetingWebsite.Entity.Users", "Admin")
+                        .WithMany()
+                        .HasForeignKey("AdminId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Owner");
+                    b.Navigation("Admin");
                 });
 
-            modelBuilder.Entity("MeetingWebsite.Entity.Thread", b =>
+            modelBuilder.Entity("MeetingWebsite.Entity.Room", b =>
                 {
                     b.Navigation("Messages");
-                });
-
-            modelBuilder.Entity("MeetingWebsite.Entity.Users", b =>
-                {
-                    b.Navigation("Messages");
-
-                    b.Navigation("Threads");
                 });
 #pragma warning restore 612, 618
         }
