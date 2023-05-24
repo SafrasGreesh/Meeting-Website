@@ -7,12 +7,11 @@ namespace MeetingWebsite.Services
     {
         
         public DbSet<Users> Users { get; set; }
+        public DbSet<Chat> Chat { get; set; }
         public DbSet<Matches> Matches { get; set; }
         public DbSet<Likes> Likes { get; set; }
         public DbSet<Events> Events { get; set; }
         public DbSet<Options> Options { get; set; }
-        public DbSet<Message> Message { get; set; }
-        public DbSet<Entity.Thread> Thread { get; set; }
         public ApplicationContext()
         {
             Database.EnsureCreated();
@@ -30,21 +29,6 @@ namespace MeetingWebsite.Services
         public async Task<int> SaveChangesAsync()
         {
             return await base.SaveChangesAsync();
-        }
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            builder.Entity<Message>()
-                .HasOne(m => m.Thread)
-                .WithMany(t => t.Messages)
-                .HasForeignKey(m => m.ThreadId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Message>()
-                .HasOne(m => m.Sender)
-                .WithMany(s => s.Messages)
-                .HasForeignKey(m => m.SenderId)
-                .OnDelete(DeleteBehavior.Restrict);
-            //base.OnModelCreating(builder);
         }
     }
 }
