@@ -10,6 +10,7 @@ namespace MeetingWebsite.Services
     {
         private readonly ApplicationContext _context;
 
+
         public UserRepository(ApplicationContext context)
         {
             _context = context;
@@ -41,6 +42,24 @@ namespace MeetingWebsite.Services
         }
 
         public async Task UserUpdate(int id, T entity)
+        {
+            var existingEntity = await _context.Set<T>().FindAsync(id); // Найти существующую сущность по идентификатору
+
+            if (existingEntity == null)
+            {
+                // Обработка случая, когда сущность с заданным идентификатором не найдена
+                // Можно выбросить исключение или вернуть сообщение об ошибке
+                // Например:
+                throw new DllNotFoundException("Entity not found");
+            }
+
+            // Обновить свойства сущности с помощью значений из новой сущности
+            _context.Entry(existingEntity).CurrentValues.SetValues(entity);
+
+            await _context.SaveChangesAsync(); // Сохранить изменения в базе данных
+        }
+
+        public async Task OptionsUpdate(int id, T entity)
         {
             var existingEntity = await _context.Set<T>().FindAsync(id); // Найти существующую сущность по идентификатору
 

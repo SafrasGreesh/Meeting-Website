@@ -12,7 +12,6 @@ using MeetingWebsite;
 using MeetingWebsite.Entity;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata;
-using System.Security.Cryptography.X509Certificates;
 
 namespace MeetingWebsite.Services
 {
@@ -21,7 +20,6 @@ namespace MeetingWebsite.Services
 		public static void Main(string[] args)
 		{
 			var host = CreateHostBuilder(args).Build();
-
 
             using (var scope = host.Services.CreateScope())
             {
@@ -36,68 +34,105 @@ namespace MeetingWebsite.Services
                 context.Users.RemoveRange(context.Users);
                 context.Users.Add(new Users {
                         Password = "1",
-                        Name = "ÐÐ±Ð¾Ð±Ð°",
+                        Name = "Àáîáà",
                         BirthDate = new DateTime(2000, 12, 1),
-                        City = "ÐÐ±Ð¾Ð±Ñ‡Ð¸Ð½ÑÐº",
-                        Description = "Ð›ÑŽÐ±Ð»ÑŽ Ð½Ð¸Ñ…ÑƒÑ Ð½Ðµ Ð´ÐµÐ»Ð°Ñ‚ÑŒ",
-                        Gender = "Ðœ",
+                        City = "Àáîá÷èíñê",
+                        Description = "Ëþáëþ íèõóÿ íå äåëàòü",
+                        Gender = "M",
                         Id = 1,
                         Mail = "aboba@mail.ru",
                         Photo = ""
                     });
-
+                context.Users.Add(new Users
+                {
+                    Password = "2",
+                    Name = "Ëàäà",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "Èæåâñê",
+                    Description = "Ëþáëþ íèõóÿ íå äåëàòü",
+                    Gender = "W",
+                    Id = 2,
+                    Mail = "lada@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "3",
+                    Name = "Àííà",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "Õîõðÿêè",
+                    Description = "Ëþáëþ íèõóÿ íå äåëàòü",
+                    Gender = "M",
+                    Id = 3,
+                    Mail = "anna@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "4",
+                    Name = "Âàíÿ",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "Õîõðÿêè",
+                    Description = "Ëþáëþ íèõóÿ íå äåëàòü",
+                    Gender = "M",
+                    Id = 4,
+                    Mail = "vanya@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "4",
+                    Name = "Àëÿ",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "Õîõðÿêè",
+                    Description = "Ëþáëþ íèõóÿ íå äåëàòü",
+                    Gender = "W",
+                    Id = 5,
+                    Mail = "aly@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "4",
+                    Name = "Ñàøà",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "Õîõðÿêè",
+                    Description = "Ëþáëþ íèõóÿ íå äåëàòü",
+                    Gender = "W",
+                    Id = 6,
+                    Mail = "sasha@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "4",
+                    Name = "Coíÿ",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "Õîõðÿêè",
+                    Description = "Ëþáëþ íèõóÿ íå äåëàòü",
+                    Gender = "W",
+                    Id = 7,
+                    Mail = "sonya@mail.ru",
+                    Photo = ""
+                });
+                context.Users.Add(new Users
+                {
+                    Password = "4",
+                    Name = "Ðåãèíà",
+                    BirthDate = new DateTime(2000, 12, 1),
+                    City = "Õîõðÿêè",
+                    Description = "Ëþáëþ íèõóÿ íå äåëàòü",
+                    Gender = "W",
+                    Id = 8,
+                    Mail = "regina@mail.ru",
+                    Photo = ""
+                });
                 context.SaveChanges();
             }
-
-            UploadFile();
             host.Run();
-
-        }
-        public static async void UploadFile()
-        {
-            var builder = WebApplication.CreateBuilder();
-            var app = builder.Build();
-
-            app.Run(async (context) =>
-            {
-                var response = context.Response;
-                var request = context.Request;
-
-                response.ContentType = "text/html; charset=utf-8";
-
-                if (request.Path == "/upload" && request.Method == "POST")
-                {
-                    IFormFileCollection files = request.Form.Files;
-                    // Ð¿ÑƒÑ‚ÑŒ Ðº Ð¿Ð°Ð¿ÐºÐµ, Ð³Ð´Ðµ Ð±ÑƒÐ´ÑƒÑ‚ Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑŒÑÑ Ñ„Ð°Ð¹Ð»Ñ‹
-                    var uploadPath = $"{Directory.GetCurrentDirectory()}/uploads";
-                    // ÑÐ¾Ð·Ð´Ð°ÐµÐ¼ Ð¿Ð°Ð¿ÐºÑƒ Ð´Ð»Ñ Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ñ Ñ„Ð°Ð¹Ð»Ð¾Ð²
-                    Directory.CreateDirectory(uploadPath);
-
-                    foreach (var file in files)
-                    {
-                        // Ð¿ÑƒÑ‚ÑŒ Ðº Ð¿Ð°Ð¿ÐºÐµ uploads
-                        string fullPath = $"{uploadPath}/{file.FileName}";
-
-                        // ÑÐ¾Ñ…Ñ€Ð°Ð½ÑÐµÐ¼ Ñ„Ð°Ð¹Ð» Ð² Ð¿Ð°Ð¿ÐºÑƒ uploads
-                        using (var fileStream = new FileStream(fullPath, FileMode.Create))
-                        {
-                            await file.CopyToAsync(fileStream);
-                        }
-                    }
-                    await response.WriteAsync("Ð¤Ð°Ð¹Ð»Ñ‹ ÑƒÑÐ¿ÐµÑˆÐ½Ð¾ Ð·Ð°Ð³Ñ€ÑƒÐ¶ÐµÐ½Ñ‹");
-                }
-                else
-                {
-                    //await response.SendFileAsync("C:\\Users\\Professional\\source\\repos\\Meeting-Website\\MeetingWebsite\\Pages\\Home.cshtml");
-                }
-            });
-
-            app.Run();
         }
 
-
-
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
+		public static IHostBuilder CreateHostBuilder(string[] args) =>
 			Host.CreateDefaultBuilder(args)
 				.ConfigureWebHostDefaults(webBuilder =>
 				{

@@ -10,5 +10,6 @@ namespace MeetingWebsite.Services
         T GetById(int? id);
         Task<int?> Add(T entity);
         Task UserUpdate(int id, T entity);
+        Task OptionsUpdate(int id, T entity);
     }
 }
