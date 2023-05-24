@@ -41,8 +41,9 @@
 							<input type="text" class="form-control" id="city" name="city" value="" readonly>
 						</div>
 						<div class="mb-3">
-							<label for="birthdate" class="form-label">Дата рождения</label>
-							<input type="date" class="form-control" id="birthdate" name="birthdate" value="2023-05-13" readonly>
+							@*<label for="birthdate" class="form-label">Дата рождения</label>
+							<input type="text" class="form-control" id="birthdate" name="birthdate" value="" readonly>*@
+							<p class="card-text">Дата рождения: <span id="birthdate" value=""></span></p>
 						</div>
 						<button type="button" class="btn btn-primary w-100">Изменить информацию</button>
 						<button type="button" class="btn btn-success w-100 d-none" id="saveBtn">Сохранить</button>
@@ -76,7 +77,7 @@
 		</div>
 	</div>
 
-<script>
+	<script>
 		fetch('/users/id')
 			.then(response => response.json())
 			.then(user => {
@@ -85,10 +86,7 @@
 				document.getElementById("email").value = user.mail;
 				document.getElementById("gender").value = user.gender;
 				document.getElementById("city").value = user.city;
-				var birthDate = new Date(user.birthDate);
-				var formattedDate = birthDate.toISOString().split('T')[0];
-				document.getElementById("birthdate").value = formattedDate;
-				//document.getElementById("birthdate").value = user.birthDate;
+				document.getElementById("birthdate").textContent = user.birthDate;
 				document.getElementById("description").value = user.description;
 			})
 			.catch(error => console.error(error));
@@ -126,7 +124,7 @@
 			var mail = document.getElementById("email").value;
 			var gender = document.getElementById("gender").value;
 			var city = document.getElementById("city").value;
-			var birthDate = document.getElementById("birthdate").value;
+			//var birthDate = document.getElementById("birthdate").value;
 			//var description = document.getElementById("description").value;
 
 			// Создать объект с данными пользователя
@@ -137,7 +135,7 @@
 				mail: mail,
 				gender: gender,
 				city: city,
-				birthDate: birthDate,
+				birthDate: "2023-05-13T21:43:21.558Z",
 				description: ""
 			};
 

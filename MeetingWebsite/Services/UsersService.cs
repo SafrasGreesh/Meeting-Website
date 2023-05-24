@@ -42,20 +42,6 @@ namespace MeetingWebsite.Services
 
             return maxId ?? 0;
         }
-
-        public async Task<string> GetMaxUserId()
-        {
-            var events = await Task.Run(() => _userRepository.GetAll());
-
-            var maxId = events.Max(x => x.Id);
-
-            int idInt = int.Parse(maxId);
-
-            idInt++;
-            
-
-            return idInt.ToString();
-        }
         public int CalculateAge(DateTime birthDate)
         {
             DateTime currentDate = DateTime.Today;
@@ -96,7 +82,6 @@ namespace MeetingWebsite.Services
         public async Task<AuthenticateResponse> Register(UserModel userModel)
         {
             var user = _mapper.Map<Users>(userModel); //создает объект юзера
-            user.Id = await GetMaxUserId();
 
             var addedUser = await _userRepository.Add(user); //добавление юзера  в бд
 
@@ -149,7 +134,7 @@ namespace MeetingWebsite.Services
             }
      
         }
-        public async Task<AuthenticateResponse> UpdateInformation(UserModel userModel, string? id)
+        public async Task<AuthenticateResponse> UpdateInformation(UserModel userModel, int? id)
         {
 
             var user = _userRepository.GetById(id.ToString()); // Найти пользователя по идентификатору
@@ -178,17 +163,13 @@ namespace MeetingWebsite.Services
 			if (userModel.Gender != "")
 			{
 				user.Gender = userModel.Gender;
-            }
-            if (userModel.Description != "")
-            {
-                user.Description = userModel.Description;
-            }
-            if (userModel.BirthDate != DateTime.Parse("2023-05-13T21:43:21.558Z"))
-            {
-                user.BirthDate = userModel.BirthDate;
-            }
+			}
+			if (userModel.Description != "")
+			{
+				user.Description = userModel.Description;
+			}
 
-            await _userRepository.UserUpdate(id, user); // Сохранить изменения в базе данных
+			await _userRepository.UserUpdate(id ?? 0, user); // Сохранить изменения в базе данных
 
             var response = Authenticate(new AuthenticateRequest
             {
@@ -198,10 +179,10 @@ namespace MeetingWebsite.Services
 
             return response;
         }
-        public async Task<bool> UpdateOptions(Options optModel, string? id)
+        public async Task<bool> UpdateOptions(Options optModel, int? id)
         {
 
-            var options = _optionsRepository.GetById(id); // Найти пользователя по идентификатору
+            var options = _optionsRepository.GetById(id.ToString()); // Найти пользователя по идентификатору
 
             if (options == null)
             {
@@ -222,7 +203,7 @@ namespace MeetingWebsite.Services
             options.Gender = optModel.Gender;
             options.City = optModel.City;
 
-            await _optionsRepository.OptionsUpdate(Convert.ToInt32(id) , options); // Сохранить изменения в базе данных
+            await _optionsRepository.OptionsUpdate(id ?? 0, options); // Сохранить изменения в базе данных
 
             return true;
         }
@@ -233,7 +214,7 @@ namespace MeetingWebsite.Services
             if(options == null)
             {
                 var optModel = new Options();
-                optModel.Id = Convert.ToInt32(id).ToString();
+                optModel.Id = id;
                 optModel.AgeMin = 18;
                 optModel.AgeMax = 100;
                 optModel.Gender = "A";

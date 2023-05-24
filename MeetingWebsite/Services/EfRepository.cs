@@ -1,6 +1,5 @@
 ﻿using MeetingWebsite.Entity;
 using MeetingWebsite.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -39,10 +38,10 @@ namespace MeetingWebsite.Services
         {
             var result = await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
-            return result.Entity.Id.ToString();
+            return result.Entity.Id;
         }
 
-        public async Task UserUpdate(string id, T entity)
+        public async Task UserUpdate(int id, T entity)
         {
             var existingEntity = await _context.Set<T>().FindAsync(id); // Найти существующую сущность по идентификатору
 

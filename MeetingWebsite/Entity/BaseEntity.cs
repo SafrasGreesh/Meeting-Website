@@ -6,7 +6,7 @@ namespace MeetingWebsite.Entity
     public class BaseEntity : IAuditable, IDeletable
     {
         [Key]
-        public string? Id { get; set; }
+        public string Id { get; set; }
         public bool isDeleted { get; set; }
 
         [DataType(DataType.DateTime)]

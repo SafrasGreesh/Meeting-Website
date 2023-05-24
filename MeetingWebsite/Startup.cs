@@ -48,13 +48,12 @@ namespace MeetingWebsite
 			services.AddAutoMapper(typeof(UserProfile));
 			services.AddCors();
 			services.AddControllers();
-			services.AddSwaggerGen();
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sailora WEB API API", Version = "v1" });
 			});
 
-			services.AddScoped<IUsersService, UsersService>();
+			services.AddScoped<IUserService, UserService>();
             services.AddSession(); //!
             // Добавьте следующие строки
 
