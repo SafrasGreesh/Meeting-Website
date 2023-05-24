@@ -11,18 +11,6 @@ using Microsoft.OpenApi.Models;
 using BlazorServerSignalRApp.Server.Hubs;
 using System.Reflection.Metadata;
 using MeetingWebsite.Entity;
-using MeetingWebsite.Handler;
-using MeetingWebsite.Interfaces;
-using MeetingWebsite.Services.HubService;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.IdentityModel.Tokens;
-using System.Text;
-using WebChat.AvatarWriter;
-using WebChat.AvatarWriter.Interface;
-using WebChat.Hubs.ConnectionMapper;
-using WebChat.Hubs.Interfaces;
-using WebChat.Hubs;
 
 namespace MeetingWebsite
 {
@@ -37,10 +25,7 @@ namespace MeetingWebsite
 
 		public void ConfigureServices(IServiceCollection services)
 		{
-            //this.RegisterAuthentication(services);
-            this.RegisterServices(services);
-
-            services.AddDbContext<ApplicationContext>(opt =>
+			services.AddDbContext<ApplicationContext>(opt =>
 				opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
 			services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
@@ -60,67 +45,8 @@ namespace MeetingWebsite
             services.AddRazorPages();
 			services.AddSignalR();
 		}
-        //private void RegisterAuthentication(IServiceCollection services)
-        //{
-        //    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).
-        //        AddJwtBearer(options =>
-        //        {
-        //            options.TokenValidationParameters = new TokenValidationParameters
-        //            {
-        //                ValidateIssuer = false,
-        //                ValidateAudience = false,
-        //                ValidateLifetime = true,
-        //                ValidateIssuerSigningKey = true,
 
-        //                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("JWTSecretKey")))
-        //            };
-        //            options.Events = new JwtBearerEvents
-        //            {
-        //                OnMessageReceived = context =>
-        //                {
-        //                    var accessToken = context.Request.Query["access_token"];
-
-        //                    // If the request is for our hub...
-        //                    var path = context.HttpContext.Request.Path;
-        //                    if (!string.IsNullOrEmpty(accessToken) &&
-        //                        (path.StartsWithSegments("/chat")))
-        //                    {
-        //                        // Read the token out of the query string
-        //                        context.Token = accessToken;
-        //                    }
-        //                    return Task.CompletedTask;
-        //                }
-        //            };
-        //        });
-
-        //}
-
-        private void RegisterServices(IServiceCollection services)
-        {
-            services.AddSingleton<IAuthService>
-                (
-                    new AuthService(
-                        Configuration.GetValue<string>("JWTSecretKey"),
-                        Configuration.GetValue<int>("JWTLifespan")
-
-                        )
-                );
-            services.AddSingleton<IUserIdProvider, NameUserIdProvider>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IMessageService, MessageService>();
-            services.AddTransient<IThreadService, ThreadService>();
-            services.AddTransient<IMappingService, MappingService>();
-            services.AddTransient<IValidator, Validator>();
-            services.AddSingleton(typeof(IConnectionMapping<string>), typeof(ConnectionMapping<string>));
-            services.AddTransient<IImageHandler, ImageHandler>();
-            services.AddTransient<IAvatarWriter,
-                                  AvatarWriter>();
-
-            var test = Environment.GetEnvironmentVariable("HELLO");
-
-
-        }
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 		{
             
             if (env.IsDevelopment())
@@ -152,10 +78,7 @@ namespace MeetingWebsite
 
 			app.UseEndpoints(endpoints =>
 			{
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
+				endpoints.MapRazorPages();
 				endpoints.MapControllers();
 				endpoints.MapHub<ChatHub>("/chatHub");
 				endpoints.MapFallbackToPage("/home");

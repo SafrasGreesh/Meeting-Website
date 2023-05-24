@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using MeetingWebsite.Interfaces;
 using MeetingWebsite.ViewModels;
-using Thread = MeetingWebsite.Entity.Thread;
 
 
 namespace MeetingWebsite.Services.HubService
@@ -87,7 +86,7 @@ namespace MeetingWebsite.Services.HubService
             return newThread;
         }
 
-        public Entity.Thread? GetThreadById(string threadId)
+        public Thread GetThreadById(string threadId)
         {
             return ctx.Thread.FirstOrDefault(t => t.Id == threadId);
         }

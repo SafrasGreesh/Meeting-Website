@@ -31,7 +31,7 @@ namespace MeetingWebsite.Helpers
             {
                 Id = model.Id,
                 SenderId = model.SenderId,
-                //Username = this.usersService.GetUserNameById(model.SenderId),
+                //Username = this.userService.GetUserNameById(model.SenderId),
                 Text = model.Text,
                 Time = model.CreatedOn,
                 ThreadId = model.ThreadId

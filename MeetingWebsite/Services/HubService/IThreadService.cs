@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using MeetingWebsite.ViewModels;
-using Thread = MeetingWebsite.Entity.Thread;
 
 namespace MeetingWebsite.Services.HubService
 {
@@ -10,11 +9,11 @@ namespace MeetingWebsite.Services.HubService
     {
         Dictionary<DateTime, List<MessageViewModel>> SearchForMessages(string threadId, string term);
 
-        ICollection<Entity.Thread> GetUserThreads(string userId);
+        ICollection<Thread> GetUserThreads(string userId);
 
         void AddThread(ThreadViewModel thread);
 
-        Thread? GetThreadById(string threadId);
+        Thread GetThreadById(string threadId);
 
         ThreadViewModel CreateThreadViewModel(string ownerId, string oponentId);
         //Testing

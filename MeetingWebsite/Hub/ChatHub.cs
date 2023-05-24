@@ -1,7 +1,6 @@
 ﻿using MeetingWebsite.Helpers;
 using MeetingWebsite.Interfaces;
 using Microsoft.AspNetCore.SignalR;
-using WebChat.Hubs.Interfaces;
 
 namespace BlazorServerSignalRApp.Server.Hubs;
 

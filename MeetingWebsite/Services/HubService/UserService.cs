@@ -5,7 +5,6 @@ using System.Text;
 using MeetingWebsite.Entity;
 using MeetingWebsite.Interfaces;
 using MeetingWebsite.ViewModels;
-using WebChat.Hubs.Interfaces;
 using Thread = MeetingWebsite.Entity.Thread;
 
 namespace MeetingWebsite.Services.HubService
@@ -34,10 +33,10 @@ namespace MeetingWebsite.Services.HubService
 
         public void UpdateProfile(ProfileViewModel model)
         {
-            var entity = this.ctx.Users.FirstOrDefault(u => u.Id == model.Id);
-            entity.Mail = model.Email;
+            var entity = this.ctx.User.FirstOrDefault(u => u.Id == model.Id);
+            entity.Email = model.Email;
             entity.Username = model.Username;
-            ctx.Users.Update(entity);
+            ctx.User.Update(entity);
             ctx.SaveChanges();
         }
 
@@ -45,7 +44,7 @@ namespace MeetingWebsite.Services.HubService
         {
             if (string.IsNullOrEmpty(curentUser)) throw new ArgumentNullException("Current user Id can not be null");
 
-            var queryResult = ctx.Users.Where(u => u.Username.IndexOf(match) > -1 && u.Id != curentUser);
+            var queryResult = ctx.User.Where(u => u.Username.IndexOf(match) > -1 && u.Id != curentUser);
             var searchResult = new List<UserViewModel>();
             foreach (var user in queryResult)
             {
@@ -61,9 +60,9 @@ namespace MeetingWebsite.Services.HubService
 
         public void AddAvatar(string avatarId, string userId)
         {
-            var user = ctx.Users.FirstOrDefault(u => u.Id == userId);
+            var user = ctx.User.FirstOrDefault(u => u.Id == userId);
             user.AvatarFileName = avatarId;
-            ctx.Users.Update(user);
+            ctx.User.Update(user);
             ctx.SaveChanges();
         }
 
@@ -76,7 +75,7 @@ namespace MeetingWebsite.Services.HubService
 
             newUser.CreatedOn = DateTime.Now;
 
-            ctx.Users.Add(newUser);
+            ctx.User.Add(newUser);
             ctx.SaveChanges();
         }
 
@@ -113,22 +112,22 @@ namespace MeetingWebsite.Services.HubService
                 throw new ArgumentNullException("Email can not be null or empty");
             }
 
-            return ctx.Users.FirstOrDefault(u => u.Mail == email);
+            return ctx.User.FirstOrDefault(u => u.Email == email);
         }
 
         public string GetUserIdByName(string name)
         {
-            return ctx.Users.FirstOrDefault(u => u.Username == name).Id;
+            return ctx.User.FirstOrDefault(u => u.Username == name).Id;
         }
 
         public string GetUserNameById(string id)
         {
-            return ctx.Users.FirstOrDefault(u => u.Id == id).Username;
+            return ctx.User.FirstOrDefault(u => u.Id == id).Username;
         }
 
         public ProfileViewModel GetUserProfile(string userId)
         {
-            var model = ctx.Users.FirstOrDefault(u => u.Id == userId);
+            var model = ctx.User.FirstOrDefault(u => u.Id == userId);
             var viewModel = this.mappingService.MapUserModelRoProfileViewModel(model);
             viewModel.Username = GetUserNameById(userId);
 
@@ -140,7 +139,7 @@ namespace MeetingWebsite.Services.HubService
         {
             var userConnections = connectionMapping.GetConnections(id);
 
-            var profile = (from u in ctx.Users
+            var profile = (from u in ctx.User
                            where u.Id == id
                            select new OponentViewModel
                            {
@@ -153,7 +152,7 @@ namespace MeetingWebsite.Services.HubService
 
         public ICollection<Users> GetUsers()
         {
-            return ctx.Users.ToList();
+            return ctx.User.ToList();
         }
 
         public bool isEmailUniq(string email)
@@ -162,7 +161,7 @@ namespace MeetingWebsite.Services.HubService
             {
                 throw new ArgumentNullException("Email can not be null or empty");
             }
-            var user = ctx.Users.FirstOrDefault(u => u.Mail == email);
+            var user = ctx.User.FirstOrDefault(u => u.Email == email);
 
             if (user != null)
             {
@@ -178,7 +177,7 @@ namespace MeetingWebsite.Services.HubService
             {
                 throw new ArgumentNullException("Username can not be null or empty");
             }
-            var user = ctx.Users.FirstOrDefault(u => u.Username == userName);
+            var user = ctx.User.FirstOrDefault(u => u.Username == userName);
 
             if (user != null)
             {

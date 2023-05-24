@@ -73,7 +73,7 @@ namespace MeetingWebsite.Services.HubService
         //        UserId = model.SenderId,
         //        Text = model.Text,
         //        ThreadId = model.ThreadId,
-        //        Username = this.usersService.GetUserNameById(model.SenderId),
+        //        Username = this.userService.GetUserNameById(model.SenderId),
         //        Time = String.Format("{0:t}", DateTime.Now)
         //    };
 
