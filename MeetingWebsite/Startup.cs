@@ -28,7 +28,7 @@ namespace MeetingWebsite
 			services.AddDbContext<ApplicationContext>(opt =>
 				opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-			services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
+			services.AddScoped(typeof(IEfRepository<>), typeof(EfRepository<>));
 
 			services.AddAutoMapper(typeof(UserProfile));
 			services.AddCors();

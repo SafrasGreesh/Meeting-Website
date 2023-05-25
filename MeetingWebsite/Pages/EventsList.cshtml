@@ -21,8 +21,8 @@
         <div class="row">
             <div class="col-md-6">
                 <h3>Список событий</h3>
-                <ul class="list-group my-3">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                <ul class="list-group my-3" id="eventslist">
+                   @* <li class="list-group-item d-flex justify-content-between align-items-center">
                         Событие 1
                         <a href="\event" class="btn btn-sm btn-primary">Посмотреть</a>
                     </li>
@@ -32,13 +32,13 @@
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">
                         Событие 3
-                        <a href="\event" class="btn btn-sm btn-primary">Посмотреть</a>
+                        <a href="\event" class="btn btn-sm btn-primary">Посмотреть</a>*@
                     </li>
                 </ul>
             </div>
             <div class="col-md-6">
                 <h3>Добавить событие</h3>
-                <form>
+                <form id ="addEventForm">
                     <div class="mb-3">
                         <label for="eventName" class="form-label">Название события</label>
                         <input type="text" class="form-control" id="eventName">
@@ -51,7 +51,7 @@
                         <label for="eventDescription" class="form-label">Описание события</label>
                         <textarea class="form-control" id="eventDescription" rows="3"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Добавить событие</button>
+                    <button type="submit" id="saveBtnD" class="btn btn-primary">Добавить событие</button>
                 </form>
             </div>
         </div>
@@ -60,6 +60,94 @@
     @*Подключение скриптов тут приводит к отключению dropdown на Layout!*@
    @* <!-- Подключаем скрипты Bootstrap 5 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js"></script>*@
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/sidebars.js"></script>
+
+
+
+    <script>
+        var saveBtn = document.querySelector('button#saveBtnD');
+        saveBtn.addEventListener('click', function () {
+           
+            var eventName = document.getElementById("eventName").value;
+            var eventDateTime = new Date($('#eventDateTime').val()).toISOString();
+            var eventDescriptionQ = document.getElementById("eventDescription").value;
+            var id = Math.floor(Math.random() * 1000000000) + 1;
+            
+            // Создаем объект с данными для отправки на сервер
+            var eventData = {
+                id: 0,
+                name: eventName,
+                date: eventDateTime,
+                userId: 10,
+                description: eventDescriptionQ
+            };
+           
+            // Отправить данные на сервер в POST-запросе
+            $.post({
+                url: '/users/addEvent', // Здесь указывается URL-путь для обработки регистрации на сервере
+                contentType: 'application/json',
+                data: JSON.stringify(eventData),
+                success: function (response) {
+                    // Обработка успешного ответа сервера после регистрации
+                    console.log(response);
+                    //alert('Обновление данных прошло успешно');
+                    window.location.reload();
+                    //window.location.href = "home";
+                    // Дополнительные действия, например, перенаправление на другую страницу
+                },
+                error: function (xhr, status, error) {
+                    // Обработка ошибки при регистрации
+                    console.log(xhr.responseText);
+                    alert('Ошибка обновления');
+                }
+            });
+
+        });
+
+    </script>
+
+    
+
+    <script>
+        fetch('/Users/GetAllEvents')
+            .then(response => response.json())
+            .then(events => {
+                const eventsList = document.getElementById('eventslist');
+                eventsList.innerHTML = '';
+
+                events.forEach(event => {
+                    const listItem = document.createElement('li');
+                    listItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+
+                    const eventDate = document.createElement('small');
+                    const eventDateTime = new Date(event.date);
+                    eventDate.textContent = eventDateTime.toLocaleString();
+
+                    const eventName = document.createElement('span');
+                    eventName.textContent = event.name;
+
+                    const detailsButton = document.createElement('a');
+                    detailsButton.href = `/Event?id=${event.id}`;
+                    detailsButton.classList.add('btn', 'btn-sm', 'btn-primary');
+                    detailsButton.textContent = 'Посмотреть';
+
+                    listItem.appendChild(eventDate);
+                    listItem.appendChild(eventName);
+                    listItem.appendChild(detailsButton);
+
+                    eventsList.appendChild(listItem);
+                });
+            })
+            .catch(error => console.error(error));
+
+
+    </script>
+
+
 
 
     <script>
@@ -71,32 +159,32 @@
         const eventsList = document.querySelector('.list-group');
 
         // Функция для добавления нового события в список
-        const addEventToList = (eventName, eventDateTime, eventDescription) => {
-            // Создаем новый элемент списка событий
-            const newEvent = document.createElement('li');
-            newEvent.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+        //const addEventToList = (eventName, eventDateTime, eventDescription) => {
+        //    // Создаем новый элемент списка событий
+        //    const newEvent = document.createElement('li');
+        //    newEvent.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
 
-            // Создаем элементы для отображения информации о событии
-            const eventTitle = document.createElement('span');
-            eventTitle.textContent = eventName;
-            const eventDateTimeInfo = document.createElement('small');
-            eventDateTimeInfo.textContent = eventDateTime;
-            const joinButton = document.createElement('button');
-            joinButton.classList.add('btn', 'btn-sm', 'btn-primary');
-            joinButton.textContent = 'Посмотреть';
+        //    // Создаем элементы для отображения информации о событии
+        //    const eventTitle = document.createElement('span');
+        //    eventTitle.textContent = eventName;
+        //    const eventDateTimeInfo = document.createElement('small');
+        //    eventDateTimeInfo.textContent = eventDateTime;
+        //    const joinButton = document.createElement('button');
+        //    joinButton.classList.add('btn', 'btn-sm', 'btn-primary');
+        //    joinButton.textContent = 'Посмотреть';
 
-            joinButton.addEventListener('click', () => {
-                window.location.href = '/Event';
-            });
+        //    joinButton.addEventListener('click', () => {
+        //        window.location.href = '/Event?id=${eventId}';
+        //    });
 
-            // Добавляем элементы в новый элемент списка событий
-            newEvent.appendChild(eventTitle);
-            newEvent.appendChild(eventDateTimeInfo);
-            newEvent.appendChild(joinButton);
+        //    // Добавляем элементы в новый элемент списка событий
+        //    newEvent.appendChild(eventTitle);
+        //    newEvent.appendChild(eventDateTimeInfo);
+        //    newEvent.appendChild(joinButton);
 
-            // Добавляем новое событие в список
-            eventsList.appendChild(newEvent);
-        }
+        //    // Добавляем новое событие в список
+        //    eventsList.appendChild(newEvent);
+        //}
 
         // Обработчик события отправки формы
         form.addEventListener('submit', (event) => {
@@ -110,9 +198,10 @@
             const eventName = eventNameInput.value;
             const eventDateTime = eventDateTimeInput.value;
             const eventDescription = eventDescriptionInput.value;
+            
 
             // Вызываем функцию для добавления нового события в список
-            addEventToList(eventName, eventDateTime, eventDescription);
+            //addEventToList(eventName, eventDateTime, eventDescription);
 
             // Очищаем поля формы
             eventNameInput.value = '';

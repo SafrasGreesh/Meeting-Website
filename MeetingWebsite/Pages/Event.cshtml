@@ -21,11 +21,11 @@
         <div class="row">
             <div class="col-md-6">
                 <h3>Название события</h3>
-                <p>Lorem ipsum dolor sce ac massa mauris.</p>
+                <p id ="eventname"></p>
                 <h3>Дата и время события</h3>
-                <p>10 июня 2023, 15:00</p>
+                <p id="eventdate"></p>
                 <h3>Описание события</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+                <p id ="eventdescription"></p>
             </div>
             <div class="col-md-6">
                 <h3>Участники</h3>
@@ -74,5 +74,48 @@
             }
         });
     </script>
+
+
+    <script>
+        //Получение данных о событии по id
+    var urlParams = new URLSearchParams(window.location.search);
+    var eventId = urlParams.get('id');       
+
+    console.log('ID события:', eventId);
+    
+        fetch(`/users/EventId/${eventId}`) // Путь к API-методу для получения данных о событии
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка получения данных о событии');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Здесь можно использовать полученные данные о событии
+                const eventNameq = data.name;
+                console.log('имя события:', eventNameq);
+                const eventDateq = data.date;
+                const eventDescriptionq = data.description;
+
+                
+                const paragraphName = document.getElementById('eventname'); // Получаем ссылку на элемент <p> с идентификатором 'eventname'
+                paragraphName.textContent = eventNameq; // Обновляем текст внутри элемента <p> с помощью свойства textContent
+                const paragraphDate = document.getElementById('eventdate'); // Получаем ссылку на элемент <p> с идентификатором 'eventname'
+                paragraphDate.textContent = eventDateq; // Обновляем текст внутри элемента <p> с помощью свойства textContent
+                const paragraphDesc = document.getElementById('eventdescription'); // Получаем ссылку на элемент <p> с идентификатором 'eventname'
+                paragraphDesc.textContent = eventDescriptionq; // Обновляем текст внутри элемента <p> с помощью свойства textContent
+                // Пример использования данных
+                console.log(eventName);
+                console.log(eventDate);
+                console.log(eventDescription);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+
+    </script>
+
 </body>
 </html>
