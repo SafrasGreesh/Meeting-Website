@@ -17,7 +17,7 @@ namespace MeetingWebsite.Entity
 
         public ICollection<Chat> Chats {get;} = new List<Chat>();
 
-        public ICollection<Dislikes> Dislikes {get;} = new List<Dislikes>();
+        public ICollection<Matches> Matches { get;} = new List<Matches>();
 
         public ICollection<Likes> Likes {get;} = new List<Likes>();
 
