@@ -1,6 +1,6 @@
 ﻿namespace MeetingWebsite.Entity
 {
-    public class Events
+    public class Events:BaseEntity
     {
 
         public int? Id { get; set; }
@@ -9,6 +9,6 @@
         public DateTime Date { get; set; }
         public string Description { get; set; }
 
-        public Users Users { get; set; } = null!;
+       // public Users Users { get; set; } = null!;
     }
 }

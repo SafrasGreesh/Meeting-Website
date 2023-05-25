@@ -20,7 +20,7 @@ namespace MeetingWebsite.Services
         private readonly IEfRepository<Matches> _matchesRepository;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
-
+        private readonly IEfRepository<Events> _eventRepository;
 
         public async Task<int> GetMaxLikesId()
         {
@@ -54,7 +54,7 @@ namespace MeetingWebsite.Services
 
             return age;
         }
-        public UserService(IEfRepository<Users> userRepository, IConfiguration configuration, IMapper mapper, IEfRepository<Options> optionsRepository, IEfRepository<Likes> likesRepository, IEfRepository<Matches> matchesRepository)
+        public UserService(IEfRepository<Users> userRepository, IConfiguration configuration, IMapper mapper, IEfRepository<Options> optionsRepository, IEfRepository<Likes> likesRepository, IEfRepository<Matches> matchesRepository, IEfRepository<Events> eventRepository)
         {
             _optionsRepository = optionsRepository;
             _userRepository = userRepository;
@@ -62,6 +62,7 @@ namespace MeetingWebsite.Services
             _matchesRepository = matchesRepository;
             _configuration = configuration;
             _mapper = mapper;
+            _eventRepository = eventRepository;
         }
         public AuthenticateResponse Authenticate(AuthenticateRequest model) //проверяет наличие юзера в бд и соответствие логина и пароля
         {
@@ -273,6 +274,42 @@ namespace MeetingWebsite.Services
         }
 
 
+        public async Task<int> AddEvent(Events eventModel, int id_Ev)
+        {
+            var eventObj = _mapper.Map<Events>(eventModel); //создает объект события
 
+            eventObj.Id = id_Ev;
+
+            var addedEvent = await _eventRepository.Add(eventObj); //добавление события  в бд
+
+            return eventObj.Id ?? 0; //если норм возвращает норм
+        }
+
+
+
+        public async Task<int> GetMaxEventId()
+        {
+            var events = await Task.Run(() => _eventRepository.GetAll());
+
+            var maxId = events.Max(x => x.Id);
+
+            maxId++;
+
+            return maxId ?? 0;
+        }
+
+
+
+        public IEnumerable<Events> GetAllEvents()
+        {
+            return _eventRepository.GetAllEvents(); //возвращает репозиторий юзеров
+        }
+        public Events GetEventById(int? id)
+        {
+            return _eventRepository.GetEventById(id); //вовзаращет репозиторий
+        }
     }
+
+
 }
+

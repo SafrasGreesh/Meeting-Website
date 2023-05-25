@@ -194,5 +194,44 @@ namespace MeetingWebsite.Controllers
             return Ok(matches);
         }
 
+        [HttpPost("addEvent")]
+        public async Task<IActionResult> AddEventq(Events eventModel)
+        {
+            var maxEventsId = await _userService.GetMaxEventId();
+            var result = await _userService.AddEvent(eventModel, maxEventsId);
+            if (result == null)
+            {
+                return BadRequest(new { message = "Didn't register!" });
+            }
+
+            return Ok(result);
+
+        }
+
+        [HttpGet("MaxEventId")]
+        public async Task<int> GetMaxEventIdq()
+        {
+            var maxEventsId = await _userService.GetMaxEventId();
+            return maxEventsId;
+        }
+
+        [HttpGet("GetAllEvents")]
+        public IActionResult GetAllEvents()
+        {
+            var events = _userService.GetAllEvents();
+            return Ok(events);
+        }
+
+        [HttpGet("EventId/{id}")]
+        public IActionResult GetEventById(int id)
+        {
+            var eventq = _userService.GetEventById(id);
+
+            if (eventq == null)
+                return NotFound();
+
+            return Ok(eventq);
+        }
+
     }
 }

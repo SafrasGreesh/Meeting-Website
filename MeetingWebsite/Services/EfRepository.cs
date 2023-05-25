@@ -77,7 +77,27 @@ namespace MeetingWebsite.Services
             await _context.SaveChangesAsync(); // Сохранить изменения в базе данных
         }
 
+        public List<T> GetAllEvents()
+        {
+            return _context.Set<T>().ToList();
+        }
 
+
+
+
+
+        public T GetEventById(int? id)
+        {
+            var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
+
+            if (result == null)
+            {
+                //todo: need to add logger
+                return null;
+            }
+
+            return result;
+        }
 
     }
 }
