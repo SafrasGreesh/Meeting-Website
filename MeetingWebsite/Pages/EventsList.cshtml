@@ -72,40 +72,49 @@
         var saveBtn = document.querySelector('button#saveBtnD');
         saveBtn.addEventListener('click', function () {
 
+           
             var eventName = document.getElementById("eventName").value;
             var eventDateTime = new Date($('#eventDateTime').val()).toISOString();
             var eventDescriptionQ = document.getElementById("eventDescription").value;
-            var id = Math.floor(Math.random() * 1000000000) + 1;
+            var Userid = 0;
 
-            // Создаем объект с данными для отправки на сервер
-            var eventData = {
-                id: 0,
-                name: eventName,
-                date: eventDateTime,
-                userId: 10,
-                description: eventDescriptionQ
-            };
 
-            // Отправить данные на сервер в POST-запросе
-            $.post({
-                url: '/users/addEvent', // Здесь указывается URL-путь для обработки регистрации на сервере
-                contentType: 'application/json',
-                data: JSON.stringify(eventData),
-                success: function (response) {
-                    // Обработка успешного ответа сервера после регистрации
-                    console.log(response);
-                    //alert('Обновление данных прошло успешно');
-                    window.location.reload();
-                    //window.location.href = "home";
-                    // Дополнительные действия, например, перенаправление на другую страницу
-                },
-                error: function (xhr, status, error) {
-                    // Обработка ошибки при регистрации
-                    console.log(xhr.responseText);
-                    alert('Ошибка обновления');
-                }
-            });
+            // получаем id пользователя
+            fetch('/users/idOptions')
+                .then(response => response.json())
+                .then(options => {
+                    // Заполнить поля на странице данными пользователя
+                    Userid = options.id;
+                    alert(Userid);
+                    var eventData = {
+                        id: 0,
+                        name: eventName,
+                        date: eventDateTime,
+                        userId: Userid,
+                        description: eventDescriptionQ
+                    };
+                    $.post({
+                        url: '/users/addEvent', // Здесь указывается URL-путь для обработки регистрации на сервере
+                        contentType: 'application/json',
+                        data: JSON.stringify(eventData),
+                        success: function (response) {
+                            // Обработка успешного ответа сервера после регистрации
+                            console.log(response);
+                            //alert('Обновление данных прошло успешно');
+                            window.location.reload();
+                            //window.location.href = "home";
+                            // Дополнительные действия, например, перенаправление на другую страницу
+                        },
+                        error: function (xhr, status, error) {
+                            // Обработка ошибки при регистрации
+                            console.log(xhr.responseText);
+                            alert('Ошибка обновления');
+                        }
+                    });
+                })
+                .catch(error => console.error(error));
 
+            alert(Userid);
         });
 
     </script>
