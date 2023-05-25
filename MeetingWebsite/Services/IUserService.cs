@@ -21,10 +21,5 @@ namespace MeetingWebsite.Services
         Task<bool> Like(int? id1, int? id2, Boolean like_u);
         IEnumerable<int> Matches(int id_y);
 
-        IEnumerable<Events> GetAllEvents();
-        Users GetById(int? id);
-        Events GetEventById(int? id);
-        Task<int> GetMaxEventId();
-        Task<int> AddEvent(Events eventModel, int id_Ev);
     }
 }

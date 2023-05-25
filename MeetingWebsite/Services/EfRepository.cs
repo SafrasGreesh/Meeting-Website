@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MeetingWebsite.Services
 {
-    public class EfRepository<T> : IEfRepository<T> where T : BaseEntity
+    public class UserRepository<T> : IEfRepository<T> where T : BaseEntity
     {
         private readonly ApplicationContext _context;
 
@@ -21,25 +21,7 @@ namespace MeetingWebsite.Services
             return _context.Set<T>().ToList();
         }
 
-        public List<T> GetAllEvents()
-        {
-            return _context.Set<T>().ToList();
-        }
-
         public T GetById(int? id)
-        {
-            var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
-
-            if (result == null)
-            {
-                //todo: need to add logger
-                return null;
-            }
-
-            return result;
-        }
-
-        public T GetEventById(int? id)
         {
             var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
 
