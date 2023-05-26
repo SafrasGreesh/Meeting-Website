@@ -24,6 +24,6 @@ namespace MeetingWebsite.Services
         Events GetEventById(int? id);
         Task<int> GetMaxEventId();
         Task<int> AddEvent(Events eventModel, int id_Ev);
-
+       
     }
 }

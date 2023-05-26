@@ -61,6 +61,7 @@
 								<div class="drop-area">
 									<p>Или перетащите нужное изображение</p>
 								</div>
+								<button type="button" class="btn btn-secondary" id ="SavePhoto">Сохранить</button>
 							</div>
 						</div>
 					</div>
@@ -77,6 +78,82 @@
 		</div>
 	</div>
 
+
+
+	<script>
+		var savePhotoBtn = document.getElementById('SavePhoto');
+		savePhotoBtn.addEventListener('click', function () {
+			alert("НАчало");
+			var input = document.getElementById('photo');
+			var file = input.files[0];
+
+			var formData = new FormData();
+			formData.append('image', file);
+
+			fetch('/upload/image', {
+				method: 'POST',
+				body: formData
+			})
+				.then(response => {
+					if (response.ok) {
+						return response.json(); // Преобразуем ответ в JSON
+					} else {
+						throw new Error('Failed to upload image');
+					}
+				})
+				.then(data => {
+					// Получаем название файла из ответа сервера
+					var fileName = data.fileName;
+
+					// Выполняем дополнительные действия с названием файла
+					console.log('Uploaded file name:', fileName);
+
+					var userData = {
+						password: "",
+						photo: fileName,
+						name: "",
+						mail: "",
+						gender: "",
+						city: "",
+						birthDate: "2023-05-13T21:43:21.558Z",
+						description: ""
+					};
+					alert("дошел");
+					// Отправить данные на сервер в POST-запросе
+					$.post({
+						url: '/users/update', // Здесь указывается URL-путь для обработки регистрации на сервере
+						contentType: 'application/json',
+						data: JSON.stringify(userData),
+						success: function (response) {
+							// Обработка успешного ответа сервера после регистрации
+							console.log(response);
+							alert('Обновление данных прошло успешно');
+							//window.location.href = "home";
+							// Дополнительные действия, например, перенаправление на другую страницу
+						},
+						error: function (xhr, status, error) {
+							// Обработка ошибки при регистрации
+							console.log(xhr.responseText);
+							alert('Ошибка обновления!!!!');
+						}
+					});
+
+					// Пример: отобразить ссылку на загруженное изображение
+					var imageUrl = '/uploads/' + fileName;
+					var imageLink = document.createElement('a');
+					imageLink.href = imageUrl;
+					imageLink.textContent = 'Ссылка на изображение';
+					document.body.appendChild(imageLink);
+				})
+				.catch(error => console.error(error));
+
+			
+
+		});
+	</script>
+
+
+
 	<script>
 		fetch('/users/id')
 			.then(response => response.json())
@@ -88,9 +165,17 @@
 				document.getElementById("city").value = user.city;
 				document.getElementById("birthdate").textContent = user.birthDate;
 				document.getElementById("description").value = user.description;
+				//document.getElementById("photo").value = user.photo;
+				//profileImg.src = reader.result;
+				var urlPhoto = '/uploads/' + user.photo;
+				alert(urlPhoto);
+				document.querySelector('img').src = urlPhoto;
 			})
 			.catch(error => console.error(error));
 
+	 
+		
+		
 
 		// Находим кнопку "Изменить профиль"
 	  var editBtn = document.querySelector('button.btn-primary');
@@ -332,4 +417,6 @@
 			}
 		});
 	</script>
+	
+	
 </body>

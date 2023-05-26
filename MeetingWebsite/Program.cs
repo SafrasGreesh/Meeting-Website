@@ -41,8 +41,8 @@ namespace MeetingWebsite.Services
                         Gender = "M",
                         Id = 1,
                         Mail = "aboba@mail.ru",
-                        Photo = ""
-                    });
+                        Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
+                });
                 context.Users.Add(new Users
                 {
                     Password = "2",
@@ -53,7 +53,7 @@ namespace MeetingWebsite.Services
                     Gender = "W",
                     Id = 2,
                     Mail = "lada@mail.ru",
-                    Photo = ""
+                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
                 });
                 context.Users.Add(new Users
                 {
@@ -65,7 +65,7 @@ namespace MeetingWebsite.Services
                     Gender = "M",
                     Id = 3,
                     Mail = "anna@mail.ru",
-                    Photo = ""
+                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
                 });
                 context.Users.Add(new Users
                 {
@@ -77,7 +77,7 @@ namespace MeetingWebsite.Services
                     Gender = "M",
                     Id = 4,
                     Mail = "vanya@mail.ru",
-                    Photo = ""
+                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
                 });
                 context.Users.Add(new Users
                 {
@@ -89,7 +89,7 @@ namespace MeetingWebsite.Services
                     Gender = "W",
                     Id = 5,
                     Mail = "aly@mail.ru",
-                    Photo = ""
+                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
                 });
                 context.Users.Add(new Users
                 {
@@ -101,7 +101,7 @@ namespace MeetingWebsite.Services
                     Gender = "W",
                     Id = 6,
                     Mail = "sasha@mail.ru",
-                    Photo = ""
+                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
                 });
                 context.Users.Add(new Users
                 {
@@ -113,7 +113,7 @@ namespace MeetingWebsite.Services
                     Gender = "W",
                     Id = 7,
                     Mail = "sonya@mail.ru",
-                    Photo = ""
+                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
                 });
                 context.Users.Add(new Users
                 {
@@ -125,7 +125,7 @@ namespace MeetingWebsite.Services
                     Gender = "W",
                     Id = 8,
                     Mail = "regina@mail.ru",
-                    Photo = ""
+                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
                 });
                 context.SaveChanges();
             }

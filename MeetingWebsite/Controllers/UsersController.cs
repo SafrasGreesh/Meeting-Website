@@ -233,5 +233,18 @@ namespace MeetingWebsite.Controllers
             return Ok(eventq);
         }
 
+        //[HttpDelete("deleteEvent/{eventId}")]
+        //public async Task<IActionResult> DeleteEvent(int eventId)
+        //{
+        //    var result = await _userService.DeleteEvent(eventId);
+        //    if (result == null)
+        //    {
+        //        return NotFound(new { message = "Event not found!" });
+        //    }
+
+        //    return Ok(result);
+        //}
+       
+      //  }
     }
 }

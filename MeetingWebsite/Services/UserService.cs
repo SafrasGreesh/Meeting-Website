@@ -169,6 +169,10 @@ namespace MeetingWebsite.Services
 			{
 				user.Description = userModel.Description;
 			}
+			if (userModel.Photo != "")
+			{
+				user.Photo = userModel.Photo;
+			}
 
 			await _userRepository.UserUpdate(id ?? 0, user); // Сохранить изменения в базе данных
 

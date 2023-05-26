@@ -73,6 +73,9 @@
                 document.getElementById("user-city").textContent = user.city;
                 document.getElementById("user-age").textContent = calculateAge(user.birthDate);
                 document.getElementById("user-description").textContent = user.description;
+                var urlPhoto = '/uploads/' + user.photo;
+              //  alert(urlPhoto);
+                document.querySelector('img').src = urlPhoto;
             })
             .catch(error => console.error(error));
 
