@@ -101,7 +101,7 @@ namespace MeetingWebsite.Services
                     Gender = "W",
                     Id = 6,
                     Mail = "sasha@mail.ru",
-                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
+                    Photo = "1.jpg"
                 });
                 context.Users.Add(new Users
                 {
@@ -113,7 +113,7 @@ namespace MeetingWebsite.Services
                     Gender = "W",
                     Id = 7,
                     Mail = "sonya@mail.ru",
-                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
+                    Photo = "1.jpg"
                 });
                 context.Users.Add(new Users
                 {

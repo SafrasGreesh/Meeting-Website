@@ -78,7 +78,7 @@
 
     @*<script src="~/js/swipe.js"></script>*@
 
-    <script>
+<script>
 
         function calculateAge(birthDate) {
             var today = new Date();
@@ -112,12 +112,16 @@
                 const cardsContainer = document.querySelector(".cards-container");
                 const likeButton = document.querySelector("#like-button");
                 const dislikeButton = document.querySelector("#dislike-button");
-
+                
                 let currentCardIndex = 0;
-                showActiveCard();
+                
+                //var url = "/uploads/";
+                //people[0].img = url + people[0].img;
+                //showActiveCard();
                 // Функция для отображения активной карточки
                 function showActiveCard() {
-
+                    
+                    //alert(people[currentCardIndex].img);
                     if (currentCardIndex >= people.length) {
                         cardsContainer.innerHTML = `<div class="card" style="background-color: #696969;">
                                                                     <div class="card-body">
@@ -125,6 +129,8 @@
                                                                     </div>
                                                                 </div>`;
                     } else {
+                        var url = "/uploads/";
+                        people[currentCardIndex].img = url + people[currentCardIndex].img;
                         cardsContainer.innerHTML = `
 
                                                                 <div class="card" style="background-image: url('${people[currentCardIndex].img}');">
@@ -138,7 +144,7 @@
                                             `;
                     }
                 }
-
+                //alert(people[currentCardIndex].img);
                 // Показываем первую карточку при загрузке страницы
                 showActiveCard();
 
