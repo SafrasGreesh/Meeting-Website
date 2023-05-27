@@ -22,7 +22,17 @@ namespace MeetingWebsite.Services
         private readonly IMapper _mapper;
         private readonly IEfRepository<Events> _eventRepository;
 
-        public async Task<int> GetMaxLikesId()
+        public async Task<int> GetMaxUsersId()
+        {
+	        var events = await Task.Run(() => _userRepository.GetAll());
+
+	        var maxId = events.Max(x => x.Id);
+
+	        maxId++;
+
+	        return maxId ?? 0;
+        }
+		public async Task<int> GetMaxLikesId()
         {
             var events = await Task.Run(() => _likesRepository.GetAll());
 
@@ -82,11 +92,17 @@ namespace MeetingWebsite.Services
         }
         public async Task<AuthenticateResponse> Register(UserModel userModel)
         {
-            var user = _mapper.Map<Users>(userModel); //создает объект юзера
-
-            var addedUser = await _userRepository.Add(user); //добавление юзера  в бд
-
-            var response = Authenticate(new AuthenticateRequest
+	        var user = _mapper.Map<Users>(userModel); //создает объект юзера
+	        user.Id = await GetMaxUsersId();
+			var addedUser = await _userRepository.Add(user); //добавление юзера  в бд
+            var optionsModel = new Options();
+            optionsModel.Id = user.Id;
+            optionsModel.AgeMin = 18;
+            optionsModel.AgeMax = 100;
+            optionsModel.City = "";
+            optionsModel.Gender = "A";
+            var optUser = await _optionsRepository.Add(optionsModel);
+			var response = Authenticate(new AuthenticateRequest
             {
                 Mail = user.Mail,
                 Password = user.Password
@@ -121,17 +137,36 @@ namespace MeetingWebsite.Services
             var options = GetOptionsById(id_y);
             if(options.Gender == "A")
             {
-                var UsersSwipe = _userRepository.GetAll()
-                    .Where(u => UnlickedUser(id_y, u.Id ?? 0))
-                    .Where(u => u.Id != id_y && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));
-                return UsersSwipe;
+	            if (options.City == "")
+	            {
+		            var UsersSwipe = _userRepository.GetAll()
+			            .Where(u => UnlickedUser(id_y, u.Id ?? 0))
+			            .Where(u => u.Id != id_y && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));
+		            return UsersSwipe;
+				}
+                else{
+		            var UsersSwipe = _userRepository.GetAll()
+			            .Where(u => UnlickedUser(id_y, u.Id ?? 0))
+			            .Where(u => u.Id != id_y && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));
+		            return UsersSwipe;
+	            }
             }
             else
             {
-                var UsersSwipe = _userRepository.GetAll()
-                    .Where(u => UnlickedUser(id_y, u.Id ?? 0))
-                    .Where(u => u.Id != id_y && options.Gender == u.Gender && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));  
-                return UsersSwipe;
+	            if (options.City == "")
+	            {
+		            var UsersSwipe = _userRepository.GetAll()
+			            .Where(u => UnlickedUser(id_y, u.Id ?? 0))
+			            .Where(u => u.Id != id_y && options.Gender == u.Gender && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));
+		            return UsersSwipe;
+				}
+	            else
+	            {
+		            var UsersSwipe = _userRepository.GetAll()
+			            .Where(u => UnlickedUser(id_y, u.Id ?? 0))
+			            .Where(u => u.Id != id_y && options.Gender == u.Gender && options.City == u.City && options.AgeMin < CalculateAge(u.BirthDate) && options.AgeMax > CalculateAge(u.BirthDate));
+		            return UsersSwipe;
+				}
             }
      
         }
@@ -280,8 +315,6 @@ namespace MeetingWebsite.Services
 
             return secondUserIds;
         }
-
-
         public async Task<int> AddEvent(Events eventModel, int id_Ev)
         {
             var eventObj = _mapper.Map<Events>(eventModel); //создает объект события
@@ -292,9 +325,6 @@ namespace MeetingWebsite.Services
 
             return eventObj.Id ?? 0; //если норм возвращает норм
         }
-
-
-
         public async Task<int> GetMaxEventId()
         {
             var events = await Task.Run(() => _eventRepository.GetAll());
@@ -305,9 +335,6 @@ namespace MeetingWebsite.Services
 
             return maxId ?? 0;
         }
-
-
-
         public IEnumerable<Events> GetAllEvents()
         {
             return _eventRepository.GetAllEvents(); //возвращает репозиторий юзеров
