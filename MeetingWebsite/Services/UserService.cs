@@ -173,6 +173,10 @@ namespace MeetingWebsite.Services
 			{
 				user.Photo = userModel.Photo;
 			}
+			if (userModel.BirthDate != new DateTime(2023, 12, 1))
+			{
+				user.BirthDate = userModel.BirthDate;
+			}
 
 			await _userRepository.UserUpdate(id ?? 0, user); // Сохранить изменения в базе данных
 

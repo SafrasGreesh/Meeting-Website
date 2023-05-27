@@ -41,9 +41,8 @@
 							<input type="text" class="form-control" id="city" name="city" value="" readonly>
 						</div>
 						<div class="mb-3">
-							@*<label for="birthdate" class="form-label">Дата рождения</label>
-							<input type="text" class="form-control" id="birthdate" name="birthdate" value="" readonly>*@
-							<p class="card-text">Дата рождения: <span id="birthdate" value=""></span></p>
+							<label for="date" class="form-label">Дата рождения: </label>
+							<input type="date" class="form-control" id="birthdate" name="birthdate" value="" readonly>
 						</div>
 						<button type="button" class="btn btn-primary w-100">Изменить информацию</button>
 						<button type="button" class="btn btn-success w-100 d-none" id="saveBtn">Сохранить</button>
@@ -118,7 +117,7 @@
 						birthDate: "2023-05-13T21:43:21.558Z",
 						description: ""
 					};
-					alert("дошел");
+					//alert("дошел");
 					// Отправить данные на сервер в POST-запросе
 					$.post({
 						url: '/users/update', // Здесь указывается URL-путь для обработки регистрации на сервере
@@ -163,12 +162,9 @@
 				document.getElementById("email").value = user.mail;
 				document.getElementById("gender").value = user.gender;
 				document.getElementById("city").value = user.city;
-				document.getElementById("birthdate").textContent = user.birthDate;
+				document.getElementById("birthdate").value = user.birthDate.split("T")[0];;
 				document.getElementById("description").value = user.description;
-				//document.getElementById("photo").value = user.photo;
-				//profileImg.src = reader.result;
 				var urlPhoto = '/uploads/' + user.photo;
-				alert(urlPhoto);
 				document.querySelector('img').src = urlPhoto;
 			})
 			.catch(error => console.error(error));
@@ -209,7 +205,7 @@
 			var mail = document.getElementById("email").value;
 			var gender = document.getElementById("gender").value;
 			var city = document.getElementById("city").value;
-			//var birthDate = document.getElementById("birthdate").value;
+			var birthDate = document.getElementById("birthdate").value;
 			//var description = document.getElementById("description").value;
 
 			// Создать объект с данными пользователя
@@ -220,7 +216,7 @@
 				mail: mail,
 				gender: gender,
 				city: city,
-				birthDate: "2023-05-13T21:43:21.558Z",
+				birthDate: birthDate,
 				description: ""
 			};
 
@@ -366,7 +362,7 @@
 				mail: "",
 				gender: "",
 				city: "",
-				birthDate: "2023-05-13T21:43:21.558Z",
+				birthDate: new DateTime(2023, 12, 1),
 				description: description
 			};
 
