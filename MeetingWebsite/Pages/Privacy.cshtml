@@ -2,7 +2,63 @@
 @model PrivacyModel
 @{
     ViewData["Title"] = "Privacy Policy";
+	Layout = "";
 }
-<h1>@ViewData["Title"]</h1>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Пользовательское соглашение</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/MeetingWebsite.styles.css" asp-append-version="true" />
+	<!-- Custom styles for this template -->
+	<link href="~/css/sidebars.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+	<h1 class="mt-5">Пользовательское соглашение</h1>
+	<p class="lead">Пожалуйста, внимательно прочитайте эти условия и положения перед использованием нашего сайта знакомств.</p>
+	<h2 class="mt-4">1. Принятие условий</h2>
+	<p>Пользуясь нашим сайтом, вы соглашаетесь быть связанным условиями и положениями, изложенными в данном соглашении. Если вы не согласны с этими условиями, не используйте наш сайт.</p>
 
-<p>Use this page to detail your site's privacy policy.</p>
+	<h2 class="mt-4">2. Право на использование</h2>
+	<p>Наш сайт предназначен для пользователей, достигших возраста не моложе 18 лет. Используя наш сайт, вы заявляете и гарантируете, что вам исполнилось не менее 18 лет.</p>
+
+	<h2 class="mt-4">3. Обязательства пользователя</h2>
+	<p>В качестве пользователя нашего сайта, вы соглашаетесь:</p>
+	<ul>
+		<li>Предоставлять точную и достоверную информацию в вашем профиле пользователя.</li>
+		<li>Уважать конфиденциальность и права других пользователей.</li>
+		<li>Использовать наш сайт только в законных целях.</li>
+	</ul>
+
+	<h2 class="mt-4">4. Интеллектуальная собственность</h2>
+	<p>Все права интеллектуальной собственности нашего сайта и его контента принадлежат нам. Вы соглашаетесь не копировать, распространять или изменять любую часть нашего сайта без нашего предварительного письменного согласия.</p>
+
+	<h2 class="mt-4">5. Ограничение ответственности</h2>
+	<p>Мы не несем ответственности за любые убытки или ущерб, возникшие в результате использования нашего сайта или его контента. Использование нашего сайта осуществляется на ваш риск.</p>
+
+	<h2 class="mt-4">6. Изменение условий</h2>
+	<p>Мы оставляем за собой право изменять эти условия и положения в любое время. Любые изменения вступают в силу незамедлительно после их размещения на нашем сайте.</p>
+
+	<div class="mt-5">
+		<button class="btn btn-primary" onclick="acceptTerms()">Я согласен</button>
+	</div>
+</div>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+<script>
+		function acceptTerms() {
+			// Выполните необходимые действия, когда пользователь принимает условия
+			// Например, вы можете сохранить куки или обновить статус учетной записи пользователя
+			// Затем перенаправьте пользователя на другую страницу
+			window.location.href = '/Registration';
+
+		}
+	</script>
+</body>
+</html>
+
