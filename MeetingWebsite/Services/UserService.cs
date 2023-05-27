@@ -9,6 +9,7 @@ using MeetingWebsite.Helpers;
 using MeetingWebsite.Models;
 using System.IO.Pipelines;
 using Microsoft.AspNetCore.Http;
+using Org.BouncyCastle.Crypto.Tls;
 
 namespace MeetingWebsite.Services
 {
@@ -21,6 +22,7 @@ namespace MeetingWebsite.Services
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
         private readonly IEfRepository<Events> _eventRepository;
+
 
         public async Task<int> GetMaxUsersId()
         {
@@ -94,7 +96,12 @@ namespace MeetingWebsite.Services
         {
 	        var user = _mapper.Map<Users>(userModel); //создает объект юзера
 	        user.Id = await GetMaxUsersId();
-			var addedUser = await _userRepository.Add(user); //добавление юзера  в бд
+            if (CalculateAge(user.BirthDate) < 18)
+            {
+                Console.WriteLine("Вам должно быть 18 лет или старше для регистрации.");
+                return null; // или выбросить исключение
+            }
+            var addedUser = await _userRepository.Add(user); //добавление юзера  в бд
             var optionsModel = new Options();
             optionsModel.Id = user.Id;
             optionsModel.AgeMin = 18;

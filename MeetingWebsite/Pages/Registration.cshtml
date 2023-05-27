@@ -29,6 +29,10 @@
 						<label for="email">E-mail</label>
 					</div>
 					<div class="form-floating">
+						<input type="date" class="form-control" id="birthdate" name="birthdate" value="">
+						<label for="birthdate" class="form-label">Дата рождения:</label>
+					</div>
+					<div class="form-floating">
 						<input type="password" class="form-control" id="password" placeholder="password">
 						<label for="password">Пароль</label>
 					</div>
@@ -58,6 +62,7 @@
             var name = $('#username').val();
             var mail = $('#email').val();
             var password = $('#password').val();
+            var birthdate = $('#birthdate').val();
             var confirmPassword = $('#confirmPassword').val();
             var terms = $('#terms').prop('checked');
 
@@ -76,7 +81,7 @@
                 password: password,
                 id: id,
                 name: name,
-                birthDate: "2023-05-13T21:43:21.558Z",
+                birthDate: birthdate,
                 mail: mail,
                 city: "",
                 photo: "",
@@ -99,7 +104,7 @@
                 error: function (xhr, status, error) {
                     // Обработка ошибки при регистрации
                     console.log(xhr.responseText);
-                    alert('Ошибка регистрации');
+                    alert("Вам должно быть больше 18 лет");
                 }
             });
         });
