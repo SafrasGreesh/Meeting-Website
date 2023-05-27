@@ -33,10 +33,9 @@ namespace MeetingWebsite.Controllers
                 return BadRequest(new { message = "Username or password is incorrect" });
 
 
-            HttpContext.Session.SetInt32("Id", response.Id ?? 0); //!
-                                                                  // Получение значения переменной из сессии
-           
+            HttpContext.Session.SetInt32("Id", response.Id ?? 0); // Получение значения переменной из сессии
 
+            HttpContext.Session.SetString("Token", response.Token);
 
             return Ok(response);
         }
@@ -99,8 +98,17 @@ namespace MeetingWebsite.Controllers
 			int? id = HttpContext.Session.GetInt32("Id");
 			return Ok(id);
 		}
-
-		//[Authorize]
+        [HttpGet("TakeToken")]
+        public IActionResult TakeToken()
+        {
+            string token = HttpContext.Session.GetString("Token");
+            if (token == null)
+            {
+                return BadRequest();
+            }
+            return Ok(token);
+        }
+        //[Authorize]
         [HttpGet]
         public IActionResult GetAll()
         {
