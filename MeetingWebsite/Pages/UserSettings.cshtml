@@ -53,14 +53,14 @@
 				<div class="card">
 					<div class="card-header">
 						<div class="mb-3 text-center">
-							<img src="https://via.placeholder.com/150" class="rounded-circle mb-3" alt="Фотография пользователя" width="150" height="150">
+							<img src="https://via.placeholder.com/150" class="rounded-circle mb-3" alt="Фотография пользователя" width="150" height="150" ondrop="handleDrop(event)">
 							<div class="input-group">
 								<input type="file" class="form-control" id="photo" name="photo" accept="image/*" style="display: none;">
-								<button type="button" class="btn btn-secondary" onclick="document.getElementById('photo').click()">Изменить фото</button>
+								<button type="button" class="btn btn-primary" id="EditPhoto" onclick="document.getElementById('photo').click()">Изменить фото</button>
 								<div class="drop-area">
 									<p>Или перетащите нужное изображение</p>
 								</div>
-								<button type="button" class="btn btn-secondary" id ="SavePhoto">Сохранить</button>
+								<button type="button" class="btn btn-success" id="SavePhoto">Сохранить</button>
 							</div>
 						</div>
 					</div>
@@ -79,10 +79,11 @@
 
 
 <script src="~/js/logincheck.js"></script>
+
 	<script>
 		var savePhotoBtn = document.getElementById('SavePhoto');
 		savePhotoBtn.addEventListener('click', function () {
-			alert("НАчало");
+			//alert("НАчало");
 			var input = document.getElementById('photo');
 			var file = input.files[0];
 
@@ -126,14 +127,14 @@
 						success: function (response) {
 							// Обработка успешного ответа сервера после регистрации
 							console.log(response);
-							alert('Обновление данных прошло успешно');
+							//alert('Обновление данных прошло успешно');
 							//window.location.href = "home";
 							// Дополнительные действия, например, перенаправление на другую страницу
 						},
 						error: function (xhr, status, error) {
 							// Обработка ошибки при регистрации
 							console.log(xhr.responseText);
-							alert('Ошибка обновления!!!!');
+							//alert('Ошибка обновления!!!!');
 						}
 					});
 
@@ -151,7 +152,64 @@
 		});
 	</script>
 
+<script>
+		function handleDrop(event) {
+			event.preventDefault();
+			var file = event.dataTransfer.files[0];
 
+			var formData = new FormData();
+			formData.append('image', file);
+
+			fetch('/upload/image', {
+				method: 'POST',
+				body: formData
+			})
+				.then(response => {
+					if (response.ok) {
+						return response.json();
+					} else {
+						throw new Error('Failed to upload image');
+					}
+				})
+				.then(data => {
+					var fileName = data.fileName;
+					console.log('Uploaded file name:', fileName);
+
+					var userData = {
+						password: "",
+						photo: fileName,
+						name: "",
+						mail: "",
+						gender: "",
+						city: "",
+						birthDate: "2023-05-13T21:43:21.558Z",
+						description: ""
+					};
+
+					$.post({
+						url: '/users/update',
+						contentType: 'application/json',
+						data: JSON.stringify(userData),
+						success: function (response) {
+							console.log(response);
+							alert('Фото успешно сохранено');
+						},
+						error: function (xhr, status, error) {
+							console.log(xhr.responseText);
+							alert('Ошибка сохранения фото');
+						}
+					});
+
+					var imageUrl = '/uploads/' + fileName;
+					var imageLink = document.createElement('a');
+					imageLink.href = imageUrl;
+					imageLink.textContent = 'Ссылка на изображение';
+					document.body.appendChild(imageLink);
+				})
+				.catch(error => console.error(error));
+		}
+
+</script>
 
 	<script>
 		fetch('/users/id')
