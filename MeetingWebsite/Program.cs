@@ -34,99 +34,99 @@ namespace MeetingWebsite.Services
                 context.Users.RemoveRange(context.Users);
                 context.Users.Add(new Users {
                         Password = "1",
-                        Name = "Абоба",
+                        Name = "Анна",
                         BirthDate = new DateTime(2000, 12, 1),
                         City = "Абобчинск",
-                        Description = "Люблю нихуя не делать",
+                        Description = "Увлекаюсь танцами",
                         Gender = "M",
                         Id = 1,
                         Mail = "aboba@mail.ru",
-                        Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
-                });
+                        Photo = "1639034091_1.jpg"
+				});
                 context.Users.Add(new Users
                 {
                     Password = "2",
-                    Name = "Лада",
+                    Name = "Катя",
                     BirthDate = new DateTime(2000, 12, 1),
                     City = "Ижевск",
-                    Description = "Люблю нихуя не делать",
+                    Description = "Люблю рисовать",
                     Gender = "W",
                     Id = 2,
                     Mail = "lada@mail.ru",
-                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
-                });
+                    Photo = "212e84f55685b7d688be7fc348702e91.jpg"
+				});
                 context.Users.Add(new Users
                 {
                     Password = "3",
-                    Name = "Анна",
+                    Name = "Антон",
                     BirthDate = new DateTime(2000, 12, 1),
                     City = "Хохряки",
-                    Description = "Люблю нихуя не делать",
+                    Description = "Хожу в театр и оперу",
                     Gender = "M",
                     Id = 3,
                     Mail = "anna@mail.ru",
-                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
-                });
+                    Photo = "15520220501617672.jpg"
+				});
                 context.Users.Add(new Users
                 {
                     Password = "4",
                     Name = "Ваня",
                     BirthDate = new DateTime(2000, 12, 1),
                     City = "Хохряки",
-                    Description = "Люблю нихуя не делать",
+                    Description = "Люблю спорт, играю в футбол",
                     Gender = "M",
                     Id = 4,
                     Mail = "vanya@mail.ru",
-                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
-                });
+                    Photo = "0-15.jpg"
+				});
                 context.Users.Add(new Users
                 {
                     Password = "4",
                     Name = "Аля",
                     BirthDate = new DateTime(2000, 12, 1),
                     City = "Хохряки",
-                    Description = "Люблю нихуя не делать",
+                    Description = "Люблю лежать дома и смотреть сериалы",
                     Gender = "W",
                     Id = 5,
                     Mail = "aly@mail.ru",
-                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
-                });
+                    Photo = "6fcde8c90885de47abc724430eae0987.jpg"
+				});
                 context.Users.Add(new Users
                 {
                     Password = "4",
                     Name = "Саша",
                     BirthDate = new DateTime(2000, 12, 1),
                     City = "Хохряки",
-                    Description = "Люблю нихуя не делать",
+                    Description = "Люблю плавать",
                     Gender = "W",
                     Id = 6,
                     Mail = "sasha@mail.ru",
-                    Photo = "1.jpg"
-                });
+                    Photo = "bf1eb795b5f269e3ca7a833f954d1c85.jpg"
+				});
                 context.Users.Add(new Users
                 {
                     Password = "4",
                     Name = "Coня",
                     BirthDate = new DateTime(2000, 12, 1),
                     City = "Хохряки",
-                    Description = "Люблю нихуя не делать",
+                    Description = "Хочу научиться многому в этой жизни",
                     Gender = "W",
                     Id = 7,
                     Mail = "sonya@mail.ru",
-                    Photo = "1.jpg"
-                });
+                    Photo = "f55422c6a32eb07846bc9558bc28a03b.jpg"
+				});
                 context.Users.Add(new Users
                 {
                     Password = "4",
                     Name = "Регина",
                     BirthDate = new DateTime(2000, 12, 1),
                     City = "Хохряки",
-                    Description = "Люблю нихуя не делать",
+                    Description = "Просто хороший человек)",
                     Gender = "W",
                     Id = 8,
                     Mail = "regina@mail.ru",
-                    Photo = "c9b15ca0-2d59-4456-b0cb-549c120eafbe.jpg"
-                });
+                    Photo = "e23a88177aacb2cf1695497f9bd3116b.jpg"
+				});
                 context.SaveChanges();
             }
             host.Run();
