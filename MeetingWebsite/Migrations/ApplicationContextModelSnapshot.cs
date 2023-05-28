@@ -129,7 +129,7 @@ namespace MeetingWebsite.Migrations
                     b.Property<int?>("UserId2")
                         .HasColumnType("integer");
 
-                    b.Property<int>("UsersId")
+                    b.Property<int?>("UsersId")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
@@ -237,13 +237,9 @@ namespace MeetingWebsite.Migrations
 
             modelBuilder.Entity("MeetingWebsite.Entity.Matches", b =>
                 {
-                    b.HasOne("MeetingWebsite.Entity.Users", "Users")
+                    b.HasOne("MeetingWebsite.Entity.Users", null)
                         .WithMany("Matches")
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Users");
+                        .HasForeignKey("UsersId");
                 });
 
             modelBuilder.Entity("MeetingWebsite.Entity.Users", b =>
