@@ -14,65 +14,84 @@
     <!-- Подключение Bootstrap 5 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css">
     <style>
-        .messages {
-            margin-top: 20px;
-            height: 400px;
-            overflow-y: scroll;
-            border: 1px solid #ccc;
-            padding: 10px;
-        }
+	    #messagesList {
+		    list-style-type: none;
+		    padding: 0;
+		    margin: 0;
+	    }
+	    .messages {
+		    margin-top: 20px;
+		    height: 530px;
+		    overflow-y: scroll;
+		    border: 1px solid #ccc;
+		    padding: 10px;
+	    }
+	    .message-text {
+		    margin-left: 10px;
+	    }
+	    .message-time {
+		    margin-left: 30px;
+	    }
+	    .delete-button {
+		    margin-left: 10px;
+		    background-color: #ff0000;
+		    color: #fff;
+		    border: none;
+		    padding: 5px 10px;
+		    margin-right: 5px;
+		    cursor: pointer;
+	    }
+
+	    .edit-button {
+		    margin-left: 10px;
+		    background-color: #007bff;
+		    color: #fff;
+		    border: none;
+		    padding: 5px 10px;
+		    margin-right: 5px;
+		    cursor: pointer;
+	    }
     </style>
 </head>
 <body>
-
-
-
-
-  @*  <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>*@
-<!-- Custom JS -->
     <script src="~/js/logincheck.js"></script>
-    <script src="script.js"></script>
     <h1>Чат событий</h1>
     <div class="container">
         <div class="row p-1">
-            <div class="col-1">User</div>
-            <div class="col-5"><input type="text" id="userInput" /></div>
+            <div hidden class="col-5"><input type="text" id="userInput" /></div>
         </div>
         <div class="row p-1">
-            <div class="col-6">
+            <div>
                 <hr />
             </div>
         </div>
         <div class="messages">
-            <div class="row p-1">
-                <div class="col-6">
-                    <ul id="messagesList"></ul>
+            <div class="row">
+                <div>
+					<ul id="messagesList"><li class="message-item"><span class="message-user">Олег: </span><span class="message-text">312312312312<span class="message-time">May 28, 2023  11:49</span></span></li></ul>
                 </div>
             </div>
         </div>
 
         <div class="row p-1">
-            <div class="col-6">
+            <div>
                 <hr />
             </div>
         </div>
         <div class="form-group row">
-            <div class="col-1">Message</div>
-            <div class="col-5"><input type="text" class="form-control" id="messageInput" placeholder="Enter your message" /></div>
-            <div class="col-6 text-end">
-                <input type="button" class="btn btn-primary" id="sendButton" value="Send Message" />
-            </div>
+	        <div class="col-3"><input type="text" class="form-control" id="messageInput" placeholder="Сообщение" /></div>
+	        <div class="col-3 mt-2">
+		        <input type="file" id="photoInput">
+	        </div>
+	        <div class="col-4 ml-3">
+		        <div id="image-container"></div>
+		        <input type="button" class="btn btn-primary" id="sendButton" value="Отправить"/>
+	        </div>
         </div>
     </div>
-    @* <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>*@
-    <!-- Custom JS -->
-    <script src="script.js"></script>
+
+	<script src="script.js"></script>
     <script src="~/js/signalr/dist/browser/signalr.js"></script>
     <script src="~/js/chat.js"></script>
-
-
-
 </body>
 </html>
